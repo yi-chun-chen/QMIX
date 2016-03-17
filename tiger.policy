@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Policy version="0.1" type="value" model="tiger.pomdpx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="policyx.xsd">
+<AlphaVector vectorLength="2" numObsValue="1" numVectors="5">
+<Vector action="0" obsValue="0">-428.005 -318.005 </Vector>
+<Vector action="2" obsValue="0">-371.585 -329.875 </Vector>
+<Vector action="1" obsValue="0">-318.005 -428.005 </Vector>
+<Vector action="2" obsValue="0">-329.875 -371.585 </Vector>
+<Vector action="2" obsValue="0">-345.269 -345.269 </Vector>
+</AlphaVector> </Policy>

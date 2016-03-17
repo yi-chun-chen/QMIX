@@ -1,0 +1,1533 @@
+Last login: Sun Mar  6 14:14:52 on ttys002
+dn0a22c5ba:~ YICHUN$ ssh yichunc@corn.stanford.edu
+yichunc@corn.stanford.edu's password: 
+Authenticated with partial success.
+Duo two-factor login for yichunc
+
+Enter a passcode or select one of the following options:
+
+ 1. Phone call to XXX-XXX-9623
+ 2. SMS passcodes to XXX-XXX-9623
+
+Passcode or option (1-2): 2
+New SMS passcodes sent.
+Duo two-factor login for yichunc
+
+Enter a passcode or select one of the following options:
+
+ 1. Phone call to XXX-XXX-9623
+ 2. SMS passcodes to XXX-XXX-9623 (next code starts with: 1)
+
+Passcode or option (1-2): 1755956
+Success. Logging you in...
+Welcome to Ubuntu 14.04.4 LTS (GNU/Linux 3.13.0-79-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com/
+corn34.stanford.edu - Ubuntu 14.04.4 LTS, amd64
+16-core Xeon E5520 @ 2.27GHz (SB X6270, 1005FM1039); 23.54GB RAM, 10GB swap
+Puppet environment: rec_test3; kernel 3.13.0-79-generic (x86_64)
+ --*-*- Stanford University Research Computing Center -*-*--
+	      
+		https://srcc.stanford.edu/
+
+  _____                    ____  _
+ |  ___|_ _ _ __ _ __ ___ / ___|| |__   __ _ _ __ ___
+ | |_ / _` | '__| '_ ` _ \\___ \| '_ \ / _` | '__/ _ \
+ |  _| (_| | |  | | | | | |___) | | | | (_| | | |  __/
+ |_|  \__,_|_|  |_| |_| |_|____/|_| |_|\__,_|_|  \___|
+
+    		http://farmshare.stanford.edu
+
+ ##################################################################
+ #						                  #        
+ # Welcome to Farmshare! We recommend Mac and Linux users add the #        
+ # following lines to their local laptop/desktop .ssh/config file #	   
+ # to avoid having to use Duo two-factor every time you connect   #	  
+ # to Farmshare. 						  #	  
+ #								  #	   
+ # Host corn corn?? corn.stanford.edu corn??.stanford.edu	  #	   
+ #  ControlMaster auto						  #	   
+ #  ControlPath ~/.ssh/%r@%h:%p					  #	   
+ #  ControlPersist yes						  #	   
+ #								  #	   
+ # This will open an ssh tunnel that will be shared on subsequent #         
+ # connections to the same node and allow you to avoid having to  #
+ # manually authenticate again.			  		  #
+ #						   	          #
+ ##################################################################
+
+   Don't forget to sign up for the Farmshare mailing list to stay 
+     informed about upgrades, maintenace, FAQ, and downtime. 
+
+    https://mailman.stanford.edu/mailman/listinfo/farmshare-discuss
+
+
+Last login: Tue May 19 19:31:01 2015 from dn0a233926.sunet
+yichunc@corn34:~$ julia
+               _
+   _       _ _(_)_     |  A fresh approach to technical computing
+  (_)     | (_) (_)    |  Documentation: http://docs.julialang.org
+   _ _   _| |_  __ _   |  Type "?help" for help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 0.4.2 (2015-12-06 21:47 UTC)
+ _/ |\__'_|_|_|\__'_|  |  Official http://julialang.org release
+|__/                   |  x86_64-linux-gnu
+
+julia> Pkg.clone("https://github.com/sisl/SARSOP.jl")
+INFO: Initializing package repository /afs/.ir/users/y/i/yichunc/.julia/v0.4
+INFO: Cloning METADATA from git://github.com/JuliaLang/METADATA.jl
+INFO: Cloning SARSOP from https://github.com/sisl/SARSOP.jl
+INFO: Computing changes...
+INFO: No packages to install, update or remove
+
+julia> Pkg.build("SARSOP")
+INFO: Building SARSOP
+INFO: Cloning POMDPXFile from https://github.com/sisl/POMDPXFile.jl
+INFO: Computing changes...
+INFO: Cloning cache of Compat from git://github.com/JuliaLang/Compat.jl.git
+INFO: Cloning cache of LightXML from git://github.com/JuliaLang/LightXML.jl.git
+INFO: Installing Compat v0.7.12
+INFO: Installing LightXML v0.2.1
+INFO: Building LightXML
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 2865k  100 2865k    0     0  1428k      0  0:00:02  0:00:02 --:--:-- 1428k
+appl-0.96/
+appl-0.96/src/
+appl-0.96/src/Models/
+appl-0.96/src/Models/MOMDP/
+appl-0.96/src/Models/MOMDP/MOMDPLite.h
+appl-0.96/src/Models/MOMDP/Variable.cpp
+appl-0.96/src/Models/MOMDP/MOMDPLite.cpp
+appl-0.96/src/Models/MOMDP/ObservationProbabilities.cpp
+appl-0.96/src/Models/MOMDP/IVariableValue.h
+appl-0.96/src/Models/MOMDP/StateTransitionXY.cpp
+appl-0.96/src/Models/MOMDP/ObservationProbabilities.h
+appl-0.96/src/Models/MOMDP/CoLoc/
+appl-0.96/src/Models/MOMDP/Variable.h
+appl-0.96/src/Models/MOMDP/BooleanVariable.h
+appl-0.96/src/Models/MOMDP/StateTransitionXXpY.cpp
+appl-0.96/src/Models/MOMDP/VariableCombined.cpp
+appl-0.96/src/Models/MOMDP/MOMDP.h
+appl-0.96/src/Models/MOMDP/IVariable.h
+appl-0.96/src/Models/MOMDP/BooleanVariable.cpp
+appl-0.96/src/Models/MOMDP/VariableRelation.h
+appl-0.96/src/Models/MOMDP/StateTransitionXXpY.h
+appl-0.96/src/Models/MOMDP/IVariableValue.cpp
+appl-0.96/src/Models/MOMDP/Rewards.cpp
+appl-0.96/src/Models/MOMDP/BeliefTransitionMOMDP.h
+appl-0.96/src/Models/MOMDP/BeliefTransitionMOMDPLite.h
+appl-0.96/src/Models/MOMDP/IVariable.cpp
+appl-0.96/src/Models/MOMDP/VariableRelation.cpp
+appl-0.96/src/Models/MOMDP/StateTransitionX.cpp
+appl-0.96/src/Models/MOMDP/MOMDP.cpp
+appl-0.96/src/Models/MOMDP/StateTransitionXY.h
+appl-0.96/src/Models/MOMDP/Rewards.h
+appl-0.96/src/Models/MOMDP/StateTransitionY.h
+appl-0.96/src/Models/MOMDP/VariableCombined.h
+appl-0.96/src/Models/MOMDP/BeliefTransitionMOMDP.cpp
+appl-0.96/src/Models/MOMDP/VariableValue.cpp
+appl-0.96/src/Models/MOMDP/BeliefTransitionMOMDPLite.cpp
+appl-0.96/src/Models/MOMDP/VariableValue.h
+appl-0.96/src/Models/MOMDP/StateTransitionY.cpp
+appl-0.96/src/Models/MOMDP/StateTransitionX.h
+appl-0.96/src/Controller/
+appl-0.96/src/Controller/ControllerInterface.h
+appl-0.96/src/Controller/Controller.h
+appl-0.96/src/Controller/testControllerTiger.cpp
+appl-0.96/src/Controller/Controller.cpp
+appl-0.96/src/Simulator/
+appl-0.96/src/Simulator/SimulationEngine.h
+appl-0.96/src/Simulator/Simulator.cpp
+appl-0.96/src/Simulator/SimulationEngine.cpp
+appl-0.96/src/Core/
+appl-0.96/src/Core/SymbolSet.h
+appl-0.96/src/Core/IndexedTuple.h
+appl-0.96/src/Core/Actions.cpp
+appl-0.96/src/Core/Component.h
+appl-0.96/src/Core/BoundSet.h
+appl-0.96/src/Core/BeliefCacheRow.h
+appl-0.96/src/Core/UniqueBeliefHeap.cpp
+appl-0.96/src/Core/SymbolSetIterator.h
+appl-0.96/src/Core/BeliefForest.h
+appl-0.96/src/Core/Belief.cpp
+appl-0.96/src/Core/BeliefWithState.cpp
+appl-0.96/src/Core/BeliefCache.h
+appl-0.96/src/Core/Observations.cpp
+appl-0.96/src/Core/VariableContainer.cpp
+appl-0.96/src/Core/States.h
+appl-0.96/src/Core/Backup.h
+appl-0.96/src/Core/BeliefException.h
+appl-0.96/src/Core/BeliefTreeNode.h
+appl-0.96/src/Core/BeliefWithState.h
+appl-0.96/src/Core/Actions.h
+appl-0.96/src/Core/MObject.h
+appl-0.96/src/Core/MObjectManager.h
+appl-0.96/src/Core/BeliefTransition.h
+appl-0.96/src/Core/Const.h
+appl-0.96/src/Core/BeliefException.cpp
+appl-0.96/src/Core/MObject.cpp
+appl-0.96/src/Core/Bound.h
+appl-0.96/src/Core/BeliefCacheSet.cpp
+appl-0.96/src/Core/BeliefForest.cpp
+appl-0.96/src/Core/BeliefCacheSet.h
+appl-0.96/src/Core/FacmodelStructs.h
+appl-0.96/src/Core/Observations.h
+appl-0.96/src/Core/States.cpp
+appl-0.96/src/Core/BeliefTreeNode.cpp
+appl-0.96/src/Core/UniqueBeliefHeap.h
+appl-0.96/src/Core/BeliefCache.cpp
+appl-0.96/src/Core/MObjectUser.h
+appl-0.96/src/Core/Policy.h
+appl-0.96/src/Core/Belief.h
+appl-0.96/src/Core/VariableContainer.h
+appl-0.96/src/Core/Tuple.h
+appl-0.96/src/Makefile
+appl-0.96/src/Utils/
+appl-0.96/src/Utils/Cache.h
+appl-0.96/src/Utils/SimulationRewardCollector.h
+appl-0.96/src/Utils/md5wrapper.cpp
+appl-0.96/src/Utils/md5.h
+appl-0.96/src/Utils/md5.cpp
+appl-0.96/src/Utils/InfoLog.cpp
+appl-0.96/src/Utils/md5wrapper.h
+appl-0.96/src/Utils/StatsCollector.cpp
+appl-0.96/src/Utils/CPTimer.h
+appl-0.96/src/Utils/StatsCollector.h
+appl-0.96/src/Utils/SimulationRewardCollector.cpp
+appl-0.96/src/Utils/CPMemUtils.h
+appl-0.96/src/Utils/InfoLog.h
+appl-0.96/src/Utils/CPMemUtils.cpp
+appl-0.96/src/Utils/boost/
+appl-0.96/src/Utils/boost/exception/
+appl-0.96/src/Utils/boost/exception/get_error_info.hpp
+appl-0.96/src/Utils/boost/exception/exception.hpp
+appl-0.96/src/Utils/boost/exception/info.hpp
+appl-0.96/src/Utils/boost/exception/enable_current_exception.hpp
+appl-0.96/src/Utils/boost/exception/to_string.hpp
+appl-0.96/src/Utils/boost/exception/to_string_stub.hpp
+appl-0.96/src/Utils/boost/exception/info_tuple.hpp
+appl-0.96/src/Utils/boost/exception/diagnostic_information.hpp
+appl-0.96/src/Utils/boost/exception/error_info.hpp
+appl-0.96/src/Utils/boost/exception/current_exception_cast.hpp
+appl-0.96/src/Utils/boost/exception/enable_error_info.hpp
+appl-0.96/src/Utils/boost/exception/detail/
+appl-0.96/src/Utils/boost/exception/detail/error_info_impl.hpp
+appl-0.96/src/Utils/boost/exception/detail/is_output_streamable.hpp
+appl-0.96/src/Utils/boost/exception/detail/object_hex_dump.hpp
+appl-0.96/src/Utils/boost/exception/detail/type_info.hpp
+appl-0.96/src/Utils/boost/config.hpp
+appl-0.96/src/Utils/boost/checked_delete.hpp
+appl-0.96/src/Utils/boost/config/
+appl-0.96/src/Utils/boost/config/posix_features.hpp
+appl-0.96/src/Utils/boost/config/suffix.hpp
+appl-0.96/src/Utils/boost/config/select_stdlib_config.hpp
+appl-0.96/src/Utils/boost/config/auto_link.hpp
+appl-0.96/src/Utils/boost/config/abi_prefix.hpp
+appl-0.96/src/Utils/boost/config/platform/
+appl-0.96/src/Utils/boost/config/platform/solaris.hpp
+appl-0.96/src/Utils/boost/config/platform/aix.hpp
+appl-0.96/src/Utils/boost/config/platform/amigaos.hpp
+appl-0.96/src/Utils/boost/config/platform/win32.hpp
+appl-0.96/src/Utils/boost/config/platform/beos.hpp
+appl-0.96/src/Utils/boost/config/platform/linux.hpp
+appl-0.96/src/Utils/boost/config/platform/irix.hpp
+appl-0.96/src/Utils/boost/config/platform/qnxnto.hpp
+appl-0.96/src/Utils/boost/config/platform/macos.hpp
+appl-0.96/src/Utils/boost/config/platform/hpux.hpp
+appl-0.96/src/Utils/boost/config/platform/bsd.hpp
+appl-0.96/src/Utils/boost/config/platform/cygwin.hpp
+appl-0.96/src/Utils/boost/config/warning_disable.hpp
+appl-0.96/src/Utils/boost/config/user.hpp
+appl-0.96/src/Utils/boost/config/stdlib/
+appl-0.96/src/Utils/boost/config/stdlib/roguewave.hpp
+appl-0.96/src/Utils/boost/config/stdlib/libstdcpp3.hpp
+appl-0.96/src/Utils/boost/config/stdlib/msl.hpp
+appl-0.96/src/Utils/boost/config/stdlib/sgi.hpp
+appl-0.96/src/Utils/boost/config/stdlib/libcomo.hpp
+appl-0.96/src/Utils/boost/config/stdlib/stlport.hpp
+appl-0.96/src/Utils/boost/config/stdlib/dinkumware.hpp
+appl-0.96/src/Utils/boost/config/stdlib/modena.hpp
+appl-0.96/src/Utils/boost/config/stdlib/vacpp.hpp
+appl-0.96/src/Utils/boost/config/requires_threads.hpp
+appl-0.96/src/Utils/boost/config/abi/
+appl-0.96/src/Utils/boost/config/abi/msvc_prefix.hpp
+appl-0.96/src/Utils/boost/config/abi/borland_prefix.hpp
+appl-0.96/src/Utils/boost/config/abi/msvc_suffix.hpp
+appl-0.96/src/Utils/boost/config/abi/borland_suffix.hpp
+appl-0.96/src/Utils/boost/config/no_tr1/
+appl-0.96/src/Utils/boost/config/no_tr1/complex.hpp
+appl-0.96/src/Utils/boost/config/no_tr1/memory.hpp
+appl-0.96/src/Utils/boost/config/no_tr1/functional.hpp
+appl-0.96/src/Utils/boost/config/no_tr1/utility.hpp
+appl-0.96/src/Utils/boost/config/no_tr1/cmath.hpp
+appl-0.96/src/Utils/boost/config/compiler/
+appl-0.96/src/Utils/boost/config/compiler/borland.hpp
+appl-0.96/src/Utils/boost/config/compiler/mpw.hpp
+appl-0.96/src/Utils/boost/config/compiler/kai.hpp
+appl-0.96/src/Utils/boost/config/compiler/vacpp.hpp
+appl-0.96/src/Utils/boost/config/compiler/gcc.hpp
+appl-0.96/src/Utils/boost/config/compiler/comeau.hpp
+appl-0.96/src/Utils/boost/config/compiler/metrowerks.hpp
+appl-0.96/src/Utils/boost/config/compiler/intel.hpp
+appl-0.96/src/Utils/boost/config/compiler/visualc.hpp
+appl-0.96/src/Utils/boost/config/compiler/greenhills.hpp
+appl-0.96/src/Utils/boost/config/compiler/compaq_cxx.hpp
+appl-0.96/src/Utils/boost/config/compiler/sunpro_cc.hpp
+appl-0.96/src/Utils/boost/config/compiler/sgi_mipspro.hpp
+appl-0.96/src/Utils/boost/config/compiler/codegear.hpp
+appl-0.96/src/Utils/boost/config/compiler/hp_acc.hpp
+appl-0.96/src/Utils/boost/config/compiler/pgi.hpp
+appl-0.96/src/Utils/boost/config/compiler/common_edg.hpp
+appl-0.96/src/Utils/boost/config/compiler/digitalmars.hpp
+appl-0.96/src/Utils/boost/config/compiler/gcc_xml.hpp
+appl-0.96/src/Utils/boost/config/select_compiler_config.hpp
+appl-0.96/src/Utils/boost/config/abi_suffix.hpp
+appl-0.96/src/Utils/boost/config/select_platform_config.hpp
+appl-0.96/src/Utils/boost/smart_ptr/
+appl-0.96/src/Utils/boost/smart_ptr/intrusive_ptr.hpp
+appl-0.96/src/Utils/boost/smart_ptr/shared_array.hpp
+appl-0.96/src/Utils/boost/smart_ptr/make_shared.hpp
+appl-0.96/src/Utils/boost/smart_ptr/shared_ptr.hpp
+appl-0.96/src/Utils/boost/smart_ptr/scoped_ptr.hpp
+appl-0.96/src/Utils/boost/smart_ptr/bad_weak_ptr.hpp
+appl-0.96/src/Utils/boost/smart_ptr/weak_ptr.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/
+appl-0.96/src/Utils/boost/smart_ptr/detail/sp_counted_base_gcc_mips.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/sp_counted_base_cw_ppc.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/sp_has_sync.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/sp_counted_base_acc_ia64.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/shared_array_nmt.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/sp_counted_base_sync.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/spinlock_w32.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/shared_count.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/yield_k.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/lwm_nop.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/sp_counted_impl.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/atomic_count_sync.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/sp_counted_base_pt.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/atomic_count_win32.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/sp_convertible.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/sp_counted_base_cw_x86.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/atomic_count_gcc_x86.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/operator_bool.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/spinlock_pool.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/quick_allocator.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/spinlock.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/spinlock_nt.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/sp_counted_base_w32.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/sp_counted_base_solaris.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/lightweight_mutex.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/atomic_count_solaris.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/sp_counted_base.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/sp_counted_base_gcc_x86.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/atomic_count_gcc.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/shared_ptr_nmt.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/spinlock_pt.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/sp_counted_base_spin.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/sp_counted_base_gcc_ia64.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/sp_counted_base_gcc_sparc.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/lwm_win32_cs.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/atomic_count.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/spinlock_gcc_arm.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/sp_counted_base_gcc_ppc.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/atomic_count_pthreads.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/lwm_pthreads.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/sp_counted_base_nt.hpp
+appl-0.96/src/Utils/boost/smart_ptr/detail/spinlock_sync.hpp
+appl-0.96/src/Utils/boost/smart_ptr/enable_shared_from_this.hpp
+appl-0.96/src/Utils/boost/smart_ptr/scoped_array.hpp
+appl-0.96/src/Utils/boost/memory_order.hpp
+appl-0.96/src/Utils/boost/detail/
+appl-0.96/src/Utils/boost/detail/binary_search.hpp
+appl-0.96/src/Utils/boost/detail/templated_streams.hpp
+appl-0.96/src/Utils/boost/detail/interlocked.hpp
+appl-0.96/src/Utils/boost/detail/limits.hpp
+appl-0.96/src/Utils/boost/detail/identifier.hpp
+appl-0.96/src/Utils/boost/detail/is_function_ref_tester.hpp
+appl-0.96/src/Utils/boost/detail/is_xxx.hpp
+appl-0.96/src/Utils/boost/detail/container_fwd.hpp
+appl-0.96/src/Utils/boost/detail/has_default_constructor.hpp
+appl-0.96/src/Utils/boost/detail/utf8_codecvt_facet.hpp
+appl-0.96/src/Utils/boost/detail/sp_typeinfo.hpp
+appl-0.96/src/Utils/boost/detail/call_traits.hpp
+appl-0.96/src/Utils/boost/detail/catch_exceptions.hpp
+appl-0.96/src/Utils/boost/detail/lightweight_test.hpp
+appl-0.96/src/Utils/boost/detail/algorithm.hpp
+appl-0.96/src/Utils/boost/detail/numeric_traits.hpp
+appl-0.96/src/Utils/boost/detail/named_template_params.hpp
+appl-0.96/src/Utils/boost/detail/compressed_pair.hpp
+appl-0.96/src/Utils/boost/detail/lightweight_mutex.hpp
+appl-0.96/src/Utils/boost/detail/lcast_precision.hpp
+appl-0.96/src/Utils/boost/detail/dynamic_bitset.hpp
+appl-0.96/src/Utils/boost/detail/iterator.hpp
+appl-0.96/src/Utils/boost/detail/ob_call_traits.hpp
+appl-0.96/src/Utils/boost/detail/none_t.hpp
+appl-0.96/src/Utils/boost/detail/quick_allocator.hpp
+appl-0.96/src/Utils/boost/detail/reference_content.hpp
+appl-0.96/src/Utils/boost/detail/select_type.hpp
+appl-0.96/src/Utils/boost/detail/is_incrementable.hpp
+appl-0.96/src/Utils/boost/detail/indirect_traits.hpp
+appl-0.96/src/Utils/boost/detail/lightweight_thread.hpp
+appl-0.96/src/Utils/boost/detail/workaround.hpp
+appl-0.96/src/Utils/boost/detail/ob_compressed_pair.hpp
+appl-0.96/src/Utils/boost/detail/allocator_utilities.hpp
+appl-0.96/src/Utils/boost/detail/no_exceptions_support.hpp
+appl-0.96/src/Utils/boost/detail/atomic_count.hpp
+appl-0.96/src/Utils/boost/detail/endian.hpp
+appl-0.96/src/Utils/boost/assert.hpp
+appl-0.96/src/Utils/boost/current_function.hpp
+appl-0.96/src/Utils/boost/throw_exception.hpp
+appl-0.96/src/Algorithms/
+appl-0.96/src/Algorithms/SARSOP/
+appl-0.96/src/Algorithms/SARSOP/SARSOP.h
+appl-0.96/src/Algorithms/SARSOP/SampleBP.cpp
+appl-0.96/src/Algorithms/SARSOP/Sample.h
+appl-0.96/src/Algorithms/SARSOP/Prune.h
+appl-0.96/src/Algorithms/SARSOP/BinManagerSet.h
+appl-0.96/src/Algorithms/SARSOP/SARSOPPrune.cpp
+appl-0.96/src/Algorithms/SARSOP/SARSOP.cpp
+appl-0.96/src/Algorithms/SARSOP/SampleBP.h
+appl-0.96/src/Algorithms/SARSOP/SARSOPPrune.h
+appl-0.96/src/Algorithms/SARSOP/BinManager.h
+appl-0.96/src/Algorithms/SARSOP/Sample.cpp
+appl-0.96/src/Algorithms/SARSOP/AlphaPlaneMaxMeta.h
+appl-0.96/src/Algorithms/SARSOP/BinManager.cpp
+appl-0.96/src/Algorithms/SARSOP/BinManagerSet.cpp
+appl-0.96/src/Algorithms/PointBasedAlgorithm.h
+appl-0.96/src/Algorithms/HSVI/
+appl-0.96/src/miniposix/
+appl-0.96/src/miniposix/getopt.h
+appl-0.96/src/miniposix/getopt1.c
+appl-0.96/src/miniposix/getopt.c
+appl-0.96/src/miniposix/getopt_init.c
+appl-0.96/src/miniposix/getopt_int.h
+appl-0.96/src/Parser/
+appl-0.96/src/Parser/POMDPX/
+appl-0.96/src/Parser/POMDPX/SparseEntry.cpp
+appl-0.96/src/Parser/POMDPX/POMDPLayer.h
+appl-0.96/src/Parser/POMDPX/tinystr.cpp
+appl-0.96/src/Parser/POMDPX/PreCMatrix.cpp
+appl-0.96/src/Parser/POMDPX/StateObsAct.cpp
+appl-0.96/src/Parser/POMDPX/PreCMatrix.h
+appl-0.96/src/Parser/POMDPX/tinyxml.cpp
+appl-0.96/src/Parser/POMDPX/tinyxmlerror.cpp
+appl-0.96/src/Parser/POMDPX/tinyxmlparser.cpp
+appl-0.96/src/Parser/POMDPX/State.h
+appl-0.96/src/Parser/POMDPX/FactoredPomdp.cpp
+appl-0.96/src/Parser/POMDPX/PreCEntry.cpp
+appl-0.96/src/Parser/POMDPX/FactoredPomdp.h
+appl-0.96/src/Parser/POMDPX/SparseEntry.h
+appl-0.96/src/Parser/POMDPX/UniqueIndex.h
+appl-0.96/src/Parser/POMDPX/PreCEntry.h
+appl-0.96/src/Parser/POMDPX/Function.h
+appl-0.96/src/Parser/POMDPX/State.cpp
+appl-0.96/src/Parser/POMDPX/SparseTable.cpp
+appl-0.96/src/Parser/POMDPX/Function.cpp
+appl-0.96/src/Parser/POMDPX/StateObsAct.h
+appl-0.96/src/Parser/POMDPX/tinyxml.h
+appl-0.96/src/Parser/POMDPX/ObsAct.h
+appl-0.96/src/Parser/POMDPX/ObsAct.cpp
+appl-0.96/src/Parser/POMDPX/tinystr.h
+appl-0.96/src/Parser/POMDPX/SparseTable.h
+appl-0.96/src/Parser/Cassandra/
+appl-0.96/src/Parser/Cassandra/pomdpCassandraWrapper.cpp
+appl-0.96/src/Parser/Cassandra/pomdpCassandraWrapper.h
+appl-0.96/src/Parser/Cassandra/parse_hash.h
+appl-0.96/src/Parser/Cassandra/imm-reward.c
+appl-0.96/src/Parser/Cassandra/parse_err.c
+appl-0.96/src/Parser/Cassandra/sparse-matrix.h
+appl-0.96/src/Parser/Cassandra/decision-tree.h
+appl-0.96/src/Parser/Cassandra/POMDP.cpp
+appl-0.96/src/Parser/Cassandra/mdpCassandra.c
+appl-0.96/src/Parser/Cassandra/parse_constant.h
+appl-0.96/src/Parser/Cassandra/parse_hash.c
+appl-0.96/src/Parser/Cassandra/Parser.cpp
+appl-0.96/src/Parser/Cassandra/POMDP.h
+appl-0.96/src/Parser/Cassandra/MDP.h
+appl-0.96/src/Parser/Cassandra/Parser.h
+appl-0.96/src/Parser/Cassandra/decision-tree.c
+appl-0.96/src/Parser/Cassandra/mdpCassandra.h
+appl-0.96/src/Parser/Cassandra/include/
+appl-0.96/src/Parser/Cassandra/include/pomdp_spec.yy.cc
+appl-0.96/src/Parser/Cassandra/include/pomdp_spec.tab.cc
+appl-0.96/src/Parser/Cassandra/include/pomdp_spec.tab.hh
+appl-0.96/src/Parser/Cassandra/imm-reward.h
+appl-0.96/src/Parser/Cassandra/parse_err.h
+appl-0.96/src/Parser/Cassandra/sparse-matrix.c
+appl-0.96/src/Parser/ParserSelector.cpp
+appl-0.96/src/Parser/ParserSelector.h
+appl-0.96/src/MathLib/
+appl-0.96/src/MathLib/MathLib.cpp
+appl-0.96/src/MathLib/DenseVector.h
+appl-0.96/src/MathLib/SparseMatrix.h
+appl-0.96/src/MathLib/DenseVector.cpp
+appl-0.96/src/MathLib/SparseVector.cpp
+appl-0.96/src/MathLib/MathLib.h
+appl-0.96/src/MathLib/SparseMatrix.cpp
+appl-0.96/src/MathLib/SparseVector.h
+appl-0.96/src/Makefile.dep
+appl-0.96/src/PomdpConvertor/
+appl-0.96/src/PomdpConvertor/PomdpConverter.vcproj
+appl-0.96/src/PomdpConvertor/convertor.cpp
+appl-0.96/src/Evaluator/
+appl-0.96/src/Evaluator/EvaluationEngine.cpp
+appl-0.96/src/Evaluator/EvaluatorBeliefTreeNodeTuple.h
+appl-0.96/src/Evaluator/EvaluatorSampleEngine.h
+appl-0.96/src/Evaluator/Evaluator.cpp
+appl-0.96/src/Evaluator/EvaluatorSampleEngine.cpp
+appl-0.96/src/Evaluator/EvaluationEngine.h
+appl-0.96/src/OfflineSolver/
+appl-0.96/src/OfflineSolver/GlobalResource.cpp
+appl-0.96/src/OfflineSolver/GlobalResource.h
+appl-0.96/src/OfflineSolver/solverUtils.cpp
+appl-0.96/src/OfflineSolver/solverUtils.h
+appl-0.96/src/OfflineSolver/solver.cpp
+appl-0.96/src/Bounds/
+appl-0.96/src/Bounds/AlphaVectorPolicy.cpp
+appl-0.96/src/Bounds/AlphaPlane.h
+appl-0.96/src/Bounds/BeliefValuePairPool.h
+appl-0.96/src/Bounds/BackupBeliefValuePairMOMDPLite.cpp
+appl-0.96/src/Bounds/AlphaVectorPolicy.h
+appl-0.96/src/Bounds/BackupAlphaPlaneMOMDPLite.cpp
+appl-0.96/src/Bounds/PruneBeliefValuePair.h
+appl-0.96/src/Bounds/FullObsUBInitializer.cpp
+appl-0.96/src/Bounds/BeliefValuePairPoolSet.cpp
+appl-0.96/src/Bounds/BackupBeliefValuePairMOMDP.h
+appl-0.96/src/Bounds/BackupBeliefValuePairMOMDP.cpp
+appl-0.96/src/Bounds/PruneAlphaPlane.h
+appl-0.96/src/Bounds/xml_parse_lib.c
+appl-0.96/src/Bounds/BackupAlphaPlaneMOMDPLite.h
+appl-0.96/src/Bounds/AlphaPlanePoolSet.cpp
+appl-0.96/src/Bounds/PruneAlphaPlane.cpp
+appl-0.96/src/Bounds/PruneBeliefValuePair.cpp
+appl-0.96/src/Bounds/BackupBeliefValuePairMOMDPLite.h
+appl-0.96/src/Bounds/BlindLBInitializer.cpp
+appl-0.96/src/Bounds/FastInfUBInitializer.h
+appl-0.96/src/Bounds/AlphaPlane.cpp
+appl-0.96/src/Bounds/BackupAlphaPlaneMOMDP.h
+appl-0.96/src/Bounds/BlindLBInitializer.h
+appl-0.96/src/Bounds/AlphaPlanePoolSet.h
+appl-0.96/src/Bounds/BackupAlphaPlaneMOMDP.cpp
+appl-0.96/src/Bounds/FullObsUBInitializer.h
+appl-0.96/src/Bounds/FastInfUBInitializer.cpp
+appl-0.96/src/Bounds/BeliefValuePair.cpp
+appl-0.96/src/Bounds/AlphaPlanePool.h
+appl-0.96/src/Bounds/BeliefValuePairPool.cpp
+appl-0.96/src/Bounds/xml_parse_lib.h
+appl-0.96/src/Bounds/AlphaPlanePool.cpp
+appl-0.96/src/Bounds/BeliefValuePair.h
+appl-0.96/src/Bounds/BeliefValuePairPoolSet.h
+appl-0.96/src/PolicyGraph/
+appl-0.96/src/PolicyGraph/PolicyGraphGenerator.cpp
+appl-0.96/src/PolicyGraph/PolicyGraph.cpp
+appl-0.96/src/PolicyGraph/PolicyGraphGenerator.h
+appl-0.96/README.txt
+appl-0.96/license/
+appl-0.96/license/APACHE LICENSE-2.0.txt
+appl-0.96/license/License
+appl-0.96/license/GPL-2.0.txt
+appl-0.96/license/zlib.txt
+appl-0.96/license/Notice
+appl-0.96/doc/
+appl-0.96/doc/POMDPX/
+appl-0.96/doc/POMDPX/PomdpxFileFormat-v1.0.pdf
+appl-0.96/doc/POMDPX/pomdpx.xsd
+appl-0.96/doc/POMDP/
+appl-0.96/doc/POMDP/PomdpFileFormat.html
+appl-0.96/doc/Install.txt
+appl-0.96/doc/FAQ.pdf
+appl-0.96/doc/Usage.txt
+appl-0.96/examples/
+appl-0.96/examples/POMDPX/
+appl-0.96/examples/POMDPX/TagAvoid.pomdpx
+appl-0.96/examples/POMDPX/Tiger.pomdpx
+appl-0.96/examples/POMDPX/Tiger.pdf
+appl-0.96/examples/POMDPX/Tiger.log
+appl-0.96/examples/POMDPX/Hallway2.pomdpx
+appl-0.96/examples/POMDPX/RockSample_7_8.pomdpx
+appl-0.96/examples/POMDPX/RockSample_11_11.pomdpx
+appl-0.96/examples/POMDPX/Hallway.pomdpx
+appl-0.96/examples/POMDPX/Tiger.policy
+appl-0.96/examples/POMDP/
+appl-0.96/examples/POMDP/Hallway.pomdp
+appl-0.96/examples/POMDP/RockSample_7_8.pomdp
+appl-0.96/examples/POMDP/TagAvoid.pomdp
+appl-0.96/examples/POMDP/Hallway2.pomdp
+appl-0.96/examples/POMDP/Tiger.pomdp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o PolicyGraph/PolicyGraph.o PolicyGraph/PolicyGraph.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o PolicyGraph/PolicyGraphGenerator.o PolicyGraph/PolicyGraphGenerator.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Evaluator/EvaluationEngine.o Evaluator/EvaluationEngine.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Evaluator/EvaluatorSampleEngine.o Evaluator/EvaluatorSampleEngine.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Simulator/SimulationEngine.o Simulator/SimulationEngine.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o MathLib/DenseVector.o MathLib/DenseVector.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o MathLib/MathLib.o MathLib/MathLib.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o MathLib/SparseMatrix.o MathLib/SparseMatrix.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o MathLib/SparseVector.o MathLib/SparseVector.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Algorithms/SARSOP/BinManager.o Algorithms/SARSOP/BinManager.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Algorithms/SARSOP/BinManagerSet.o Algorithms/SARSOP/BinManagerSet.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Algorithms/SARSOP/Sample.o Algorithms/SARSOP/Sample.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Algorithms/SARSOP/SampleBP.o Algorithms/SARSOP/SampleBP.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Algorithms/SARSOP/SARSOP.o Algorithms/SARSOP/SARSOP.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Algorithms/SARSOP/SARSOPPrune.o Algorithms/SARSOP/SARSOPPrune.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Models/MOMDP/BeliefTransitionMOMDP.o Models/MOMDP/BeliefTransitionMOMDP.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Models/MOMDP/BeliefTransitionMOMDPLite.o Models/MOMDP/BeliefTransitionMOMDPLite.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Models/MOMDP/BooleanVariable.o Models/MOMDP/BooleanVariable.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Models/MOMDP/IVariable.o Models/MOMDP/IVariable.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Models/MOMDP/IVariableValue.o Models/MOMDP/IVariableValue.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Models/MOMDP/MOMDP.o Models/MOMDP/MOMDP.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Models/MOMDP/MOMDPLite.o Models/MOMDP/MOMDPLite.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Models/MOMDP/ObservationProbabilities.o Models/MOMDP/ObservationProbabilities.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Models/MOMDP/Rewards.o Models/MOMDP/Rewards.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Models/MOMDP/StateTransitionX.o Models/MOMDP/StateTransitionX.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Models/MOMDP/StateTransitionXXpY.o Models/MOMDP/StateTransitionXXpY.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Models/MOMDP/StateTransitionXY.o Models/MOMDP/StateTransitionXY.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Models/MOMDP/StateTransitionY.o Models/MOMDP/StateTransitionY.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Models/MOMDP/Variable.o Models/MOMDP/Variable.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Models/MOMDP/VariableCombined.o Models/MOMDP/VariableCombined.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Models/MOMDP/VariableRelation.o Models/MOMDP/VariableRelation.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Models/MOMDP/VariableValue.o Models/MOMDP/VariableValue.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o OfflineSolver/GlobalResource.o OfflineSolver/GlobalResource.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o OfflineSolver/solverUtils.o OfflineSolver/solverUtils.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Bounds/AlphaPlane.o Bounds/AlphaPlane.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Bounds/AlphaPlanePool.o Bounds/AlphaPlanePool.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Bounds/AlphaPlanePoolSet.o Bounds/AlphaPlanePoolSet.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Bounds/AlphaVectorPolicy.o Bounds/AlphaVectorPolicy.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Bounds/BackupAlphaPlaneMOMDP.o Bounds/BackupAlphaPlaneMOMDP.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Bounds/BackupAlphaPlaneMOMDPLite.o Bounds/BackupAlphaPlaneMOMDPLite.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Bounds/BackupBeliefValuePairMOMDP.o Bounds/BackupBeliefValuePairMOMDP.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Bounds/BackupBeliefValuePairMOMDPLite.o Bounds/BackupBeliefValuePairMOMDPLite.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Bounds/BeliefValuePair.o Bounds/BeliefValuePair.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Bounds/BeliefValuePairPool.o Bounds/BeliefValuePairPool.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Bounds/BeliefValuePairPoolSet.o Bounds/BeliefValuePairPoolSet.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Bounds/BlindLBInitializer.o Bounds/BlindLBInitializer.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Bounds/FastInfUBInitializer.o Bounds/FastInfUBInitializer.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Bounds/FullObsUBInitializer.o Bounds/FullObsUBInitializer.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Bounds/PruneAlphaPlane.o Bounds/PruneAlphaPlane.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Bounds/PruneBeliefValuePair.o Bounds/PruneBeliefValuePair.cpp
+gcc -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Bounds/xml_parse_lib.o Bounds/xml_parse_lib.c
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Core/Actions.o Core/Actions.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Core/VariableContainer.o Core/VariableContainer.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Core/Belief.o Core/Belief.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Core/BeliefCache.o Core/BeliefCache.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Core/BeliefException.o Core/BeliefException.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Core/BeliefForest.o Core/BeliefForest.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Core/BeliefTreeNode.o Core/BeliefTreeNode.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Core/BeliefWithState.o Core/BeliefWithState.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Core/MObject.o Core/MObject.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Core/Observations.o Core/Observations.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Core/States.o Core/States.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Core/UniqueBeliefHeap.o Core/UniqueBeliefHeap.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/Cassandra/Parser.o Parser/Cassandra/Parser.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/Cassandra/POMDP.o Parser/Cassandra/POMDP.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/Cassandra/pomdpCassandraWrapper.o Parser/Cassandra/pomdpCassandraWrapper.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/ParserSelector.o Parser/ParserSelector.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/POMDPX/FactoredPomdp.o Parser/POMDPX/FactoredPomdp.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/POMDPX/Function.o Parser/POMDPX/Function.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/POMDPX/ObsAct.o Parser/POMDPX/ObsAct.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/POMDPX/PreCEntry.o Parser/POMDPX/PreCEntry.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/POMDPX/PreCMatrix.o Parser/POMDPX/PreCMatrix.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/POMDPX/SparseEntry.o Parser/POMDPX/SparseEntry.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/POMDPX/SparseTable.o Parser/POMDPX/SparseTable.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/POMDPX/State.o Parser/POMDPX/State.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/POMDPX/StateObsAct.o Parser/POMDPX/StateObsAct.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/POMDPX/tinystr.o Parser/POMDPX/tinystr.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/POMDPX/tinyxml.o Parser/POMDPX/tinyxml.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/POMDPX/tinyxmlerror.o Parser/POMDPX/tinyxmlerror.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/POMDPX/tinyxmlparser.o Parser/POMDPX/tinyxmlparser.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Utils/InfoLog.o Utils/InfoLog.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Utils/md5.o Utils/md5.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Utils/md5wrapper.o Utils/md5wrapper.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Utils/CPMemUtils.o Utils/CPMemUtils.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Utils/StatsCollector.o Utils/StatsCollector.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Utils/SimulationRewardCollector.o Utils/SimulationRewardCollector.cpp
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/Cassandra/include/pomdp_spec.tab.o Parser/Cassandra/include/pomdp_spec.tab.cc
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/Cassandra/include/pomdp_spec.yy.o Parser/Cassandra/include/pomdp_spec.yy.cc
+gcc -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o miniposix/getopt.o miniposix/getopt.c
+gcc -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o miniposix/getopt1.o miniposix/getopt1.c
+gcc -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o miniposix/getopt_init.o miniposix/getopt_init.c
+gcc -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/Cassandra/decision-tree.o Parser/Cassandra/decision-tree.c
+gcc -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/Cassandra/imm-reward.o Parser/Cassandra/imm-reward.c
+gcc -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/Cassandra/mdpCassandra.o Parser/Cassandra/mdpCassandra.c
+gcc -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/Cassandra/parse_err.o Parser/Cassandra/parse_err.c
+gcc -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/Cassandra/parse_hash.o Parser/Cassandra/parse_hash.c
+gcc -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Parser/Cassandra/sparse-matrix.o Parser/Cassandra/sparse-matrix.c
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Controller/Controller.o Controller/Controller.cpp
+ar -ruv libappl.a ./PolicyGraph/PolicyGraph.o ./PolicyGraph/PolicyGraphGenerator.o ./Evaluator/EvaluationEngine.o ./Evaluator/EvaluatorSampleEngine.o ./Simulator/SimulationEngine.o ./MathLib/DenseVector.o ./MathLib/MathLib.o ./MathLib/SparseMatrix.o ./MathLib/SparseVector.o ./Algorithms/SARSOP/BinManager.o ./Algorithms/SARSOP/BinManagerSet.o ./Algorithms/SARSOP/Sample.o ./Algorithms/SARSOP/SampleBP.o ./Algorithms/SARSOP/SARSOP.o ./Algorithms/SARSOP/SARSOPPrune.o ./Models/MOMDP/BeliefTransitionMOMDP.o ./Models/MOMDP/BeliefTransitionMOMDPLite.o ./Models/MOMDP/BooleanVariable.o ./Models/MOMDP/IVariable.o ./Models/MOMDP/IVariableValue.o ./Models/MOMDP/MOMDP.o ./Models/MOMDP/MOMDPLite.o ./Models/MOMDP/ObservationProbabilities.o ./Models/MOMDP/Rewards.o ./Models/MOMDP/StateTransitionX.o ./Models/MOMDP/StateTransitionXXpY.o ./Models/MOMDP/StateTransitionXY.o ./Models/MOMDP/StateTransitionY.o ./Models/MOMDP/Variable.o ./Models/MOMDP/VariableCombined.o ./Models/MOMDP/VariableRelation.o ./Models/MOMDP/VariableValue.o ./OfflineSolver/GlobalResource.o ./OfflineSolver/solverUtils.o ./Bounds/AlphaPlane.o ./Bounds/AlphaPlanePool.o ./Bounds/AlphaPlanePoolSet.o ./Bounds/AlphaVectorPolicy.o ./Bounds/BackupAlphaPlaneMOMDP.o ./Bounds/BackupAlphaPlaneMOMDPLite.o ./Bounds/BackupBeliefValuePairMOMDP.o ./Bounds/BackupBeliefValuePairMOMDPLite.o ./Bounds/BeliefValuePair.o ./Bounds/BeliefValuePairPool.o ./Bounds/BeliefValuePairPoolSet.o ./Bounds/BlindLBInitializer.o ./Bounds/FastInfUBInitializer.o ./Bounds/FullObsUBInitializer.o ./Bounds/PruneAlphaPlane.o ./Bounds/PruneBeliefValuePair.o ./Bounds/xml_parse_lib.o ./Core/Actions.o ./Core/VariableContainer.o ./Core/Belief.o ./Core/BeliefCache.o ./Core/BeliefException.o ./Core/BeliefForest.o ./Core/BeliefTreeNode.o ./Core/BeliefWithState.o ./Core/MObject.o ./Core/Observations.o ./Core/States.o ./Core/UniqueBeliefHeap.o ./Parser/Cassandra/Parser.o ./Parser/Cassandra/POMDP.o ./Parser/Cassandra/pomdpCassandraWrapper.o ./Parser/ParserSelector.o ./Parser/POMDPX/FactoredPomdp.o ./Parser/POMDPX/Function.o ./Parser/POMDPX/ObsAct.o ./Parser/POMDPX/PreCEntry.o ./Parser/POMDPX/PreCMatrix.o ./Parser/POMDPX/SparseEntry.o ./Parser/POMDPX/SparseTable.o ./Parser/POMDPX/State.o ./Parser/POMDPX/StateObsAct.o ./Parser/POMDPX/tinystr.o ./Parser/POMDPX/tinyxml.o ./Parser/POMDPX/tinyxmlerror.o ./Parser/POMDPX/tinyxmlparser.o ./Utils/InfoLog.o ./Utils/md5.o ./Utils/md5wrapper.o ./Utils/CPMemUtils.o ./Utils/StatsCollector.o ./Utils/SimulationRewardCollector.o ./Parser/Cassandra/include/pomdp_spec.tab.o ./Parser/Cassandra/include/pomdp_spec.yy.o ./miniposix/getopt.o ./miniposix/getopt1.o ./miniposix/getopt_init.o ./Parser/Cassandra/decision-tree.o ./Parser/Cassandra/imm-reward.o ./Parser/Cassandra/mdpCassandra.o ./Parser/Cassandra/parse_err.o ./Parser/Cassandra/parse_hash.o ./Parser/Cassandra/sparse-matrix.o ./Controller/Controller.o  
+ar: creating libappl.a
+a - ./PolicyGraph/PolicyGraph.o
+a - ./PolicyGraph/PolicyGraphGenerator.o
+a - ./Evaluator/EvaluationEngine.o
+a - ./Evaluator/EvaluatorSampleEngine.o
+a - ./Simulator/SimulationEngine.o
+a - ./MathLib/DenseVector.o
+a - ./MathLib/MathLib.o
+a - ./MathLib/SparseMatrix.o
+a - ./MathLib/SparseVector.o
+a - ./Algorithms/SARSOP/BinManager.o
+a - ./Algorithms/SARSOP/BinManagerSet.o
+a - ./Algorithms/SARSOP/Sample.o
+a - ./Algorithms/SARSOP/SampleBP.o
+a - ./Algorithms/SARSOP/SARSOP.o
+a - ./Algorithms/SARSOP/SARSOPPrune.o
+a - ./Models/MOMDP/BeliefTransitionMOMDP.o
+a - ./Models/MOMDP/BeliefTransitionMOMDPLite.o
+a - ./Models/MOMDP/BooleanVariable.o
+a - ./Models/MOMDP/IVariable.o
+a - ./Models/MOMDP/IVariableValue.o
+a - ./Models/MOMDP/MOMDP.o
+a - ./Models/MOMDP/MOMDPLite.o
+a - ./Models/MOMDP/ObservationProbabilities.o
+a - ./Models/MOMDP/Rewards.o
+a - ./Models/MOMDP/StateTransitionX.o
+a - ./Models/MOMDP/StateTransitionXXpY.o
+a - ./Models/MOMDP/StateTransitionXY.o
+a - ./Models/MOMDP/StateTransitionY.o
+a - ./Models/MOMDP/Variable.o
+a - ./Models/MOMDP/VariableCombined.o
+a - ./Models/MOMDP/VariableRelation.o
+a - ./Models/MOMDP/VariableValue.o
+a - ./OfflineSolver/GlobalResource.o
+a - ./OfflineSolver/solverUtils.o
+a - ./Bounds/AlphaPlane.o
+a - ./Bounds/AlphaPlanePool.o
+a - ./Bounds/AlphaPlanePoolSet.o
+a - ./Bounds/AlphaVectorPolicy.o
+a - ./Bounds/BackupAlphaPlaneMOMDP.o
+a - ./Bounds/BackupAlphaPlaneMOMDPLite.o
+a - ./Bounds/BackupBeliefValuePairMOMDP.o
+a - ./Bounds/BackupBeliefValuePairMOMDPLite.o
+a - ./Bounds/BeliefValuePair.o
+a - ./Bounds/BeliefValuePairPool.o
+a - ./Bounds/BeliefValuePairPoolSet.o
+a - ./Bounds/BlindLBInitializer.o
+a - ./Bounds/FastInfUBInitializer.o
+a - ./Bounds/FullObsUBInitializer.o
+a - ./Bounds/PruneAlphaPlane.o
+a - ./Bounds/PruneBeliefValuePair.o
+a - ./Bounds/xml_parse_lib.o
+a - ./Core/Actions.o
+a - ./Core/VariableContainer.o
+a - ./Core/Belief.o
+a - ./Core/BeliefCache.o
+a - ./Core/BeliefException.o
+a - ./Core/BeliefForest.o
+a - ./Core/BeliefTreeNode.o
+a - ./Core/BeliefWithState.o
+a - ./Core/MObject.o
+a - ./Core/Observations.o
+a - ./Core/States.o
+a - ./Core/UniqueBeliefHeap.o
+a - ./Parser/Cassandra/Parser.o
+a - ./Parser/Cassandra/POMDP.o
+a - ./Parser/Cassandra/pomdpCassandraWrapper.o
+a - ./Parser/ParserSelector.o
+a - ./Parser/POMDPX/FactoredPomdp.o
+a - ./Parser/POMDPX/Function.o
+a - ./Parser/POMDPX/ObsAct.o
+a - ./Parser/POMDPX/PreCEntry.o
+a - ./Parser/POMDPX/PreCMatrix.o
+a - ./Parser/POMDPX/SparseEntry.o
+a - ./Parser/POMDPX/SparseTable.o
+a - ./Parser/POMDPX/State.o
+a - ./Parser/POMDPX/StateObsAct.o
+a - ./Parser/POMDPX/tinystr.o
+a - ./Parser/POMDPX/tinyxml.o
+a - ./Parser/POMDPX/tinyxmlerror.o
+a - ./Parser/POMDPX/tinyxmlparser.o
+a - ./Utils/InfoLog.o
+a - ./Utils/md5.o
+a - ./Utils/md5wrapper.o
+a - ./Utils/CPMemUtils.o
+a - ./Utils/StatsCollector.o
+a - ./Utils/SimulationRewardCollector.o
+a - ./Parser/Cassandra/include/pomdp_spec.tab.o
+a - ./Parser/Cassandra/include/pomdp_spec.yy.o
+a - ./miniposix/getopt.o
+a - ./miniposix/getopt1.o
+a - ./miniposix/getopt_init.o
+a - ./Parser/Cassandra/decision-tree.o
+a - ./Parser/Cassandra/imm-reward.o
+a - ./Parser/Cassandra/mdpCassandra.o
+a - ./Parser/Cassandra/parse_err.o
+a - ./Parser/Cassandra/parse_hash.o
+a - ./Parser/Cassandra/sparse-matrix.o
+a - ./Controller/Controller.o
+ranlib libappl.a
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o OfflineSolver/solver.o OfflineSolver/solver.cpp
+g++ -L. ./OfflineSolver/solver.o  -lappl  -o pomdpsol
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Simulator/Simulator.o Simulator/Simulator.cpp
+g++ -L. ./Simulator/Simulator.o  -lappl  -o pomdpsim
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Evaluator/Evaluator.o Evaluator/Evaluator.cpp
+g++ -L. ./Evaluator/Evaluator.o  -lappl  -o pomdpeval
+g++ -L. ./PolicyGraph/PolicyGraph.o  -lappl  -o polgraph
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o PomdpConvertor/convertor.o PomdpConvertor/convertor.cpp
+g++ -L. ./PomdpConvertor/convertor.o  -lappl  -o pomdpconvert
+g++ -g -w -O3 -I./MathLib -I./Algorithms -I./Algorithms/HSVI -I./Algorithms/SARSOP -I./Models/MOMDP/ -I./Models/MOMDP/CoLoc/ -I./OfflineSolver/ -I./Bounds/ -I./Core/ -I./Parser/Cassandra/ -I./Parser/Cassandra/include -I./Parser/ -I./Parser/POMDPX/ -I./Utils/ -I./Simulator/ -I./Evaluator/ -I./Controller/  -msse2  -mfpmath=sse      -c -o Controller/testControllerTiger.o Controller/testControllerTiger.cpp
+g++ -L. ./Controller/testControllerTiger.o  -lappl  -o testControllerTiger
+
+julia> exit()
+yichunc@corn34:~$ ls 
+Desktop    Mail      WWW       cs228hw5		   private
+Documents  Music     cs228hw2  cvx		   public
+Downloads  News      cs228hw3  cvx-a64.tar.gz	   sudoku.mod
+Favorites  Pictures  cs228hw4  esriLicense.config  sudoku2.mod
+yichunc@corn34:~$ ls     
+Desktop    Mail      WWW       cs228hw5		   private
+Documents  Music     cs228hw2  cvx		   public
+Downloads  News      cs228hw3  cvx-a64.tar.gz	   sudoku.mod
+Favorites  Pictures  cs228hw4  esriLicense.config  sudoku2.mod
+yichunc@corn34:~$ ls
+Desktop    Mail      WWW       cs228hw5		   hallway.POMDP  sudoku2.mod
+Documents  Music     cs228hw2  cvx		   private
+Downloads  News      cs228hw3  cvx-a64.tar.gz	   public
+Favorites  Pictures  cs228hw4  esriLicense.config  sudoku.mod
+yichunc@corn34:~$ ls
+Desktop    Mail      WWW       cs228hw5		   hallway.POMDP  sudoku2.mod
+Documents  Music     cs228hw2  cvx		   private
+Downloads  News      cs228hw3  cvx-a64.tar.gz	   public
+Favorites  Pictures  cs228hw4  esriLicense.config  sudoku.mod
+yichunc@corn34:~$ ./.julia/v0.4/SARSOP/deps/appl-0.96/src/pomdpsol hallway.POMDP 
+
+Loading the model ...
+  input file   : hallway.POMDP
+  loading time : 0.01s 
+
+SARSOP initializing ...
+  initialization time : 0.17s
+
+-------------------------------------------------------------------------------
+ Time   |#Trial |#Backup |LBound    |UBound    |Precision  |#Alphas |#Beliefs  
+-------------------------------------------------------------------------------
+ 0.17    0       0        0.0470563  1.35742    1.31036     5        1        
+ 0.28    2       61       0.153104   1.26376    1.11065     49       31       
+ 0.39    3       100      0.217666   1.2493     1.03164     81       54       
+ 0.5     5       150      0.381071   1.23533    0.854258    67       67       
+ 0.59    7       200      0.521674   1.23254    0.710867    44       80       
+ 0.72    9       257      0.631793   1.23078    0.59899     49       88       
+ 0.83    10      300      0.658548   1.23041    0.571862    63       95       
+ 1.01    12      355      0.728367   1.22853    0.500168    78       108      
+ 1.16    14      413      0.762658   1.22772    0.465065    98       116      
+ 1.24    15      450      0.784301   1.22754    0.44324     115      121      
+ 1.37    17      501      0.811627   1.2275     0.41587     99       125      
+ 1.63    19      553      0.824063   1.22664    0.402579    127      142      
+ 1.77    21      609      0.839496   1.22652    0.387021    120      145      
+ 1.96    22      650      0.850411   1.22511    0.374701    114      153      
+ 2.11    24      701      0.864926   1.22508    0.360151    136      158      
+ 2.25    26      753      0.876208   1.22415    0.347942    172      161      
+ 2.4     28      801      0.885953   1.22355    0.337601    193      167      
+ 2.59    30      850      0.890618   1.22354    0.332925    199      173      
+ 2.68    31      900      0.897509   1.22345    0.325938    164      175      
+ 2.91    33      953      0.904547   1.2234     0.318855    189      180      
+ 3.16    35      1015     0.913511   1.22331    0.309803    196      187      
+ 3.28    36      1050     0.916629   1.22331    0.306681    177      189      
+ 3.51    38      1103     0.923316   1.22327    0.299954    201      194      
+ 3.86    40      1163     0.926196   1.22322    0.297023    227      202      
+ 4.05    41      1200     0.928936   1.22316    0.294222    244      205      
+ 4.27    43      1253     0.933763   1.22237    0.288605    263      208      
+ 4.47    45      1309     0.935062   1.22224    0.287176    308      213      
+ 4.68    46      1350     0.935768   1.22214    0.28637     345      221      
+ 4.95    48      1411     0.938482   1.22207    0.283583    390      226      
+ 5.16    49      1450     0.939469   1.22197    0.282499    422      230      
+ 5.57    51      1507     0.942393   1.22189    0.279497    266      237      
+ 5.72    52      1550     0.942931   1.22176    0.278827    305      242      
+ 6.2     54      1603     0.946147   1.22172    0.275569    193      250      
+ 6.48    56      1663     0.949144   1.22163    0.272487    113      254      
+ 6.75    57      1700     0.949853   1.22157    0.271721    92       260      
+ 7.08    59      1759     0.951426   1.22154    0.270112    86       268      
+ 7.27    60      1800     0.952102   1.22151    0.269406    79       272      
+ 7.74    62      1863     0.953326   1.22147    0.268141    79       284      
+ 7.83    63      1900     0.953638   1.22135    0.267708    85       286      
+ 8.05    65      1957     0.954994   1.22128    0.266288    71       295      
+ 8.38    67      2013     0.955875   1.22121    0.265338    75       302      
+ 8.52    68      2050     0.956107   1.22119    0.265086    78       305      
+ 8.74    70      2100     0.95733    1.2211     0.263775    76       309      
+ 9.12    72      2161     0.958406   1.22107    0.262662    84       318      
+ 9.45    73      2200     0.958455   1.22106    0.262601    97       325      
+ 9.69    75      2251     0.959794   1.22071    0.260916    92       328      
+ 10.02   77      2300     0.96052    1.2207     0.260175    91       334      
+ 10.16   78      2350     0.962439   1.22067    0.258233    77       334      
+ 10.57   80      2403     0.963321   1.2206     0.257277    83       341      
+ 10.93   81      2450     0.963935   1.2206     0.256662    91       346      
+ 11.4    83      2501     0.965617   1.22049    0.254871    95       353      
+ 11.52   85      2559     0.965923   1.2204     0.254479    94       358      
+ 11.67   86      2600     0.966179   1.22037    0.254193    97       359      
+ 12.06   88      2659     0.967267   1.22037    0.253102    97       364      
+ 12.26   89      2700     0.967396   1.22037    0.25297     98       368      
+ 12.76   91      2753     0.967903   1.22035    0.252446    103      375      
+ 13.09   93      2807     0.968173   1.22033    0.252158    108      383      
+ 13.62   95      2861     0.968869   1.22026    0.251392    102      391      
+ 13.75   96      2900     0.968958   1.22024    0.251282    113      395      
+ 14.25   98      2965     0.969321   1.22023    0.250907    119      405      
+ 14.49   99      3000     0.969701   1.22021    0.250507    116      407      
+ 14.92   101     3053     0.969786   1.22021    0.25042     125      416      
+ 15.19   103     3111     0.969802   1.22018    0.250379    128      420      
+ 15.44   104     3150     0.969805   1.22018    0.250376    133      425      
+ 15.72   106     3200     0.969847   1.22016    0.250313    132      426      
+ 16.06   108     3253     0.969934   1.22014    0.250201    132      434      
+ 16.38   110     3301     0.970001   1.2201     0.250098    131      440      
+ 16.81   112     3363     0.970383   1.22006    0.249674    135      445      
+ 17.16   113     3400     0.970405   1.22005    0.249646    140      451      
+ 17.47   115     3450     0.970839   1.22003    0.249187    135      454      
+ 18.18   117     3507     0.971119   1.22001    0.248891    141      464      
+ 18.53   118     3550     0.971188   1.21997    0.248785    151      470      
+ 18.81   120     3600     0.971517   1.21994    0.248427    147      472      
+ 19.29   122     3661     0.971546   1.21993    0.248385    149      481      
+ 19.56   123     3700     0.971547   1.21993    0.248384    150      485      
+ 20.02   125     3753     0.97192    1.21993    0.248009    150      490      
+ 20.52   126     3800     0.972036   1.21993    0.24789     153      499      
+ 21.13   128     3851     0.973608   1.21979    0.246183    148      506      
+ 21.62   129     3900     0.973768   1.21979    0.246019    150      513      
+ 21.92   131     3950     0.97433    1.21973    0.245404    140      515      
+ 22.45   133     4000     0.974408   1.21961    0.245201    143      524      
+ 23      135     4059     0.974676   1.2196     0.24492     151      531      
+ 23.42   136     4100     0.975034   1.21959    0.244559    154      535      
+ 23.79   138     4150     0.975509   1.21957    0.244057    155      537      
+ 24.37   140     4211     0.975764   1.21949    0.243726    155      543      
+ 24.76   141     4250     0.976002   1.21937    0.243367    156      548      
+ 25.34   143     4305     0.976383   1.21935    0.242969    151      554      
+ 25.87   145     4363     0.976416   1.21935    0.242932    155      560      
+ 26.55   147     4411     0.976717   1.21735    0.240634    154      571      
+ 26.98   148     4450     0.976801   1.21731    0.240512    161      577      
+ 27.76   150     4515     0.976937   1.21728    0.240342    162      584      
+ 28.07   151     4550     0.977176   1.21728    0.240102    163      588      
+ 28.57   153     4617     0.977429   1.21727    0.239837    166      593      
+ 28.99   154     4650     0.977564   1.2172     0.239634    168      596      
+ 29.49   156     4703     0.977707   1.21688    0.239172    164      600      
+ 30.25   157     4750     0.977834   1.21683    0.238999    166      607      
+ 30.77   159     4800     0.978344   1.21682    0.23848     167      609      
+ 31.18   161     4851     0.978624   1.2166     0.23798     164      610      
+ 31.77   163     4905     0.978793   1.2166     0.237805    161      614      
+ 32.5    164     4950     0.979041   1.21655    0.237508    164      621      
+ 33.01   166     5003     0.9793     1.21655    0.237246    167      625      
+ 33.74   168     5050     0.979475   1.21637    0.236893    177      631      
+ 34.22   169     5101     0.97972    1.21636    0.236644    172      632      
+ 35.05   171     5163     0.979843   1.21617    0.236328    172      637      
+ 35.66   172     5200     0.979985   1.21187    0.231887    178      645      
+ 36.35   174     5251     0.980593   1.21174    0.231152    165      649      
+ 37.13   176     5309     0.98081    1.21149    0.230677    164      653      
+ 37.74   177     5350     0.981037   1.21141    0.230373    166      660      
+ 38.34   179     5403     0.981149   1.2114     0.230251    171      662      
+ 38.84   180     5450     0.981169   1.2114     0.23023     180      664      
+ 39.72   182     5509     0.981329   1.21136    0.230032    179      672      
+ 40.08   183     5550     0.981428   1.21136    0.229931    187      675      
+ 40.93   185     5603     0.982109   1.21135    0.229241    186      682      
+ 41.5    186     5650     0.982234   1.21135    0.229114    191      688      
+ 42.14   188     5703     0.982536   1.21134    0.2288      189      691      
+ 42.83   190     5765     0.982714   1.21133    0.228619    194      695      
+ 43.09   191     5800     0.982805   1.21131    0.228504    200      696      
+ 44.09   193     5867     0.982975   1.2113     0.228329    208      705      
+ 44.34   194     5900     0.983022   1.2113     0.228282    211      706      
+ 45.34   196     5965     0.983062   1.2113     0.228239    212      714      
+ 45.89   197     6000     0.983076   1.2113     0.228222    210      718      
+ 46.68   199     6059     0.983377   1.21126    0.227882    211      725      
+ 47.27   200     6100     0.983416   1.21125    0.227836    213      727      
+ 48.04   202     6153     0.983527   1.21124    0.227715    198      732      
+ 48.73   204     6213     0.983575   1.21123    0.22766     203      735      
+ 49.41   205     6250     0.983607   1.21123    0.22762     203      739      
+ 50.04   207     6313     0.983664   1.21113    0.22747     205      743      
+ 50.62   208     6350     0.9837     1.21113    0.227433    205      746      
+ 51.44   210     6413     0.98374    1.21113    0.227393    205      750      
+ 51.98   211     6450     0.983785   1.21113    0.227347    209      755      
+ 52.95   213     6513     0.983804   1.21113    0.227328    207      761      
+ 53.3    214     6550     0.983831   1.21113    0.227298    209      763      
+ 54.57   216     6611     0.983916   1.21111    0.22719     213      771      
+ 55      217     6650     0.984061   1.2111     0.227044    215      775      
+ 55.95   219     6715     0.9842     1.21109    0.226887    218      782      
+ 56.33   220     6750     0.984251   1.21108    0.226833    220      784      
+ 57.33   222     6813     0.984395   1.21108    0.226689    221      791      
+ 57.98   223     6850     0.984421   1.21108    0.226662    220      794      
+ 58.67   225     6909     0.984581   1.21103    0.226452    229      798      
+ 59.17   226     6950     0.984613   1.21103    0.226418    233      799      
+ 59.66   228     7005     0.984632   1.21103    0.226398    229      801      
+ 60.6    229     7050     0.98467    1.21099    0.226325    235      808      
+ 61.23   231     7105     0.98472    1.21099    0.226266    234      813      
+ 61.97   232     7150     0.984741   1.21099    0.226245    234      818      
+ 62.85   234     7200     0.984792   1.21099    0.226193    233      827      
+ 63.53   235     7250     0.984843   1.21098    0.226141    230      830      
+ 64.38   237     7307     0.984866   1.2106     0.225739    231      833      
+ 65.1    238     7350     0.984955   1.21056    0.225606    234      838      
+ 66.01   240     7409     0.984981   1.21056    0.225579    232      843      
+ 66.65   242     7461     0.985473   1.21052    0.22505     220      846      
+ 67.34   243     7500     0.985507   1.21052    0.225013    221      849      
+ 68.09   245     7559     0.985514   1.21052    0.225005    222      855      
+ 68.85   246     7600     0.98554    1.21052    0.224979    224      859      
+ 69.94   248     7663     0.985836   1.21052    0.22468     223      867      
+ 70.57   249     7700     0.985992   1.2105     0.22451     226      868      
+ 71.59   251     7765     0.986085   1.2105     0.224412    232      878      
+ 72.1    252     7800     0.986128   1.2105     0.224369    233      879      
+ 72.91   253     7850     0.98613    1.2105     0.224366    238      887      
+ 73.76   255     7903     0.986186   1.2105     0.224309    242      891      
+ 74.27   256     7950     0.986197   1.2105     0.224298    242      893      
+ 75.29   258     8007     0.98623    1.21049    0.224265    241      899      
+ 75.89   259     8050     0.986448   1.21049    0.224046    245      902      
+ 77.15   261     8109     0.986526   1.21046    0.223938    262      910      
+ 77.69   262     8150     0.986565   1.21046    0.223897    255      913      
+ 78.95   264     8209     0.986605   1.21046    0.223855    260      920      
+ 79.78   265     8250     0.986651   1.21046    0.223808    263      927      
+ 80.92   267     8315     0.986835   1.21046    0.223621    263      934      
+ 81.45   268     8353     0.98687    1.21044    0.223573    265      938      
+ 82.73   269     8400     0.986884   1.21018    0.2233      270      945      
+ 83.5    271     8450     0.98698    1.20998    0.222996    269      948      
+ 84.6    272     8500     0.986986   1.20998    0.22299     271      955      
+ 85.49   274     8559     0.987004   1.20997    0.222971    272      960      
+ 86.62   275     8600     0.98701    1.20997    0.222964    280      968      
+ 87.44   276     8650     0.987023   1.20997    0.222943    282      975      
+ 88.44   278     8701     0.987162   1.20996    0.2228      286      981      
+ 89.17   279     8750     0.987256   1.20996    0.222704    291      986      
+ 90.08   281     8803     0.987382   1.2099     0.222523    287      991      
+ 91.17   282     8850     0.987407   1.2099     0.222497    292      996      
+ 92.42   284     8905     0.987483   1.2099     0.222419    292      1003     
+ 93.48   285     8950     0.987498   1.20989    0.222395    296      1008     
+ 94.24   287     9001     0.987537   1.20988    0.222339    298      1011     
+ 95.67   289     9065     0.987568   1.20987    0.222302    294      1017     
+ 96.27   290     9100     0.987594   1.2098     0.222202    294      1019     
+ 97.76   292     9165     0.987657   1.20979    0.222135    296      1028     
+ 98.43   293     9201     0.987678   1.20979    0.222114    295      1032     
+ 99.48   294     9250     0.987689   1.20979    0.222102    295      1036     
+ 100.16  296     9305     0.987716   1.20979    0.222075    290      1038     
+ 100.87  298     9350     0.98775    1.20971    0.221961    292      1042     
+ 101.88  299     9405     0.987769   1.20971    0.221941    291      1046     
+ 102.47  300     9450     0.987787   1.20971    0.221923    294      1048     
+ 103.77  302     9503     0.987808   1.20969    0.221882    297      1055     
+ 104.35  303     9550     0.987831   1.20969    0.221858    301      1058     
+ 105.64  305     9609     0.9879     1.20969    0.221788    293      1064     
+ 106.08  306     9650     0.987921   1.20968    0.221756    294      1064     
+ 107.84  308     9709     0.988033   1.20968    0.221644    291      1074     
+ 108.39  309     9750     0.988073   1.20968    0.221603    291      1077     
+ 109.37  311     9811     0.988117   1.20968    0.221559    298      1082     
+ 110.23  312     9850     0.988169   1.20968    0.221506    301      1083     
+ 111.06  314     9905     0.988223   1.20967    0.221452    298      1087     
+ 112.03  315     9950     0.988236   1.20967    0.221439    297      1091     
+ 113.14  317     10009    0.988288   1.20967    0.221387    291      1098     
+ 113.81  318     10050    0.988311   1.20967    0.221364    296      1102     
+ 115.07  320     10101    0.988355   1.20962    0.221263    301      1106     
+ 116.08  322     10167    0.988487   1.20962    0.22113     295      1110     
+ 116.82  323     10200    0.9885     1.20962    0.221116    295      1110     
+ 118.14  324     10250    0.988532   1.20962    0.221084    298      1118     
+ 119.21  326     10305    0.988589   1.20961    0.221025    301      1123     
+ 120.64  327     10350    0.988628   1.20961    0.220987    308      1129     
+ 121.6   329     10405    0.988653   1.20961    0.22096     310      1133     
+ 122.69  331     10457    0.98899    1.20952    0.220535    307      1136     
+ 123.63  333     10500    0.989379   1.20947    0.220088    300      1140     
+ 124.88  334     10550    0.990297   1.20943    0.219137    294      1145     
+ 125.96  336     10611    0.990493   1.20943    0.218935    285      1147     
+ 126.53  337     10650    0.990535   1.20943    0.218892    284      1149     
+ 127.89  339     10709    0.990658   1.20942    0.218765    289      1154     
+ 128.56  340     10750    0.990669   1.20942    0.218754    292      1158     
+ 129.45  342     10805    0.990696   1.20942    0.218727    296      1161     
+ 131.17  343     10850    0.990921   1.20941    0.218486    299      1167     
+ 132.02  345     10911    0.991215   1.2094     0.218186    288      1171     
+ 133.29  346     10950    0.991269   1.2094     0.218131    286      1176     
+ 134.35  348     11001    0.991532   1.20865    0.21712     287      1179     
+ 135.19  349     11050    0.99155    1.20865    0.217099    291      1183     
+ 136.42  351     11105    0.991598   1.20865    0.21705     288      1186     
+ 137.02  352     11150    0.991612   1.20865    0.217035    286      1188     
+ 139.28  354     11215    0.991727   1.20864    0.216915    274      1199     
+ 140.58  355     11253    0.991736   1.20864    0.216906    275      1206     
+ 141.64  356     11300    0.991742   1.20863    0.216883    283      1211     
+ 143.35  358     11361    0.991794   1.20863    0.216831    279      1217     
+ 144.11  359     11400    0.991815   1.20862    0.216808    276      1221     
+ 145.2   360     11450    0.991828   1.20862    0.216795    286      1227     
+ 146.34  362     11500    0.9919     1.20855    0.21665     276      1228     
+ 147.73  364     11569    0.991942   1.20855    0.216609    277      1236     
+ 148.66  365     11603    0.99195    1.20855    0.2166      277      1238     
+ 149.47  366     11650    0.991983   1.20855    0.216567    280      1241     
+ 150.58  368     11703    0.992004   1.20854    0.21654     282      1247     
+ 151.77  369     11750    0.992011   1.20854    0.216533    284      1250     
+ 153.01  371     11801    0.99208    1.20854    0.216462    287      1256     
+ 154.64  373     11869    0.992117   1.20854    0.216424    293      1264     
+ 155.66  374     11900    0.99213    1.20854    0.21641     297      1266     
+ 156.76  375     11950    0.992147   1.20853    0.216388    295      1273     
+ 158.49  377     12005    0.992171   1.2085     0.21633     296      1279     
+ 159.47  378     12050    0.992175   1.2085     0.216325    304      1284     
+ 160.97  380     12109    0.992189   1.20849    0.216302    302      1291     
+ 162.36  381     12150    0.992215   1.20849    0.216274    306      1295     
+ 164.49  383     12217    0.992336   1.20849    0.216152    317      1308     
+ 165.19  384     12253    0.992344   1.20849    0.216144    319      1311     
+ 166.97  385     12300    0.992409   1.20849    0.216077    317      1318     
+ 168.04  387     12357    0.992454   1.20848    0.21603     315      1323     
+ 169.05  388     12400    0.992477   1.20848    0.216007    314      1328     
+ 170.48  390     12461    0.992498   1.20845    0.215952    311      1330     
+ 171.27  391     12500    0.992507   1.20845    0.215941    312      1334     
+ 173.38  393     12567    0.992536   1.20842    0.215882    310      1341     
+ 174.23  394     12605    0.992538   1.20842    0.21588     313      1344     
+ 174.96  395     12650    0.992538   1.20842    0.215879    313      1345     
+ 176.77  397     12717    0.99256    1.20842    0.215858    319      1351     
+ 178.18  398     12750    0.992589   1.20841    0.215817    323      1356     
+ 179.38  399     12800    0.992593   1.20841    0.215813    325      1359     
+ 180.52  401     12850    0.992615   1.20841    0.21579     325      1362     
+ 182.03  403     12907    0.992626   1.2084     0.215779    324      1364     
+ 183.11  404     12950    0.992628   1.2084     0.215777    326      1368     
+ 184.29  406     13007    0.992641   1.2084     0.215764    325      1372     
+ 185.59  407     13050    0.992642   1.2084     0.215763    327      1375     
+ 186.72  409     13111    0.99266    1.2084     0.215745    322      1378     
+ 188.32  410     13151    0.992664   1.2084     0.21574     322      1386     
+ 189.86  412     13211    0.992682   1.2084     0.215721    326      1389     
+ 190.59  413     13250    0.992688   1.2084     0.215715    330      1391     
+ 193.18  415     13315    0.992763   1.2084     0.215639    324      1400     
+ 194.54  416     13350    0.992821   1.2084     0.215576    325      1404     
+ 195.56  417     13400    0.992884   1.2084     0.215513    323      1408     
+ 197.58  419     13465    0.992968   1.2084     0.215428    324      1415     
+ 199.24  420     13500    0.992971   1.20601    0.213036    328      1423     
+ 200.23  422     13550    0.993052   1.206      0.212952    333      1425     
+ 201.47  424     13611    0.993102   1.20599    0.212885    340      1428     
+ 202.75  425     13650    0.993106   1.20598    0.212877    340      1429     
+ 204.47  427     13707    0.993111   1.20595    0.212842    341      1438     
+ 205.74  428     13750    0.993169   1.20587    0.212696    345      1441     
+ 208.34  430     13813    0.993225   1.20585    0.21262     343      1452     
+ 208.87  431     13850    0.993252   1.20584    0.212591    341      1452     
+ 210.13  433     13900    0.993289   1.20581    0.212522    345      1456     
+ 211.98  435     13967    0.99336    1.20581    0.212446    343      1460     
+ 212.77  436     14001    0.993368   1.20581    0.212439    347      1463     
+ 214.32  437     14050    0.993374   1.2058     0.212424    355      1470     
+ 216.49  439     14107    0.993395   1.20578    0.212389    355      1476     
+ 217.09  440     14150    0.993398   1.20578    0.212386    359      1477     
+ 218.37  442     14201    0.993399   1.20578    0.212385    355      1481     
+ 219.58  443     14250    0.993418   1.20578    0.212365    356      1485     
+ 221.43  445     14309    0.993424   1.20578    0.212354    358      1489     
+ 222.31  446     14350    0.993455   1.20573    0.212276    362      1491     
+ 224.04  448     14411    0.993492   1.20573    0.212239    361      1494     
+ 224.88  449     14450    0.993499   1.20573    0.21223     370      1496     
+ 226.43  451     14517    0.993512   1.20573    0.212217    364      1502     
+ 226.93  452     14553    0.993515   1.20573    0.212214    365      1502     
+ 229.32  453     14600    0.993549   1.20572    0.212171    375      1507     
+ 230.72  455     14655    0.993578   1.20572    0.21214     374      1514     
+ 231.7   456     14700    0.99358    1.20572    0.212139    384      1518     
+ 234.5   458     14767    0.993605   1.20572    0.212113    382      1528     
+ 235.23  459     14801    0.993649   1.20572    0.212068    381      1530     
+ 237.4   461     14865    0.993917   1.20571    0.211791    384      1537     
+ 238.61  462     14900    0.993953   1.20569    0.21174     384      1537     
+ 239.74  464     14953    0.993985   1.20569    0.211709    385      1539     
+ 240.84  465     15000    0.993989   1.20569    0.211704    386      1542     
+ 241.87  467     15053    0.994      1.20569    0.211693    394      1544     
+ 243.51  468     15100    0.994001   1.20569    0.211692    390      1546     
+ 244.69  470     15155    0.994011   1.20569    0.211682    394      1550     
+ 245.71  471     15200    0.994018   1.20569    0.211675    394      1553     
+ 247.48  473     15253    0.994019   1.20569    0.211674    392      1556     
+ 248.79  474     15300    0.99402    1.20569    0.211673    398      1561     
+ 250.58  476     15365    0.994026   1.20569    0.211667    401      1568     
+ 252.42  477     15405    0.994026   1.20569    0.211666    403      1572     
+ 253.58  478     15450    0.994032   1.20569    0.21166     409      1576     
+ 255.3   480     15517    0.994033   1.20569    0.211659    406      1583     
+ 256.01  481     15550    0.994033   1.20569    0.211659    405      1584     
+ 257.84  482     15600    0.994034   1.20569    0.211658    413      1588     
+ 259.33  484     15659    0.994038   1.20569    0.211654    414      1594     
+ 260.22  485     15700    0.99406    1.20569    0.211631    419      1596     
+ 261.41  486     15750    0.994061   1.20569    0.211631    424      1600     
+ 263.43  488     15809    0.994067   1.20569    0.211625    424      1604     
+ 264.26  489     15850    0.99407    1.20569    0.211621    424      1606     
+ 265.43  490     15900    0.994071   1.20569    0.21162     431      1610     
+ 267.37  492     15951    0.994097   1.20569    0.211594    430      1613     
+ 268.35  494     16009    0.994108   1.20569    0.211583    433      1613     
+ 269.27  495     16050    0.994117   1.20569    0.211574    431      1615     
+ 271.12  497     16107    0.994125   1.20569    0.211565    428      1616     
+ 271.95  498     16150    0.994127   1.20569    0.211564    426      1617     
+ 274.5   500     16213    0.994193   1.20568    0.21149     442      1628     
+ 275.41  501     16250    0.994204   1.20568    0.211478    443      1630     
+ 277.87  503     16307    0.994233   1.20568    0.211447    451      1635     
+ 278.93  504     16350    0.994245   1.20568    0.211435    451      1637     
+ 281.42  506     16407    0.994249   1.20568    0.21143     449      1645     
+ 282.76  507     16450    0.994267   1.20568    0.211412    452      1649     
+ 285.66  509     16507    0.994353   1.20565    0.211299    451      1656     
+ 286.82  510     16550    0.994376   1.20565    0.211275    456      1659     
+ 288.53  512     16603    0.99438    1.20565    0.21127     459      1664     
+ 291.8   514     16665    0.994438   1.20564    0.211203    465      1671     
+ 293.4   515     16703    0.994439   1.20564    0.211201    468      1678     
+ 294.72  516     16750    0.994448   1.20564    0.211192    464      1683     
+ 297.72  518     16813    0.994572   1.20563    0.211062    462      1693     
+ 299.71  519     16850    0.99459    1.20563    0.211043    465      1696     
+ 301.17  520     16900    0.994616   1.20563    0.211018    470      1701     
+ 303.46  522     16961    0.994643   1.20563    0.210991    477      1709     
+ 304.49  523     17000    0.994649   1.20563    0.210984    477      1711     
+ 306.67  525     17053    0.994663   1.20558    0.210921    471      1713     
+ 308.02  526     17100    0.994667   1.20558    0.210916    476      1717     
+ 309.2   528     17150    0.994677   1.20544    0.210767    471      1718     
+ 312.06  530     17215    0.994711   1.20544    0.210731    469      1725     
+ 313.44  531     17250    0.994723   1.20544    0.210719    468      1729     
+ 315.07  533     17311    0.994742   1.20544    0.210699    468      1732     
+ 317.06  534     17350    0.994749   1.20544    0.210691    471      1739     
+ 319.31  536     17400    0.994753   1.20544    0.210686    477      1747     
+ 321.27  537     17451    0.994774   1.20544    0.210665    475      1748     
+ 322.94  538     17500    0.994797   1.20544    0.210642    473      1753     
+ 324.93  540     17561    0.9948     1.20541    0.210614    478      1758     
+ 325.81  541     17600    0.994801   1.20541    0.210614    479      1759     
+ 329.24  543     17659    0.994809   1.20541    0.210603    482      1767     
+ 330.65  544     17700    0.994818   1.20541    0.210593    478      1770     
+ 332.7   546     17751    0.994827   1.20541    0.210583    482      1776     
+ 336.31  547     17800    0.994848   1.20541    0.210561    491      1785     
+ 337.41  549     17850    0.994866   1.20541    0.210541    492      1785     
+ 339.59  551     17907    0.994874   1.20541    0.210531    491      1790     
+ 340.89  552     17950    0.994885   1.20541    0.210521    494      1793     
+ 343.43  554     18005    0.994901   1.2054     0.210499    492      1796     
+ 345.29  556     18050    0.994914   1.2054     0.210485    490      1801     
+ 346.58  557     18100    0.994926   1.2054     0.210472    489      1803     
+ 349.4   559     18163    0.994928   1.2054     0.210469    496      1811     
+ 350.63  560     18200    0.994929   1.20539    0.210463    497      1813     
+ 353.53  562     18255    0.994945   1.20539    0.210446    505      1818     
+ 354.84  563     18300    0.994946   1.20539    0.210444    505      1822     
+ 356.69  565     18363    0.994951   1.20539    0.210439    509      1826     
+ 359.37  566     18400    0.994953   1.20539    0.210437    511      1831     
+ 361.44  567     18450    0.99496    1.20539    0.21043     512      1839     
+ 363.48  569     18505    0.994964   1.20539    0.210424    517      1845     
+ 365.25  571     18550    0.994966   1.20539    0.210421    525      1849     
+ 367.99  572     18600    0.994967   1.20539    0.210418    525      1851     
+ 369.74  574     18665    0.994974   1.20538    0.21041     527      1855     
+ 372.01  575     18700    0.994983   1.20538    0.210399    528      1861     
+ 374.33  577     18765    0.994986   1.20538    0.210392    522      1867     
+ 376.5   578     18800    0.994992   1.20538    0.210386    524      1869     
+ 378.97  580     18859    0.994994   1.20538    0.210382    524      1874     
+ 380.99  581     18900    0.995007   1.20537    0.210367    528      1879     
+ 383.95  583     18961    0.995025   1.20537    0.210349    535      1886     
+ 385.8   584     19000    0.995025   1.20537    0.210348    532      1889     
+ 390.01  586     19050    0.995028   1.20537    0.210345    542      1900     
+ 391.93  587     19103    0.995028   1.20537    0.210341    546      1904     
+ 393.54  589     19163    0.995041   1.20537    0.210328    543      1906     
+ 395.17  590     19201    0.995061   1.20537    0.210308    548      1910     
+ 399.31  591     19250    0.995244   1.20536    0.210117    542      1920     
+ 401.64  593     19307    0.995269   1.20534    0.21007     548      1925     
+ 403.41  594     19350    0.995276   1.20534    0.210064    554      1930     
+ 406.45  595     19400    0.995277   1.20534    0.210061    566      1940     
+ 408.93  597     19450    0.995291   1.20534    0.210046    565      1941     
+ 410.38  599     19505    0.995292   1.20534    0.210045    566      1942     
+ 412.34  600     19550    0.995296   1.20534    0.21004     572      1948     
+ 414.85  602     19601    0.995354   1.20529    0.209938    574      1954     
+ 417.58  603     19650    0.995397   1.20526    0.209864    564      1956     
+ 419.29  605     19700    0.995489   1.20525    0.209764    552      1958     
+ 422.62  607     19767    0.995666   1.20516    0.209498    544      1966     
+ 423.74  608     19800    0.995691   1.20516    0.209467    542      1967     
+ 427.11  610     19867    0.995703   1.20516    0.209454    537      1972     
+ 428.51  611     19900    0.995707   1.20516    0.20945     537      1975     
+ 430.96  613     19957    0.995741   1.2051     0.209356    531      1979     
+ 432.34  614     20000    0.995747   1.2051     0.20935     534      1981     
+ 434.34  616     20061    0.995787   1.2051     0.209309    533      1984     
+ 437.21  617     20101    0.995792   1.2051     0.209303    534      1990     
+ 438.81  618     20150    0.995794   1.2051     0.209302    535      1994     
+ 441.35  620     20213    0.995795   1.2051     0.2093      535      2003     
+ 442.61  621     20251    0.995796   1.2051     0.2093      535      2006     
+ 445.15  622     20300    0.995797   1.2051     0.209298    539      2008     
+ 446.75  624     20363    0.9958     1.2051     0.209295    534      2011     
+ 447.88  625     20403    0.995801   1.20509    0.209293    535      2013     
+ 449.9   626     20450    0.995815   1.20508    0.209261    540      2018     
+ 453.01  628     20511    0.995816   1.20508    0.20926     541      2022     
+ 453.87  629     20550    0.995816   1.20508    0.20926     580      2024     
+ 455.16  630     20600    0.995817   1.20508    0.209259    605      2027     
+ 456.64  632     20651    0.99582    1.20508    0.209256    529      2028     
+ 458.11  634     20713    0.99584    1.20506    0.209223    571      2031     
+ 460.16  635     20751    0.995868   1.20506    0.209194    609      2033     
+ 462.53  637     20809    0.995936   1.20456    0.208621    526      2036     
+ 464.08  638     20850    0.995938   1.20456    0.208619    567      2040     
+ 467.42  640     20915    0.995975   1.20456    0.208581    528      2050     
+ 468.35  641     20950    0.995977   1.20456    0.208579    563      2051     
+ 471.66  643     21003    0.99598    1.20456    0.208575    532      2056     
+ 473.52  645     21067    0.995992   1.20455    0.208562    532      2059     
+ 474.67  646     21105    0.995993   1.20455    0.208561    570      2063     
+ 476.08  647     21150    0.995993   1.20455    0.208561    534      2065     
+ 478.4   649     21200    0.995995   1.20455    0.208559    584      2067     
+ 480.84  651     21269    0.995996   1.20455    0.208556    537      2072     
+ 482.18  652     21301    0.995998   1.20455    0.208554    569      2076     
+ 484.33  654     21363    0.996      1.20455    0.208552    538      2080     
+ 486.05  655     21400    0.996008   1.20455    0.208544    575      2085     
+ 489.54  656     21450    0.996016   1.20455    0.208534    539      2091     
+ 492.49  658     21503    0.996021   1.20454    0.208518    544      2098     
+ 495.24  659     21550    0.996023   1.20454    0.208516    556      2105     
+ 496.47  661     21601    0.996028   1.20452    0.208497    607      2107     
+ 500.39  663     21667    0.996055   1.20452    0.208469    549      2112     
+ 501.57  664     21700    0.996079   1.20452    0.208445    582      2115     
+ 504.39  665     21750    0.996085   1.20452    0.208437    560      2122     
+ 506.12  667     21800    0.996111   1.20452    0.208408    610      2127     
+ 509.64  669     21863    0.996142   1.20449    0.208349    561      2130     
+ 510.73  670     21900    0.996151   1.20449    0.20834     598      2133     
+ 512.53  672     21950    0.996154   1.20449    0.208336    559      2135     
+ 514.4   674     22000    0.996156   1.20449    0.208334    609      2140     
+ 515.94  675     22050    0.996162   1.20449    0.208326    565      2141     
+ 518.66  677     22109    0.996179   1.20449    0.208309    600      2143     
+ 520.65  678     22150    0.996181   1.20449    0.208307    562      2148     
+ 522.99  679     22200    0.996196   1.20449    0.208292    612      2158     
+ 525.11  681     22255    0.99621    1.20449    0.208276    564      2160     
+ 527.13  682     22300    0.996216   1.20449    0.20827     609      2165     
+ 532.52  684     22353    0.996224   1.20448    0.208257    574      2174     
+ 535.02  685     22400    0.996233   1.20448    0.208248    576      2180     
+ 537.48  687     22453    0.996249   1.20447    0.20822     579      2185     
+ 538.48  689     22515    0.996784   1.20443    0.207648    619      2191     
+ 539.65  690     22550    0.997312   1.20442    0.207109    654      2192     
+ 543     692     22611    0.997465   1.20442    0.206956    532      2193     
+ 543.71  693     22650    0.997505   1.20442    0.206916    571      2194     
+ 545.23  695     22707    0.99756    1.20442    0.206861    610      2196     
+ 546.33  696     22750    0.997573   1.20442    0.206847    633      2198     
+ 548.6   698     22803    0.997579   1.20442    0.206841    523      2202     
+ 551.33  699     22850    0.997582   1.20442    0.206838    570      2205     
+ 552.72  701     22903    0.997625   1.20442    0.206796    593      2208     
+ 554.32  702     22950    0.997638   1.20442    0.206782    507      2210     
+ 555.7   704     23003    0.997666   1.20442    0.206753    543      2212     
+ 557.87  705     23050    0.997673   1.20442    0.206746    590      2217     
+ 562.47  707     23105    0.997693   1.20442    0.206727    508      2224     
+ 563.36  708     23150    0.997708   1.20442    0.206711    553      2225     
+ 565.64  710     23200    0.997722   1.20441    0.206692    516      2230     
+ 567.99  711     23250    0.99774    1.20441    0.206673    525      2235     
+ 570.73  713     23309    0.997752   1.20441    0.206661    518      2242     
+ 573.62  714     23350    0.997754   1.20441    0.206659    559      2245     
+ 577.31  716     23413    0.997775   1.20441    0.206637    517      2254     
+ 579.88  717     23450    0.997804   1.20441    0.206607    524      2259     
+ 583     719     23500    0.997826   1.20441    0.206585    530      2267     
+ 586.22  720     23555    0.99783    1.20441    0.206581    533      2269     
+ 587.16  721     23600    0.997831   1.20441    0.20658     578      2271     
+ 589     723     23661    0.997838   1.20441    0.206572    520      2273     
+ 589.92  724     23700    0.997849   1.20441    0.206562    559      2275     
+ 591.12  725     23750    0.997857   1.20441    0.206553    597      2277     
+ 595.52  727     23801    0.997999   1.20441    0.20641     520      2282     
+ 597.07  728     23850    0.998015   1.20441    0.206394    569      2287     
+ 600.56  730     23909    0.998491   1.20441    0.205917    510      2297     
+ 601.84  731     23950    0.998523   1.20441    0.205885    551      2301     
+ 603.85  732     24000    0.998532   1.20441    0.205875    515      2306     
+ 607.08  734     24050    0.998544   1.20441    0.205863    512      2309     
+ 608.96  736     24113    0.998571   1.20441    0.205836    550      2313     
+ 610.27  737     24150    0.998572   1.20441    0.205835    518      2315     
+ 613.06  739     24215    0.998608   1.20441    0.205798    553      2323     
+ 614.47  740     24250    0.998623   1.20441    0.205783    516      2325     
+ 618.03  742     24315    0.998677   1.20441    0.205728    513      2327     
+ 619.81  743     24350    0.998686   1.2044     0.205719    548      2331     
+ 625.25  745     24415    0.99883    1.20439    0.205563    518      2342     
+ 626.29  746     24450    0.998857   1.20439    0.205535    517      2343     
+ 629.01  747     24500    0.998881   1.20439    0.205511    524      2350     
+ 632.99  749     24557    0.998892   1.20439    0.205499    522      2356     
+ 634.83  750     24600    0.998908   1.20439    0.205483    565      2360     
+ 637.79  752     24653    0.998988   1.20439    0.205402    523      2366     
+ 638.87  753     24700    0.999022   1.20439    0.205368    570      2367     
+ 641.21  755     24753    0.999071   1.20439    0.205316    508      2372     
+ 643.34  757     24811    0.999316   1.20438    0.205062    547      2376     
+ 646.75  758     24850    0.999343   1.20436    0.20502     509      2378     
+ 648.55  760     24900    0.999374   1.20436    0.204989    504      2381     
+ 650.52  762     24963    0.999383   1.20436    0.204979    544      2385     
+ 652.02  763     25000    0.999393   1.20436    0.20497     509      2387     
+ 656.27  765     25061    0.99941    1.20436    0.204947    513      2396     
+ 659.08  766     25100    0.999441   1.20436    0.204916    512      2397     
+ 661.58  768     25157    0.999446   1.20436    0.204911    512      2402     
+ 663.27  769     25200    0.999457   1.20436    0.2049      555      2407     
+ 666.55  771     25259    0.999467   1.20436    0.20489     508      2414     
+ 667.94  772     25300    0.99947    1.20436    0.204887    549      2417     
+ 672.86  774     25357    0.999507   1.20436    0.204849    502      2422     
+ 674.44  775     25400    0.999512   1.20436    0.204844    509      2426     
+ 677.71  777     25465    0.999525   1.20436    0.204831    511      2435     
+ 678.88  778     25500    0.999527   1.20436    0.204829    514      2436     
+ 682.44  780     25565    0.999533   1.20436    0.204823    522      2444     
+ 685.45  781     25600    0.999562   1.20436    0.204794    519      2446     
+ 688.66  783     25661    0.999573   1.20436    0.204782    517      2453     
+ 689.37  784     25700    0.999589   1.20435    0.204766    556      2453     
+ 692.75  786     25750    0.999597   1.20435    0.204758    518      2461     
+ 694.33  787     25803    0.999607   1.20435    0.204748    548      2464     
+ 697.26  789     25850    0.999608   1.20435    0.204747    516      2469     
+ 700.81  790     25900    0.999615   1.20435    0.204735    520      2471     
+ 704.55  792     25965    0.999673   1.20435    0.204676    519      2479     
+ 705.65  793     26000    0.999678   1.20435    0.204671    520      2480     
+ 708.02  795     26061    0.999687   1.20435    0.204662    520      2484     
+ 708.96  796     26100    0.999689   1.20435    0.20466     559      2485     
+ 713.38  798     26155    0.999697   1.20435    0.204652    521      2490     
+ 715.6   800     26200    0.9997     1.20435    0.204649    521      2494     
+ 717.85  801     26250    0.99972    1.20434    0.204619    520      2498     
+ 722.2   803     26300    0.999728   1.20434    0.204611    521      2510     
+ 724.89  804     26350    0.999792   1.20428    0.204483    514      2512     
+ 727.37  805     26400    0.999798   1.20428    0.204478    514      2517     
+ 731.41  807     26451    0.999799   1.20428    0.204476    515      2521     
+ 734.24  808     26500    0.9998     1.20428    0.204475    514      2528     
+ 738.47  810     26563    0.999807   1.20427    0.204466    525      2539     
+ 740.75  811     26600    0.999813   1.20427    0.204461    528      2542     
+ 744.9   813     26667    0.999833   1.20427    0.204439    518      2553     
+ 748.16  814     26700    0.999836   1.20427    0.204436    521      2555     
+ 751.56  816     26763    0.999843   1.20427    0.204428    521      2560     
+ 754.15  817     26800    0.999847   1.20427    0.204423    525      2565     
+ 758.21  819     26865    0.99985    1.20427    0.204421    534      2571     
+ 760.42  820     26901    0.99985    1.20427    0.20442     540      2574     
+ 765.46  822     26961    0.999895   1.20355    0.203658    538      2577     
+ 767.33  823     27000    0.999903   1.20355    0.203649    539      2581     
+ 769.39  824     27050    0.999915   1.20355    0.203637    589      2585     
+ 773.93  826     27107    0.999917   1.20355    0.203636    542      2591     
+ 776.77  827     27150    0.999917   1.20355    0.203636    544      2594     
+ 779.96  829     27201    0.999917   1.20355    0.203633    543      2597     
+ 784.22  830     27250    0.999919   1.20355    0.203631    547      2601     
+ 788.42  832     27313    0.999921   1.20355    0.20363     558      2612     
+ 789.81  833     27350    0.999923   1.20352    0.203596    558      2613     
+ 791.81  835     27411    0.999931   1.20352    0.203586    599      2616     
+ 793.34  836     27450    0.999934   1.20352    0.203582    552      2617     
+ 795.21  838     27507    0.99994    1.20351    0.203575    583      2620     
+ 799.98  839     27550    0.99994    1.20351    0.203574    562      2626     
+ 804.13  841     27600    0.999941   1.20351    0.203574    569      2638     
+ 807.3   842     27657    0.999945   1.2035     0.203554    567      2644     
+ 809.52  843     27700    0.999959   1.2035     0.20354     569      2647     
+ 814.61  845     27763    0.999969   1.2035     0.20353     571      2659     
+ 818.65  846     27803    0.999973   1.2035     0.203525    576      2663     
+ 820.4   848     27861    0.99999    1.2035     0.203508    608      2665     
+ 823.13  849     27900    1.00001    1.2035     0.203491    570      2670     
+ 825.83  851     27959    1.00006    1.20349    0.203426    613      2675     
+ 827.83  852     28000    1.00008    1.20349    0.203407    570      2677     
+ 830.14  854     28057    1.00009    1.20349    0.203402    627      2680     
+ 834.49  855     28100    1.0001     1.20348    0.203381    578      2683     
+ 836.29  857     28155    1.00011    1.20348    0.203377    633      2686     
+ 838.26  859     28200    1.00011    1.20348    0.203375    577      2689     
+ 839.52  860     28250    1.00011    1.20348    0.203374    627      2690     
+ 841.2   862     28313    1.00011    1.20348    0.203373    662      2691     
+ 843.4   863     28350    1.00011    1.20348    0.203372    581      2694     
+ 848.95  865     28411    1.00011    1.20348    0.203365    585      2701     
+ 850.63  866     28450    1.00012    1.20348    0.203363    624      2704     
+ 852.7   868     28509    1.00012    1.20348    0.20336     661      2708     
+ 854.44  869     28550    1.00012    1.20348    0.203359    585      2709     
+ 857.01  871     28611    1.00013    1.20348    0.203351    629      2715     
+ 859.46  872     28653    1.00013    1.20348    0.20335     671      2723     
+ 864.29  873     28700    1.00013    1.20348    0.20335     586      2728     
+ 868.05  875     28767    1.00014    1.20348    0.203341    588      2736     
+ 869.6   876     28807    1.00014    1.20348    0.20334     628      2740     
+ 872.01  877     28850    1.00014    1.20348    0.203339    585      2743     
+ 875.01  879     28909    1.00014    1.20348    0.203338    624      2750     
+ 877.57  880     28950    1.00014    1.20348    0.203337    600      2755     
+ 882.34  881     29000    1.00014    1.20348    0.203337    650      2762     
+ 886.27  883     29061    1.00014    1.20348    0.203335    608      2771     
+ 888.25  884     29100    1.00015    1.20348    0.203329    647      2775     
+ 891.68  886     29161    1.00015    1.20348    0.203327    617      2782     
+ 892.96  887     29200    1.00015    1.20348    0.203327    656      2783     
+ 894.86  889     29251    1.00015    1.20348    0.203326    674      2786     
+ 901.22  891     29309    1.00016    1.20346    0.2033      613      2791     
+ 902.53  892     29350    1.00017    1.20346    0.203298    654      2794     
+ 906.28  894     29409    1.00017    1.20346    0.203295    610      2799     
+ 907.51  895     29450    1.00017    1.20346    0.203294    651      2801     
+ 911.65  897     29513    1.00019    1.20346    0.203278    610      2809     
+ 912.68  898     29550    1.00019    1.20346    0.203272    647      2809     
+ 919.36  900     29611    1.0002     1.20346    0.203259    606      2817     
+ 921.31  901     29650    1.0002     1.20346    0.203255    645      2822     
+ 923.38  903     29709    1.00021    1.20346    0.203253    673      2825     
+ 925.89  904     29750    1.00021    1.20346    0.203252    607      2830     
+ 928.03  906     29805    1.00023    1.20344    0.203212    662      2832     
+ 931.54  907     29850    1.00023    1.20344    0.203212    606      2839     
+ 938.58  909     29913    1.00026    1.20344    0.203186    612      2848     
+ 940.75  910     29950    1.00042    1.20342    0.202998    649      2852     
+ 943.88  911     30000    1.00042    1.20342    0.202996    618      2858     
+ 945.84  913     30057    1.00042    1.20342    0.202996    675      2861     
+ 947.19  914     30100    1.00042    1.20342    0.202995    701      2863     
+ 949.13  916     30155    1.00043    1.20342    0.202988    727      2865     
+ 953.98  917     30200    1.00043    1.20342    0.202985    626      2867     
+ 956.22  919     30250    1.00044    1.20341    0.202978    676      2870     
+ 959.41  920     30300    1.00045    1.20341    0.202969    625      2875     
+ 962.75  922     30357    1.00045    1.20341    0.202963    682      2883     
+ 964.26  923     30400    1.00045    1.20341    0.202958    696      2884     
+ 967.56  925     30451    1.00046    1.20341    0.202953    624      2890     
+ 974.33  927     30517    1.00046    1.20341    0.202948    623      2895     
+ 975.39  928     30551    1.00046    1.20341    0.202947    657      2896     
+ 977.61  930     30611    1.00047    1.20341    0.202935    686      2898     
+ 978.81  931     30650    1.00047    1.20341    0.202934    686      2899     
+ 983.01  933     30709    1.00048    1.20341    0.202926    625      2905     
+ 985.36  934     30750    1.00051    1.20341    0.202894    666      2909     
+ 988.73  936     30803    1.0006     1.2034     0.202804    619      2912     
+ 994.51  938     30861    1.00062    1.2034     0.202778    677      2916     
+ 996.79  939     30900    1.00063    1.2034     0.202765    620      2920     
+ 1000.48 941     30957    1.00073    1.20339    0.202663    677      2925     
+ 1001.52 942     31000    1.00073    1.20339    0.20266     701      2925     
+ 1004.75 944     31055    1.00073    1.20339    0.202659    627      2930     
+ 1007.23 945     31100    1.00073    1.20339    0.202658    672      2934     
+ 1013.44 947     31159    1.00075    1.20339    0.202646    629      2939     
+ 1016.21 948     31200    1.00076    1.20339    0.202635    670      2947     
+ 1020.63 950     31265    1.00084    1.20339    0.202551    626      2954     
+ 1022.92 951     31307    1.00085    1.20339    0.202539    668      2959     
+ 1025.49 952     31350    1.00086    1.20339    0.202532    682      2966     
+ 1028.41 954     31403    1.00086    1.20337    0.202508    629      2968     
+ 1031.12 956     31465    1.00088    1.20333    0.202449    691      2971     
+ 1036.55 957     31500    1.00088    1.20333    0.202442    639      2975     
+ 1038.3  959     31557    1.00089    1.20333    0.202438    696      2976     
+ 1039.55 960     31600    1.00089    1.20333    0.202437    700      2977     
+ 1043.46 962     31655    1.00089    1.20333    0.202431    635      2982     
+ 1045.44 963     31700    1.0009     1.20333    0.202429    680      2987     
+ 1048.68 965     31759    1.00091    1.20332    0.202418    712      2993     
+ 1054.39 966     31800    1.00091    1.20332    0.202417    638      2998     
+ 1056.07 968     31859    1.00091    1.20332    0.202414    697      2999     
+ 1057.15 969     31900    1.00091    1.20332    0.202413    723      3000     
+ 1062.43 971     31959    1.00092    1.20332    0.202404    631      3006     
+ 1063.91 972     32000    1.00092    1.20332    0.202397    672      3007     
+ 1065.82 974     32050    1.00092    1.20332    0.202394    705      3009     
+ 1067.75 976     32111    1.00104    1.20329    0.202255    736      3014     
+ 1073.02 977     32150    1.00104    1.20329    0.202253    640      3016     
+ 1074.97 979     32201    1.00105    1.20329    0.202246    691      3018     
+ 1076.52 980     32250    1.00106    1.20329    0.202237    705      3020     
+ 1080.42 982     32303    1.00106    1.20329    0.202231    641      3027     
+ 1082.04 983     32350    1.00106    1.20329    0.202228    688      3029     
+ 1084    985     32403    1.00108    1.20329    0.202213    703      3031     
+ 1087.96 987     32461    1.00109    1.20329    0.202203    653      3035     
+ 1093.59 988     32500    1.00109    1.20329    0.202199    692      3041     
+ 1096.28 990     32559    1.00111    1.20329    0.202176    639      3044     
+ 1097.99 991     32600    1.00112    1.20329    0.202172    680      3046     
+ 1100.38 993     32650    1.00112    1.20329    0.202165    711      3049     
+ 1103.07 995     32703    1.00114    1.20328    0.202147    630      3050     
+ 1107.48 996     32750    1.00114    1.20328    0.202145    677      3058     
+ 1114.82 998     32807    1.00115    1.20328    0.202137    638      3065     
+ 1118.9  999     32850    1.0012     1.20328    0.202081    641      3070     
+ 1123.56 1001    32909    1.00121    1.20328    0.202071    643      3078     
+ 1125.4  1002    32950    1.00122    1.20328    0.202057    684      3080     
+ 1129.86 1004    33011    1.00122    1.20328    0.202053    642      3087     
+ 1130.78 1005    33050    1.00123    1.20328    0.202045    681      3087     
+ 1134.76 1007    33113    1.00124    1.20328    0.202042    722      3095     
+ 1140.29 1008    33150    1.00124    1.20328    0.202039    649      3097     
+ 1143.49 1010    33215    1.00124    1.20328    0.202035    701      3105     
+ 1145.45 1011    33251    1.00124    1.20328    0.202033    643      3107     
+ 1147.15 1012    33300    1.00124    1.20328    0.202033    692      3110     
+ 1151.04 1014    33361    1.00125    1.20328    0.202028    711      3119     
+ 1153.64 1015    33400    1.00125    1.20328    0.202028    651      3122     
+ 1156.57 1016    33450    1.00125    1.20328    0.202028    701      3129     
+ 1162.91 1018    33500    1.00126    1.20327    0.202012    651      3132     
+ 1167.52 1020    33559    1.00126    1.20327    0.202008    652      3138     
+ 1169.57 1021    33600    1.00126    1.20327    0.202007    693      3141     
+ 1174.19 1023    33653    1.00128    1.20327    0.201989    654      3147     
+ 1177.89 1024    33700    1.00129    1.20327    0.201984    701      3154     
+ 1181.62 1026    33753    1.00134    1.20326    0.201919    648      3158     
+ 1184.19 1027    33800    1.00135    1.20326    0.201914    695      3164     
+ 1190.84 1029    33850    1.00136    1.20325    0.20189     655      3168     
+ 1194.58 1031    33905    1.00136    1.20324    0.20188     656      3172     
+ 1198.15 1033    33963    1.00137    1.20321    0.201847    714      3177     
+ 1202.18 1034    34001    1.00137    1.20319    0.201818    671      3184     
+ 1205.63 1036    34057    1.00137    1.20319    0.201813    727      3188     
+ 1210.14 1037    34100    1.00138    1.20319    0.201811    672      3196     
+ 1215.09 1038    34150    1.00138    1.20319    0.201805    675      3204     
+ 1220.75 1040    34201    1.00141    1.20318    0.201776    726      3207     
+^C*** Received SIGINT. User pressed control-C. ***
+
+Terminating ...
+
+-------------------------------------------------------------------------------
+ Time   |#Trial |#Backup |LBound    |UBound    |Precision  |#Alphas |#Beliefs  
+-------------------------------------------------------------------------------
+ 1222.55 1041    34238    1.00141    1.20318    0.201773    732      3209     
+-------------------------------------------------------------------------------
+
+Writing out policy ...
+  output file : out.policy
+
+yichunc@corn34:~$ ./.julia/v0.4/SARSOP/deps/appl-0.96/src/pomdpeval --simLen 300 --simNum 100 --policy-file out.policy hallway.POMDP 
+
+Loading the model ...
+  input file   : hallway.POMDP
+
+Loading the policy ...
+  input file   : out.policy
+
+Simulating ...
+  action selection :  one-step look ahead
+
+-----------------------------------
+ #Simulations  | Exp Total Reward  
+-----------------------------------
+ 10              1.30689
+ 20              1.13374
+ 30              1.01635
+ 40              1.01909
+ 50              0.975282
+ 60              0.973142
+ 70              1.01153
+ 80              1.01098
+ 90              1.01535
+ 100             1.03032
+-----------------------------------
+
+Finishing ...
+
+-------------------------------------------------------------
+ #Simulations  | Exp Total Reward | 95% Confidence Interval 
+-------------------------------------------------------------
+ 100             1.03032            (0.931569, 1.12907)
+-------------------------------------------------------------
+yichunc@corn34:~$ 
