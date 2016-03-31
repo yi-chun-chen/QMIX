@@ -1017,9 +1017,9 @@ end
 
 gamma = 0.95
 
-@time Q_MDP = Q_value_iteration(zeros(Float64,60,5),T,R,0.01,gamma)
-@time Q_UMDP = QUMDP(zeros(Float64,60,5),T,R,0.01,gamma)
-@time Q_FIB = FIB(zeros(Float64,60,5),T,R,O,0.01,gamma)
+@time Q_MDP = Q_value_iteration(zeros(Float64,60,5),T,R,0.01,gamma/2)
+@time Q_UMDP = QUMDP(zeros(Float64,60,5),T,R,0.01,gamma/2)
+@time Q_FIB = FIB(zeros(Float64,60,5),T,R,O,0.01,gamma/2)
 @time Q_M3 = purely_iteration_v3(zeros(Float64,60,5),T,R,O,0.01,gamma)
 @time Q_M5 = purely_iteration_v5(zeros(Float64,60,5),T,R,O,0.01,gamma)
 @time Q_M6 = purely_iteration_v6(zeros(Float64,60,5),T,R,O,0.01,gamma)
@@ -1122,13 +1122,13 @@ t_trial = 1000
 t_step = 300
 for i = 1 : t_trial
     if (i%100 == 0); println("trial = ",i); end
-    QMDP_r_sum += one_hallway60_trial(T,R,O,t_step,Q_MDP,1)#gamma)
-    QUMDP_r_sum += one_hallway60_trial(T,R,O,t_step,Q_UMDP,1)#gamma)
-    FIB_r_sum += one_hallway60_trial(T,R,O,t_step,Q_FIB,1)#gamma)
-    MY_3_r_sum += one_hallway60_trial(T,R,O,t_step,Q_M3,1)#gamma)
-    MY_5_r_sum += one_hallway60_trial(T,R,O,t_step,Q_M5,1)#gamma)
-    MY_6_r_sum += one_hallway60_trial(T,R,O,t_step,Q_M6,1)#gamma)
-    MY_7_r_sum += one_hallway60_trial(T,R,O,t_step,Q_M7,1)#gamma)
+    QMDP_r_sum += one_hallway60_trial(T,R,O,t_step,Q_MDP,gamma)
+    QUMDP_r_sum += one_hallway60_trial(T,R,O,t_step,Q_UMDP,gamma)
+    FIB_r_sum += one_hallway60_trial(T,R,O,t_step,Q_FIB,gamma)
+    MY_3_r_sum += one_hallway60_trial(T,R,O,t_step,Q_M3,gamma)
+    MY_5_r_sum += one_hallway60_trial(T,R,O,t_step,Q_M5,gamma)
+    MY_6_r_sum += one_hallway60_trial(T,R,O,t_step,Q_M6,gamma)
+    MY_7_r_sum += one_hallway60_trial(T,R,O,t_step,Q_M7,gamma)
 
 end
 

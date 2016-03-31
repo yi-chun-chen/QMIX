@@ -71,7 +71,7 @@ for s = 1 : n_s
 end
 
 #################################
-gamma = 0.9
+gamma = 0.95
 
 function one_mini_hallway_trial(T,R,O,t_step,alpha,gamma)
     (n_s,n_a,n_o) = (size(T)[1],size(T)[2],size(O)[3])
@@ -115,9 +115,9 @@ function one_mini_hallway_trial(T,R,O,t_step,alpha,gamma)
 
 end
 
-Q_MDP = Q_value_iteration(zeros(Float64,n_s,n_a),T,R,0.01,gamma)
-Q_UMDP = QUMDP(zeros(Float64,n_s,n_a),T,R,0.01,gamma)
-Q_FIB = FIB(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
+Q_MDP = Q_value_iteration(zeros(Float64,n_s,n_a),T,R,0.01,gamma/1.5)
+Q_UMDP = QUMDP(zeros(Float64,n_s,n_a),T,R,0.01,gamma/1.5)
+Q_FIB = FIB(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma/1.5)
 Q_M3 = purely_iteration_v3(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
 Q_M5 = purely_iteration_v5(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
 Q_M6 = purely_iteration_v6(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
@@ -130,17 +130,17 @@ MY_3_r_sum = 0
 MY_5_r_sum = 0
 MY_6_r_sum = 0
 MY_7_r_sum = 0
-t_trial = 10000
+t_trial = 2000
 t_step = 200
 
 for i = 1 : t_trial
     if (i%500 == 0); println("trial = ",i); end
-    #QMDP_r_sum += one_mini_hallway_trial(T,R,O,t_step,Q_MDP,gamma)
-    #QUMDP_r_sum += one_mini_hallway_trial(T,R,O,t_step,Q_UMDP,gamma)
-    #FIB_r_sum += one_mini_hallway_trial(T,R,O,t_step,Q_FIB,gamma)
-    #MY_3_r_sum += one_mini_hallway_trial(T,R,O,t_step,Q_M3,gamma)
-    #MY_5_r_sum += one_mini_hallway_trial(T,R,O,t_step,Q_M5,gamma)
-    #MY_6_r_sum += one_mini_hallway_trial(T,R,O,t_step,Q_M6,gamma)
+    QMDP_r_sum += one_mini_hallway_trial(T,R,O,t_step,Q_MDP,gamma)
+    QUMDP_r_sum += one_mini_hallway_trial(T,R,O,t_step,Q_UMDP,gamma)
+    FIB_r_sum += one_mini_hallway_trial(T,R,O,t_step,Q_FIB,gamma)
+    MY_3_r_sum += one_mini_hallway_trial(T,R,O,t_step,Q_M3,gamma)
+    MY_5_r_sum += one_mini_hallway_trial(T,R,O,t_step,Q_M5,gamma)
+    MY_6_r_sum += one_mini_hallway_trial(T,R,O,t_step,Q_M6,gamma)
     MY_7_r_sum += one_mini_hallway_trial(T,R,O,t_step,Q_M7,gamma)
 end
 
@@ -149,5 +149,5 @@ println(QUMDP_r_sum/t_trial)
 println(FIB_r_sum/t_trial)
 println(MY_3_r_sum/t_trial)
 println(MY_5_r_sum/t_trial)
-println(MY_6_r_sum/t_trial)
 println(MY_7_r_sum/t_trial)
+println(MY_6_r_sum/t_trial)

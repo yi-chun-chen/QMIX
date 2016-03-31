@@ -1,3 +1,5 @@
+# This file implements QMDP, FIB, QUMDP, and the sampling of environment model
+
 using PyPlot
 
 function cartesian_product(product_set)
@@ -71,9 +73,16 @@ function belief_update(b,a,o,T,O)
 
 end
 
-
+#########################################
+########## Existing Methods #############
+#########################################
 
 function Q_value_iteration(Q_0,T,R,delta,gamma)
+
+    ##################
+    # MDP Q-function #
+    ##################
+
     sigma = Inf
     (n_s,n_a) = size(T)[1:2]
 
@@ -96,44 +105,12 @@ function Q_value_iteration(Q_0,T,R,delta,gamma)
     return Q
 end
 
-function Q_value_iteration_count(Q_0,T,R,count,gamma)
-    sigma = Inf
-    (n_s,n_a) = size(T)[1:2]
-
-    Q = zeros(Float64,n_s,n_a)
-    t = 1
-
-    while t < count + 1
-        t += 1
-        Q = zeros(Float64,n_s,n_a)
-        for s = 1 : n_s
-            for a = 1 : n_a
-                sum_s_p = 0
-
-                if (s==7 && a == 3)
-                    sum_check = 0
-                    for sp = 1 : n_s
-                        sum_check += T[s,a,sp] * R[s,a,sp]
-                        #println(T[s,a,sp] * R[s,a,sp])
-                    end
-                    println(sum_check)
-                end
-
-                for s_p = 1 : n_s
-                    V = maximum(Q_0[s_p,:])
-                    #if ((t,s,a)==(1,7,1)); println(V); end;
-                    sum_s_p += T[s,a,s_p] * ( R[s,a,s_p] + gamma * V)
-                end
-            Q[s,a] = sum_s_p
-            end
-        end
-        Q_0 = copy(Q)
-    end
-    return Q
-end
-
 
 function Q_open(T,R,d,gamma)
+
+    ###########################
+    # My new open loop method #
+    ###########################
     (n_s,n_a) = size(T)[1:2]
 
     action_one_set = tuple(collect(1:n_a)...)
@@ -303,6 +280,11 @@ end
 
 
 function FIB(alpha_0,T,R,O,delta,gamma)
+
+    #########################################
+    # Alpha vectors for Fast Informed Bound #
+    #########################################
+
     sigma = Inf
     (n_s,n_a) = size(T)[1:2]
     n_o = size(O)[3]
@@ -361,6 +343,10 @@ end
 
 function QUMDP(Q_0,T,R,delta,gamma)
 
+    ##########################
+    # Alpha vectors for UMDP #
+    ##########################
+
     sigma = Inf
     (n_s,n_a) = size(T)[1:2]
 
@@ -403,6 +389,10 @@ function QUMDP(Q_0,T,R,delta,gamma)
 
     return Q
 end
+
+#####################################
+# Some functions related to entropy #
+#####################################
 
 function weight(b)
     n_s = length(b)
@@ -472,7 +462,12 @@ function scaling_entropy(a,b)
     return w
 end
 
+
 function direct_update(b,T,a)
+
+    ###########################################
+    # Update belief without observation model #
+    ###########################################
 
     (n_s,n_a) = size(T)[1:2]
 
@@ -495,755 +490,20 @@ function direct_update(b,T,a)
 end
 
 
-function value_approx_QMDP(Q_0_MDP,T,R,delta,gamma,all_b)
-
-    Q_MDP = Q_value_iteration(Q_0_MDP,T,R,delta,gamma)
-
-    (n_s,n_a) = size(T)[1:2]
-
-    value_action = Array(Any,length(all_b[:,1]),2)
-
-    for nb = 1 : length(all_b[:,1])
-        b = all_b[nb,:]
-
-
-        best_action_index = 0
-        best_action_value = -Inf
-
-        for a = 1 : n_a
-
-            Q_sa = 0
-
-            for s = 1 : n_s
-
-                Q_sa += b[s] * (Q_MDP[s,a] )
-
-            end
-
-            if best_action_value < Q_sa
-
-                best_action_index = a
-                best_action_value = Q_sa
-
-            end
-
-        end
-
-        value_action[nb,:] = [best_action_value,best_action_index]
-
-    end
-
-    return value_action
-
-end
-
-function weight_propogation_f(T,O,delta,gamma)
-
-    n_s = size(T)[1]
-    n_a = size(T)[2]
-    n_o = size(O)[3]
-
-    f = zeros(Float64,n_s,n_a)
-
-    for s = 1 : n_s
-        for a = 1 : n_a
-            f[s,a] = weight(O[s,a,:])[1]
-        end
-    end
-
-    return f
-end
-
-function weight_propogation(T,O,delta,gamma)
-
-    n_s = size(T)[1]
-    n_a = size(T)[2]
-    n_o = size(O)[3]
-
-    f = zeros(Float64,n_s,n_a)
-
-    for s = 1 : n_s
-        for a = 1 : n_a
-            f[s,a] = weight(O[s,a,:])[2]
-        end
-    end
-
-    W_0 = zeros(Float64,n_s,n_a)
-    W = zeros(Float64,n_s,n_a)
-
-    sigma = Inf
-
-    while sigma > delta
-        for s = 1 : n_s
-            for a = 1 : n_a
-                sum_s_p = f[s,a]
-                for s_p = 1 : n_s
-                    V = maximum(W_0[s_p,:])
-                    sum_s_p += gamma * T[s,a,s_p] * V
-                end
-                W[s,a] = (sum_s_p)/(1+gamma)
-            end
-        end
-        sigma = norm(W-W_0,Inf)
-        W_0 = copy(W)
-    end
-    return W
-end
-
-function weight_propogation_2(T,O,delta,gamma)
-
-    n_s = size(T)[1]
-    n_a = size(T)[2]
-    n_o = size(O)[3]
-
-    f = zeros(Float64,n_s,n_a)
-
-    for s = 1 : n_s
-        for a = 1 : n_a
-            f[s,a] = weight(O[s,a,:])[2]
-        end
-    end
-
-    W_0 = zeros(Float64,n_s,n_a)
-    W = zeros(Float64,n_s,n_a)
-
-    sigma = Inf
-
-    while sigma > delta
-        for s = 1 : n_s
-            for a = 1 : n_a
-                sum_s_p = f[s,a]
-                for s_p = 1 : n_s
-                    V = maximum(W_0[s_p,:])
-                    sum_s_p += gamma * T[s,a,s_p] * V
-                end
-                W[s,a] = (sum_s_p)
-            end
-        end
-        sigma = norm(W-W_0,Inf)
-        W_0 = copy(W)
-    end
-
-    W = W * (1-gamma)
-    return W
-end
-
-function weight_propogation_3(T,O,delta,gamma)
-
-    n_s = size(T)[1]
-    n_a = size(T)[2]
-    n_o = size(O)[3]
-
-    f = zeros(Float64,n_s,n_a)
-
-    for s = 1 : n_s
-        for a = 1 : n_a
-            f[s,a] = weight(O[s,a,:])[2]
-        end
-    end
-
-    W_0 = zeros(Float64,n_s,n_a)
-    W = zeros(Float64,n_s,n_a)
-
-    sigma = Inf
-
-    while sigma > delta
-        for s = 1 : n_s
-            for a = 1 : n_a
-                im_w = f[s,a]
-
-                # Choose a action
-                best_ap_v = - Inf
-
-                for ap = 1 : n_a
-
-                    ap_v = 0
-
-                    for sp = 1 : n_s
-
-                        ap_v += T[s,a,sp] * W_0[sp,ap]
-
-                    end
-
-                    if ap_v > best_ap_v
-
-                        best_ap_v = ap_v
-
-                    end
-
-                end
-
-                W[s,a] = im_w + gamma * best_ap_v
-            end
-        end
-
-        sigma = norm(W-W_0,Inf)
-        W_0 = copy(W)
-    end
-
-    W = W * (1-gamma)
-    return W
-end
-
-
-
-
-
-function value_approx_v1(Q_0_MDP,Q_0_UMDP,T,R,delta,gamma,all_b)
-
-    ##### Only distribution of belief state is considered for weighting #####
-
-    Q_UMDP = QUMDP(Q_0_UMDP,T,R,delta,gamma)
-    Q_MDP = Q_value_iteration(Q_0_MDP,T,R,delta,gamma)
-
-    (n_s,n_a) = size(T)[1:2]
-
-    value_action = Array(Any,length(all_b[:,1]),2)
-
-    for nb = 1 : length(all_b[:,1])
-        b = all_b[nb,:]
-        weight_b = weight(b)[2]
-
-        best_action_index = 0
-        best_action_value = -Inf
-
-        for a = 1 : n_a
-
-            Q_sa = 0
-
-            for s = 1 : n_s
-
-                Q_sa += b[s] * (Q_MDP[s,a] * weight_b + Q_UMDP[s,a] * (1 - weight_b))
-
-            end
-
-            if best_action_value < Q_sa
-
-                best_action_index = a
-                best_action_value = Q_sa
-
-            end
-
-        end
-
-        value_action[nb,:] = [best_action_value,best_action_index]
-
-    end
-
-    return value_action
-
-end
-
-function value_approx_v2(Q_0_MDP,Q_0_UMDP,T,R,O,delta,gamma,all_b)
-
-    ##### Only distribution of O[s,a,:] is considered for weighting #####
-
-    Q_UMDP = QUMDP(Q_0_UMDP,T,R,delta,gamma)
-    Q_MDP = Q_value_iteration(Q_0_MDP,T,R,delta,gamma)
-
-    (n_s,n_a) = size(T)[1:2]
-    n_o = size(T)[3]
-
-    value_action = Array(Any,length(all_b[:,1]),2)
-
-    for nb = 1 : length(all_b[:,1])
-        b = all_b[nb,:]
-
-        best_action_index = 0
-        best_action_value = -Inf
-
-        for a = 1 : n_a
-
-            Q_sa = 0
-
-            for s = 1 : n_s
-
-                O_distr = O[s,a,:]
-                weight_b = weight(O_distr)[1]
-
-                Q_sa += b[s] * (Q_MDP[s,a] * weight_b + Q_UMDP[s,a] * (1 - weight_b))
-
-            end
-
-            if best_action_value < Q_sa
-
-                best_action_index = a
-                best_action_value = Q_sa
-
-            end
-
-        end
-
-        value_action[nb,:] = [best_action_value,best_action_index]
-
-    end
-
-    return value_action
-
-end
-
-
-function value_approx_v3(Q_0_MDP,Q_0_UMDP,T,R,O,delta,gamma,all_b)
-
-    ##### both distribution of O[s,a,:] and b[s] are considered for weighting #####
-    ##### They are considered as average of entropies #####
-
-    Q_UMDP = QUMDP(Q_0_UMDP,T,R,delta,gamma)
-    Q_MDP = Q_value_iteration(Q_0_MDP,T,R,delta,gamma)
-
-    (n_s,n_a) = size(T)[1:2]
-    n_o = size(T)[3]
-
-    value_action = Array(Any,length(all_b[:,1]),2)
-
-    for nb = 1 : length(all_b[:,1])
-        b = all_b[nb,:]
-
-        best_action_index = 0
-        best_action_value = -Inf
-
-        for a = 1 : n_a
-
-            Q_sa = 0
-
-            for s = 1 : n_s
-
-                O_distr = O[s,a,:]
-
-                weight_b = scaling_entropy(O_distr,b)
-
-                Q_sa += b[s] * (Q_MDP[s,a] * weight_b + Q_UMDP[s,a] * (1 - weight_b))
-
-            end
-
-            if best_action_value < Q_sa
-
-                best_action_index = a
-                best_action_value = Q_sa
-
-            end
-
-        end
-
-        value_action[nb,:] = [best_action_value,best_action_index]
-
-    end
-
-    return value_action
-
-end
-
-
-
-function value_approx_v4(Q_0_MDP,Q_0_UMDP,T,R,O,delta,gamma,all_b)
-
-    ##### UMDP is weighted by (1-w(b))(1-w(o)) #####
-
-    Q_UMDP = QUMDP(Q_0_UMDP,T,R,delta,gamma) #Q_open(T,R,5,gamma)[3] #
-    Q_MDP = Q_value_iteration(Q_0_MDP,T,R,delta,gamma)
-
-    (n_s,n_a) = size(T)[1:2]
-    n_o = size(T)[3]
-
-    value_action = Array(Any,length(all_b[:,1]),2)
-
-    for nb = 1 : length(all_b[:,1])
-        b = all_b[nb,:]
-        w_b = weight(b)[1]
-
-        best_action_index = 0
-        best_action_value = -Inf
-
-        for a = 1 : n_a
-
-            Q_sa = 0
-
-            for s = 1 : n_s
-
-                O_distr = O[s,a,:]
-
-                w_o = weight(O_distr)[1]
-
-                #www = (1-w_b) * (1-w_o)
-                #Q_sa += b[s] * (Q_MDP[s,a] * (1-www) + Q_UMDP[s,a] * www)
-
-                www = maximum([w_b w_o])
-
-                Q_sa += b[s] * (Q_MDP[s,a] * (www) + Q_UMDP[s,a] * (1-www))
-
-            end
-
-
-            if best_action_value < Q_sa
-
-                best_action_index = a
-                best_action_value = Q_sa
-
-            end
-
-        end
-
-        value_action[nb,:] = [best_action_value,best_action_index]
-
-    end
-
-    return value_action
-
-end
-
-function value_approx_v5(Q_0_MDP,Q_0_UMDP,T,R,O,delta,gamma,all_b)
-
-    ##### UMDP is weighted by (1-w(bp))(1-w(o)), where bp is for the next state belief #####
-
-    Q_UMDP = QUMDP(Q_0_UMDP,T,R,delta,gamma)
-    Q_MDP = Q_value_iteration(Q_0_MDP,T,R,delta,gamma)
-
-    (n_s,n_a) = size(T)[1:2]
-    n_o = size(T)[3]
-
-    value_action = Array(Any,length(all_b[:,1]),2)
-
-    for nb = 1 : length(all_b[:,1])
-        b = all_b[nb,:]
-
-
-        best_action_index = 0
-        best_action_value = -Inf
-
-        for a = 1 : n_a
-
-            Q_sa = 0
-
-            for s = 1 : n_s
-
-                bp = direct_update(b,T,a)
-
-                w_b = weight(bp)[2]
-
-
-                O_distr = O[s,a,:]
-
-                w_o = weight(O_distr)[2]
-
-                www = (1-w_b) * (1-w_o)
-
-                Q_sa += b[s] * (Q_MDP[s,a] * (1-www) + Q_UMDP[s,a] * www)
-
-            end
-
-            if best_action_value < Q_sa
-
-                best_action_index = a
-                best_action_value = Q_sa
-
-            end
-
-        end
-
-        value_action[nb,:] = [best_action_value,best_action_index]
-
-    end
-
-    return value_action
-
-end
-
-function value_approx_v6(Q_0_MDP,Q_0_UMDP,T,R,O,delta,gamma,all_b)
-
-    ##### Taking the expectation over obsevation #####
-
-    Q_UMDP = QUMDP(Q_0_UMDP,T,R,delta,gamma)
-    Q_MDP = Q_value_iteration(Q_0_MDP,T,R,delta,gamma)
-
-    (n_s,n_a) = size(T)[1:2]
-    n_o = size(T)[3]
-
-    value_action = Array(Any,length(all_b[:,1]),2)
-
-    for nb = 1 : length(all_b[:,1])
-        b = all_b[nb,:]
-        #w_b = weight(b)[1]
-
-
-        best_action_index = 0
-        best_action_value = -Inf
-
-        for a = 1 : n_a
-
-            prob_o = zeros(Float64,n_o)
-
-            bp1 = direct_update(b,T,a)
-
-            for o = 1 : n_o
-                for s = 1 : n_s
-                    prob_o[o] += O[s,a,o] * bp1[s]
-
-                end
-            end
-
-            Q_sa = 0
-
-            for o = 1 : n_o
-                for s = 1 : n_s
-                    bp = belief_update(b,a,o,T,O)
-                    w_b = exp((-1) * relative_entropy(bp,b))
-                    Q_sa += b[s] * (Q_MDP[s,a] * w_b + Q_UMDP[s,a] * (1-w_b)) * prob_o[o]
-                end
-            end
-
-
-            if best_action_value < Q_sa
-
-                best_action_index = a
-                best_action_value = Q_sa
-
-            end
-
-        end
-
-        value_action[nb,:] = [best_action_value,best_action_index]
-
-    end
-
-    return value_action
-
-end
-
-function purely_iteration(Q_0,T,R,O,delta,gamma)
-
-    (n_s,n_a) = size(T)[1:2]
-    n_0 = size(O)[3]
-
-    Q = zeros(Float64,n_s,n_a)
-
-    sigma = Inf
-
-    ##### Weight_matrix ######
-    W = zeros(Float64,n_s,n_a)
-    for s = 1 : n_s
-        for a = 1 : n_a
-            W[s,a] =  weight(O[s,a,:])[2]
-        end
-    end
-
-    ##### Value Iteration #####
-
-    while sigma > delta
-
-        Q = zeros(Float64,n_s,n_a)
-
-        for s = 1 : n_s
-            for a = 1 : n_a
-                ##### Imediate reward #####
-                imediate_r = 0
-                for sp = 1 : n_s
-                    imediate_r += T[s,a,sp] * R[s,a,sp]
-                end
-
-                ##### next step : MDP piece #####
-
-                MDP_r = 0
-                for sp = 1 : n_s
-                    V_MDP = maximum(Q_0[sp,:])
-                    MDP_r += T[s,a,sp] * W[sp,a] * V_MDP
-                end
-
-                ##### next step : UMDP piece ####
-
-                UMDP_r = -Inf
-
-                for ap = 1 : n_a
-
-                    umdp_ap = 0
-
-                    for sp = 1 : n_s
-
-                        umdp_ap += T[s,a,sp] * ( 1 - W[sp,a]) * Q_0[sp,ap]
-                    end
-
-                    if umdp_ap > UMDP_r
-                        UMDP_r = umdp_ap
-                    end
-                end
-
-                ##### Sum with discount factor #####
-
-                Q[s,a] = imediate_r + 0.5 * gamma * (MDP_r + UMDP_r)
-
-            end
-        end
-
-        sigma = norm( Q - Q_0, Inf)
-        Q_0 = copy(Q)
-
-    end
-
-    return Q
-
-end
-
-function value_approx_purely(Q_0_MDP,T,R,O,delta,gamma,all_b)
-
-    Q_MDP = purely_iteration(Q_0_MDP,T,R,O,delta,gamma)
-
-
-    (n_s,n_a) = size(T)[1:2]
-
-    value_action = Array(Any,length(all_b[:,1]),2)
-
-    for nb = 1 : length(all_b[:,1])
-        b = all_b[nb,:]
-
-
-        best_action_index = 0
-        best_action_value = -Inf
-
-        for a = 1 : n_a
-
-            Q_sa = 0
-
-            for s = 1 : n_s
-
-                Q_sa += b[s] * (Q_MDP[s,a] )
-
-            end
-
-            if best_action_value < Q_sa
-
-                best_action_index = a
-                best_action_value = Q_sa
-
-            end
-
-        end
-
-        value_action[nb,:] = [best_action_value,best_action_index]
-
-    end
-
-    return value_action
-
-end
-
-function purely_iteration_v2(Q_0,T,R,O,delta,gamma)
-
-    (n_s,n_a) = size(T)[1:2]
-    n_0 = size(O)[3]
-
-    Q = zeros(Float64,n_s,n_a)
-
-    sigma = Inf
-
-    ##### Weight_matrix ######
-    W = weight_propogation(T,O,delta,gamma)
-
-    ##### Value Iteration #####
-
-    while sigma > delta
-
-        Q = zeros(Float64,n_s,n_a)
-
-        for s = 1 : n_s
-            for a = 1 : n_a
-                ##### Imediate reward #####
-                imediate_r = 0
-                for sp = 1 : n_s
-                    imediate_r += T[s,a,sp] * R[s,a,sp]
-                end
-
-                ##### next step : MDP piece #####
-
-                MDP_r = 0
-                for sp = 1 : n_s
-                    V_MDP = maximum(Q_0[sp,:])
-                    MDP_r += T[s,a,sp] * V_MDP
-                end
-
-                ##### next step : UMDP piece ####
-
-                UMDP_r = -Inf
-
-                for ap = 1 : n_a
-
-                    umdp_ap = 0
-
-                    for sp = 1 : n_s
-
-                        umdp_ap += T[s,a,sp] * Q_0[sp,ap]
-                    end
-
-                    if umdp_ap > UMDP_r
-                        UMDP_r = umdp_ap
-                    end
-                end
-
-                ##### Sum with discount factor #####
-                W[s,a] = 0.05
-
-                Q[s,a] = imediate_r + gamma * ( W[s,a] * MDP_r + ( 1 - W[s,a]) *UMDP_r)
-
-            end
-        end
-
-        sigma = norm( Q - Q_0, Inf)
-        Q_0 = copy(Q)
-
-    end
-
-    return Q
-
-end
-
-function value_approx_purely_v2(Q_0_MDP,T,R,O,delta,gamma,all_b)
-
-    Q_MDP = purely_iteration_v2(Q_0_MDP,T,R,O,delta,gamma)
-
-
-    (n_s,n_a) = size(T)[1:2]
-
-    value_action = Array(Any,length(all_b[:,1]),2)
-
-    for nb = 1 : length(all_b[:,1])
-        b = all_b[nb,:]
-
-
-        best_action_index = 0
-        best_action_value = -Inf
-
-        for a = 1 : n_a
-
-            Q_sa = 0
-
-            for s = 1 : n_s
-
-                Q_sa += b[s] * (Q_MDP[s,a] )
-
-            end
-
-            if best_action_value < Q_sa
-
-                best_action_index = a
-                best_action_value = Q_sa
-
-            end
-
-        end
-
-        value_action[nb,:] = [best_action_value,best_action_index]
-
-    end
-
-    return value_action
-
-end
-
 ######################################
 ######### Sample from model ##########
+######################################
+
 ##### Observation Model #####
 
 function observe_sampling(O,s,a)
+
+    # Given next state s and current action a, sampling observation o
+
     n_o = (size(O)[3])
     distr = O[s,a,:]
+
+    # Build cumulative probability distribution
 
     cdf_distr = zeros(n_o)
 
@@ -1253,6 +513,8 @@ function observe_sampling(O,s,a)
         cdf_distr[i] = cdf_distr[i-1] + distr[i]
     end
 
+    # Sampling
+
     x = rand()
 
     for i = 1 : n_o
@@ -1260,13 +522,19 @@ function observe_sampling(O,s,a)
             return i
         end
     end
+
 end
 
 ##### Transition and Reward Model #####
 
 function tran_reward_sampling(T,R,s,a)
+
+    # Given current state s and action a, sample next state sp and obtain immediate reward r
+
     n_s = (size(T)[1])
     distr = T[s,a,:]
+
+    # Build cumulative probability distribution
 
     cdf_distr = zeros(Float64,n_s+1)
 
@@ -1278,6 +546,7 @@ function tran_reward_sampling(T,R,s,a)
 
     cdf_distr[n_s + 1] = 1
 
+    # Sample next state sp
     x = rand()
     sp = 0
 
@@ -1294,7 +563,7 @@ function tran_reward_sampling(T,R,s,a)
 
 end
 
-##### Choose action #####
+##### Choose action from the state-action pair alpha vectors #####
 
 function action_to_take(b,Q)
 
@@ -1357,41 +626,6 @@ R[2,2,1] = 0; R[2,1,1] = -5; R[1,2,1] = -10; R[1,1,1] = -15;
 
 b_0 = [0.5,0.5];
 
-V1 = FIB(zeros(Float64,2,2),T,R,O,0.01,0.9)
-#Z4 = value_approx_v4(zeros(Float64,2,2),zeros(Float64,2,2),T,R,O,0.01,0.9,b_set);
-#MDP_c = Q_value_iteration(zeros(Float64,2,2),T,R,0.01,0.9)
-#QMDP_v = value_approx_QMDP(zeros(Float64,2,2),T,R,0.01,0.9,b_set);
-
-#XXX = FIB(zeros(Float64,2,2),T,R,O,0.01,0.9)
-
-#plot(collect(1:1:51),QMDP_v[:,2])#,collect(1:1:51),Z4[:,2])
-
-
-
-gamma = 0.9
-delta = 0.01
-
-Q_0 = zeros(Float64,2,2)
-
-T_1 = Array(Float64,2,3,2)
-T_1[1,1,1] = 0.5; T_1[1,1,2] = 0.5;
-T_1[1,2,1] = 0.5; T_1[1,2,2] = 0.5;
-T_1[1,3,1] = 0.5; T_1[1,3,2] = 0.5;
-
-T_1[2,1,1] = 0.5; T_1[2,1,2] = 0.5;
-T_1[2,2,1] = 0.5; T_1[2,2,1] = 0.5;
-T_1[2,3,1] = 0.5; T_1[2,3,2] = 0.5;
-
-
-R_1 = zeros(Float64,2,3,2)
-
-R_1[1,1,1] = 1; R_1[1,1,2] = 1;
-R_1[1,2,1] = 20; R_1[1,2,2] = 20;
-R_1[1,3,1] = 1; R_1[1,3,2] = 1;
-
-R_1[2,1,1] = 1; R_1[2,1,2] = 1;
-R_1[2,2,1] = -20; R_1[2,2,1] = -20;
-R_1[2,3,1] = 1; R_1[2,3,2] = 1;
 
 
 #################################################
@@ -1416,7 +650,7 @@ T_T[2,2,1] = 0.5; T_T[2,2,2] = 0.5;
 T_T[2,3,1] = 0.0; T_T[2,3,2] = 1.0;
 
 R_T = Array(Float64,2,3,2)
-cl = -10
+cl = -1 # Cost for listening
 R_T[1,1,1] = -100; R_T[1,1,2] = -100;
 R_T[1,2,1] = 10; R_T[1,2,2] = 10;
 R_T[1,3,1] = cl; R_T[1,3,2] = cl;
@@ -1425,7 +659,7 @@ R_T[2,2,1] = -100; R_T[2,2,2] = -100;
 R_T[2,3,1] = cl; R_T[2,3,2] = cl;
 
 O_T = Array(Float64,2,3,2)
-best_observe = 0.5
+best_observe = 0.85
 O_T[1,1,1] = 0.5; O_T[1,1,2] = 0.5;
 O_T[1,2,1] = 0.5; O_T[1,2,2] = 0.5;
 O_T[1,3,1] = best_observe; O_T[1,3,2] = 1- best_observe;
@@ -1433,25 +667,3 @@ O_T[2,1,1] = 0.5; O_T[2,1,2] = 0.5;
 O_T[2,2,1] = 0.5; O_T[2,2,2] = 0.5;
 O_T[2,3,1] = 1-best_observe; O_T[2,3,2] = best_observe;
 
-
-
-#WWW = Q_open(T_T,R_T,5,gamma)[3];
-#W = Q_value_iteration(zeros(Float64,2,3),T_T,R_T,delta,gamma)
-#WW = QUMDP(zeros(Float64,2,3),T_T,R_T,delta,gamma)
-#V = FIB(zeros(Float64,2,3),T_T,R_T,O_T,delta,gamma)
-
-
-
-#b_set_1 = [0.96 0.4]
-
-#Z1 = value_approx_v1(zeros(Float64,2,3),zeros(Float64,2,3),T_T,R_T,delta,gamma,b_set)
-#Z4 = value_approx_v4(zeros(Float64,2,3),zeros(Float64,2,3),T_T,R_T,O_T,delta,gamma,b_set)
-
-#X1 = value_approx_QMDP(zeros(Float64,2,3),T_T,R_T,delta,gamma,b_set);
-#X2 = value_approx_purely(zeros(Float64,2,3),T_T,R_T,O_T,delta,gamma,b_set)
-#X3 = value_approx_purely_v3(zeros(Float64,2,3),T_T,R_T,O_T,delta,gamma,b_set)
-#WW1 = purely_iteration(zeros(Float64,2,3),T_T,R_T,O_T,delta,gamma)
-#WW2 = purely_iteration_v2(zeros(Float64,2,3),T_T,R_T,O_T,delta,gamma)
-#1
-#plot(collect(1:1:51),Z6[:,1])
-#New = new_approach_v1(zeros(Float64,2,3),zeros(Float64,2,3),T_T,R_T,O_T,delta,gamma,b_set)

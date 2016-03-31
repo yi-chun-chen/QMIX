@@ -77,7 +77,7 @@ Q_M6 = purely_iteration_v6(zeros(Float64,8,3),T,R,O,0.01,0.95)
 Q_M7 = purely_iteration_v7(zeros(Float64,8,3),T,R,O,0.01,0.95)
 
 function one_shuttle_trial(T,R,O,t_step,alpha)
-    delta = 0.1; gamma = 0.9;
+    delta = 0.1; gamma = 0.95;
 
     # initial belief
     #b = zeros(Float64,8)
@@ -125,7 +125,7 @@ MY_3_r_sum = 0
 MY_5_r_sum = 0
 MY_6_r_sum = 0
 MY_7_r_sum = 0
-t_trial = 10000
+t_trial = 2000
 t_step = 150
 
 for i = 1 : t_trial

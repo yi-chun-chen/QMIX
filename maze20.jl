@@ -1,6 +1,9 @@
 include("project_1.jl")
 include("project_2.jl")
 
+# The following matrix and data for maze20 probelm are from Tony's POMDP website:
+# www.pomdp.org
+
 n_s = 20; n_a = 6; n_o = 8;
 
 T = zeros(Float64,n_s,n_a,n_s)
@@ -321,17 +324,20 @@ end
 
 
 ################################################
-############ Start the simulation ##############
+############ Simulation  Function ##############
 ################################################
-
-gamma = 0.95
 
 # One trial
 
 function one_maze20_trial(T,R,O,t_step,alpha,gamma)
+    # T,R,O are the environment models
+    # t_step is the simulation length
+    # alpha are alpha vectors, obtained from value-function approximation method
+    # gamma is the discounted factor
+
     (n_s,n_a,n_o) = (size(T)[1],size(T)[2],size(O)[3])
 
-    # initial belief
+    # initial belief (given by the file)
     b = zeros(Float64,n_s)
     b[1] = 0.3; b[5] = 0.3; b[20] = 0.4;
 
@@ -345,48 +351,6 @@ function one_maze20_trial(T,R,O,t_step,alpha,gamma)
     else
         x = 20
     end
-
-    # intialize total reward
-    total_r = 0
-
-    for t = 1 : t_step
-
-        # Choose the action
-        action_to_do = action_to_take(b,alpha)
-
-        # Get reward and the next state
-        (xp,r) = tran_reward_sampling(T,R,x,action_to_do)
-        total_r += r *  ((gamma)^t)
-
-        # Get observation
-        o = observe_sampling(O,x,action_to_do)
-
-        # update the belief
-        bp = belief_update(b,action_to_do,o,T,O)
-
-        # printing
-        #println("Time Step = ",t)
-        #println("S,A,O,R,SP",(x,action_to_do,o,r,xp))
-
-        # update
-        b = bp
-        x = xp
-
-    end
-
-    return (total_r)
-
-end
-
-function one_maze20_trial_2(T,R,O,t_step,alpha,gamma)
-    (n_s,n_a,n_o) = (size(T)[1],size(T)[2],size(O)[3])
-
-    # initial belief
-    b = ones(Float64,n_s) * (1/n_s)
-
-    # Initialize state
-    x = round(Int64,rand()*19) + 1
-    #println(x)
 
     # intialize total reward
     total_r = 0
@@ -420,56 +384,132 @@ function one_maze20_trial_2(T,R,O,t_step,alpha,gamma)
 
 end
 
+function one_maze20_trial_2(T,R,O,t_step,alpha,gamma)
+    (n_s,n_a,n_o) = (size(T)[1],size(T)[2],size(O)[3])
+
+    # initial belief
+    b = ones(Float64,n_s) * (1/n_s)
+
+    # Initialize state (uniformly over all states)
+    x = round(Int64,div(rand()*20,1)) + 1
+
+    # intialize total reward
+    total_r = 0
+
+    for t = 1 : t_step
+
+        # Choose the action
+        action_to_do = action_to_take(b,alpha)
+
+        # Get reward and the next state
+        (xp,r) = tran_reward_sampling(T,R,x,action_to_do)
+        total_r += r *  ((gamma)^t)
+
+        # Get observation
+        o = observe_sampling(O,xp,action_to_do)
+
+        # update the belief
+        bp = belief_update(b,action_to_do,o,T,O)
+
+        # printing
+        #println("Time Step = ",t)
+        #println("S,A,O,R,SP",(x,action_to_do,o,r,xp))
+
+        # update
+        b = bp
+        x = xp
+
+    end
+
+    return (total_r)
+
+end
+
+#############################################
+############ Run Simulation #################
+#############################################
+
+f = open("run_collect","w")
 
 
+gamma = 0.9
+#redu_f = 1.5
+grid = 50
 
-@time QMDP_alpha = Q_value_iteration(zeros(Float64,n_s,n_a),T,R,0.01,gamma)
-@time QUMDP_alpha = QUMDP(zeros(Float64,n_s,n_a),T,R,0.01,gamma)
-@time FIB_alpha = FIB(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
-@time MY_3_alpha = purely_iteration_v3(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
-@time MY_5_alpha = purely_iteration_v5(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
-@time MY_6_alpha = purely_iteration_v6(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
-@time MY_7_alpha = purely_iteration_v7(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
+red = zeros(Float64,grid+1)
+QMDP_r = zeros(Float64,grid+1)
+UMDP_r = zeros(Float64,grid+1)
+FIB_r = zeros(Float64,grid+1)
+
+
+for reduced_time = 1 : grid+1
+
+println(reduced_time)
+
+redu_f = 1 + 0.1 * (reduced_time - 1)
+
+
+QMDP_alpha = Q_value_iteration(zeros(Float64,n_s,n_a),T,R,0.01,gamma/redu_f)
+QUMDP_alpha = QUMDP(zeros(Float64,n_s,n_a),T,R,0.01,gamma/redu_f)
+FIB_alpha = FIB(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma/redu_f)
+#@time MY_3_alpha = purely_iteration_v3(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
+#@time MY_5_alpha = purely_iteration_v5(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
+#@time MY_6_alpha = purely_iteration_v6(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
+#@time MY_7_alpha = purely_iteration_v7(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
 
 QMDP_r_sum = 0
 QUMDP_r_sum = 0
 FIB_r_sum = 0
-MY_3_r_sum = 0
-MY_5_r_sum = 0
-MY_6_r_sum = 0
-MY_7_r_sum = 0
-t_trial = 1000
+#MY_3_r_sum = 0
+#MY_5_r_sum = 0
+#MY_6_r_sum = 0
+#MY_7_r_sum = 0
+t_trial = 2000
 t_step = 60
 
 for i = 1 : t_trial
-    if (i%100 == 0); println("trial = ",i); end
-    QMDP_r_sum += one_maze20_trial(T,R,O,t_step,QMDP_alpha,1)#gamma)
-    QUMDP_r_sum += one_maze20_trial(T,R,O,t_step,QUMDP_alpha,1)#gamma)
-    FIB_r_sum += one_maze20_trial(T,R,O,t_step,FIB_alpha,1)#gamma)
-    MY_3_r_sum += one_maze20_trial(T,R,O,t_step,MY_3_alpha,1)#gamma)
-    MY_5_r_sum += one_maze20_trial(T,R,O,t_step,MY_5_alpha,1)#gamma)
-    MY_6_r_sum += one_maze20_trial(T,R,O,t_step,MY_3_alpha,1)#gamma)
-    MY_7_r_sum += one_maze20_trial(T,R,O,t_step,MY_5_alpha,1)#gamma)
+    #if (i%100 == 0); println("trial = ",i); end
+    QMDP_r_sum += one_maze20_trial(T,R,O,t_step,QMDP_alpha,gamma)
+    QUMDP_r_sum += one_maze20_trial(T,R,O,t_step,QUMDP_alpha,gamma)
+    FIB_r_sum += one_maze20_trial(T,R,O,t_step,FIB_alpha,gamma)
+    #MY_3_r_sum += one_maze20_trial(T,R,O,t_step,MY_3_alpha,gamma)
+    #MY_5_r_sum += one_maze20_trial(T,R,O,t_step,MY_5_alpha,gamma)
+    #MY_6_r_sum += one_maze20_trial(T,R,O,t_step,MY_6_alpha,gamma)
+    #MY_7_r_sum += one_maze20_trial(T,R,O,t_step,MY_7_alpha,gamma)
 end
 
-#for i = 1 : t_trial
-    #if (i%100 == 0); println("trial = ",i); end
-    #QMDP_r_sum += one_maze20_trial_2(T,R,O,t_step,QMDP_alpha,gamma)
-    #QUMDP_r_sum += one_maze20_trial_2(T,R,O,t_step,QUMDP_alpha,gamma)
-    #FIB_r_sum += one_maze20_trial_2(T,R,O,t_step,FIB_alpha,gamma)
-    #MY_1_r_sum += one_maze20_trial_2(T,R,O,t_step,MY_1_alpha,gamma)
-    #MY_2_r_sum += one_maze20_trial_2(T,R,O,t_step,MY_2_alpha,gamma)
-    #MY_3_r_sum += one_maze20_trial_2(T,R,O,t_step,MY_3_alpha,gamma)
-    #MY_4_r_sum += one_maze20_trial_2(T,R,O,t_step,MY_4_alpha,gamma)
-    #MY_5_r_sum += one_maze20_trial_2(T,R,O,t_step,MY_5_alpha,gamma)
-#end
+    red[reduced_time] = redu_f
+    QMDP_r[reduced_time] = QMDP_r_sum/t_trial
+    UMDP_r[reduced_time] = QUMDP_r_sum/t_trial
+    FIB_r[reduced_time] = FIB_r_sum/t_trial
 
 
-#println((QMDP_r_sum/t_trial,QUMDP_r_sum/t_trial,FIB_r_sum/t_trial,MY_1_r_sum/t_trial,MY_2_r_sum/t_trial))
-println(QMDP_r_sum/t_trial)
-println(QUMDP_r_sum/t_trial)
-println(FIB_r_sum/t_trial)
-println(MY_3_r_sum/t_trial)
-println(MY_5_r_sum/t_trial)
-println(MY_7_r_sum/t_trial)
-println(MY_6_r_sum/t_trial)
+#println(f,redu_f)
+#println(f,QMDP_r_sum/t_trial)
+#println(f,QUMDP_r_sum/t_trial)
+#println(f,FIB_r_sum/t_trial)
+#println(f,MY_3_r_sum/t_trial)
+#println(MY_5_r_sum/t_trial)
+#println(MY_7_r_sum/t_trial)
+#println(MY_6_r_sum/t_trial)
+
+
+end
+
+close(f)
+
+plot(red,QMDP_r,label="QMDP")
+plot(red,UMDP_r,label="UMDP")
+plot(red,FIB_r,label="FIB")
+xlabel("reduced factor")
+ylabel("Discounted Reward")
+title("Maze20 with gamma 0.95 and concentrated initial belief")
+legend(loc="upper right",fancybox="true")
+annotate("SARSOP = 116.84",
+	xy=[1;0],
+	xycoords="axes fraction",
+	xytext=[-10,10],
+	textcoords="offset points",
+	fontsize=12.0,
+	ha="right",
+	va="bottom")

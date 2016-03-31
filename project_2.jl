@@ -2,6 +2,10 @@ include("project_1.jl")
 
 function sample_in_belief_space(n_s)
 
+    ############################################
+    # Uniformly sample a point in belief space #
+    ############################################
+
     sample = zeros(Float64,n_s)
     total_left = 1
 
@@ -16,6 +20,30 @@ function sample_in_belief_space(n_s)
 
     return sample
 
+end
+
+function quick_belief_update(T,O,s,a,o)
+
+    ######################################################################
+    # the belief update if the current belief is concentrated on state s #
+    ######################################################################
+
+    n_s = size(T)[1]
+    b_p = Array(Float64,n_s)
+
+    for s_p = 1 : n_s
+        sum_s = T[s,a,s_p]
+        b_p[s_p] = O[s_p,a,o] * sum_s
+    end
+
+
+    if sum(b_p) == 0.0
+        b_p = (1/n_s) * ones(Float64,n_s)
+        return b_p
+    else
+        b_p = b_p / sum(b_p)
+        return b_p
+    end
 end
 
 function new_weight(T,O)
@@ -97,6 +125,33 @@ function new_weight_2(T,O)
     end
 
     return W
+
+end
+
+function length_reduce_1(T,O)
+
+    X = new_weight_2(T,O)
+
+    sum = 0
+    for s = 1 : n_s
+        for a = 1 : n_a
+            sum += maximum(X[s,a,:])
+        end
+    end
+
+    sum = sum / (n_s * n_a)
+end
+
+
+function trust(T,O)
+    (n_s,n_a,n_o) = (size(T)[1],size(T)[2],size(O)[3])
+    W = zeros(Float64,n_s,n_a,n_s)
+
+    for s = 1 : n_s
+        for a = 1 : n_a
+
+        end
+    end
 
 end
 
@@ -264,8 +319,6 @@ function value_approx_purely_v3(Q_0_MDP,T,R,O,delta,gamma,all_b)
 
 end
 
-#value_approx_purely_v3(zeros(Float64,2,3),T_T,R_T,O_T,delta,gamma,b_set)
-
 function purely_iteration_v4(Q_0,T,R,O,delta,gamma)
 
     ##### The normalized version #####
@@ -402,8 +455,6 @@ function value_approx_purely_v4(Q_0_MDP,T,R,O,delta,gamma,all_b)
 
 end
 
-#X3 = value_approx_purely_v3(zeros(Float64,2,3),T_T,R_T,O_T,delta,gamma,b_set)
-#X4 = value_approx_purely_v4(zeros(Float64,2,3),T_T,R_T,O_T,delta,gamma,b_set)
 
 function purely_iteration_v5(Q_0,T,R,O,delta,gamma)
 
@@ -539,9 +590,9 @@ function purely_iteration_v6(Q_0,T,R,O,delta,gamma)
 
                 ##### Sum with discount factor #####
                 #println((www_1,www_2,www_1+www_2))
-                www = 0
+                www = 1.2
 
-                Q[s,a] = imediate_r + gamma * (www * MDP_r + (1 - www) * UMDP_r)
+                Q[s,a] = imediate_r + gamma * (MDP_r) / 1.2
 
             end
         end
@@ -616,7 +667,7 @@ function purely_iteration_v7(Q_0,T,R,O,delta,gamma)
                 #println((www_1,www_2,www_1+www_2))
                 www = 1
 
-                Q[s,a] = imediate_r + gamma * (www * MDP_r + (1 - www) * UMDP_r)
+                Q[s,a] = imediate_r + gamma * (1/www)*(MDP_r)# + UMDP_r)
 
             end
         end
