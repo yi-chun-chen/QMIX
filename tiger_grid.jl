@@ -606,10 +606,11 @@ for s = 1 : n_s
         R[s,a,1] = -1.0
         R[s,a,2] = -1.0
         R[s,a,3] = -1.0
-        R[s,a,9] = -1.0
-        R[s,a,10] = -1.0
-        R[s,a,11] = -1.0
-        R[s,a,12] = -1.0
+        R[s,a,4] = -1.0
+        R[s,a,9] = 1.0
+        R[s,a,10] = 1.0
+        R[s,a,11] = 1.0
+        R[s,a,12] = 1.0
         R[s,a,17] = -1.0
         R[s,a,18] = -1.0
         R[s,a,19] = -1.0
@@ -709,41 +710,101 @@ end
 
 ######################################################
 
+#gamma = 0.95
+
+#@time Q_MDP = Q_value_iteration(zeros(Float64,n_s,n_a),T,R,0.01,gamma)
+#@time Q_UMDP = QUMDP(zeros(Float64,n_s,n_a),T,R,0.01,gamma/1.1)
+#@time Q_FIB = FIB(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma/1.3)
+#@time Q_M3 = purely_iteration_v3(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
+#@time Q_M5 = purely_iteration_v5(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
+#@time Q_M6 = purely_iteration_v6(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
+#@time Q_M7 = purely_iteration_v7(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
+
+#QMDP_r_sum = 0
+#QUMDP_r_sum = 0
+#FIB_r_sum = 0
+#MY_3_r_sum = 0
+#MY_5_r_sum = 0
+#MY_6_r_sum = 0
+#MY_7_r_sum = 0
+#t_trial = 1000
+#t_step = 200
+
+#for i = 1 : t_trial
+#    if (i%100 == 0); println("trial = ",i); end
+#    QMDP_r_sum += one_tiger_grid_trial_2(T,R,O,t_step,Q_MDP,gamma)
+#    QUMDP_r_sum += one_tiger_grid_trial_2(T,R,O,t_step,Q_UMDP,gamma)
+#    FIB_r_sum += one_tiger_grid_trial_2(T,R,O,t_step,Q_FIB,gamma)
+    #MY_3_r_sum += one_tiger_grid_trial_2(T,R,O,t_step,Q_M3,gamma)
+    #MY_5_r_sum += one_tiger_grid_trial_2(T,R,O,t_step,Q_M5,gamma)
+    #MY_6_r_sum += one_tiger_grid_trial_2(T,R,O,t_step,Q_M6,gamma)
+    #MY_7_r_sum += one_tiger_grid_trial_2(T,R,O,t_step,Q_M7,gamma)
+#end
+
+#println(QMDP_r_sum/t_trial)
+#println(QUMDP_r_sum/t_trial)
+#println(FIB_r_sum/t_trial)
+#println(MY_3_r_sum/t_trial)
+#println(MY_5_r_sum/t_trial)
+#println(MY_6_r_sum/t_trial)
+#println(MY_7_r_sum/t_trial)
+
 gamma = 0.95
+grid = 5
 
-@time Q_MDP = Q_value_iteration(zeros(Float64,n_s,n_a),T,R,0.01,gamma)
-@time Q_UMDP = QUMDP(zeros(Float64,n_s,n_a),T,R,0.01,gamma)
-@time Q_FIB = FIB(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
-@time Q_M3 = purely_iteration_v3(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
-@time Q_M5 = purely_iteration_v5(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
-@time Q_M6 = purely_iteration_v6(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
-@time Q_M7 = purely_iteration_v7(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
+red = zeros(Float64,grid+1)
+QMDP_r = zeros(Float64,grid+1)
+UMDP_r = zeros(Float64,grid+1)
+FIB_r = zeros(Float64,grid+1)
 
-QMDP_r_sum = 0
-QUMDP_r_sum = 0
-FIB_r_sum = 0
-MY_3_r_sum = 0
-MY_5_r_sum = 0
-MY_6_r_sum = 0
-MY_7_r_sum = 0
-t_trial = 100
-t_step = 300
 
-for i = 1 : t_trial
-    if (i%100 == 0); println("trial = ",i); end
-    QMDP_r_sum += one_tiger_grid_trial_2(T,R,O,t_step,Q_MDP,gamma)
-    QUMDP_r_sum += one_tiger_grid_trial_2(T,R,O,t_step,Q_UMDP,gamma)
-    FIB_r_sum += one_tiger_grid_trial_2(T,R,O,t_step,Q_FIB,gamma)
-    MY_3_r_sum += one_tiger_grid_trial_2(T,R,O,t_step,Q_M3,gamma)
-    MY_5_r_sum += one_tiger_grid_trial_2(T,R,O,t_step,Q_M5,gamma)
-    MY_6_r_sum += one_tiger_grid_trial_2(T,R,O,t_step,Q_M6,gamma)
-    MY_7_r_sum += one_tiger_grid_trial_2(T,R,O,t_step,Q_M7,gamma)
+for reduced_time = 1 : grid+1
+
+    println(reduced_time)
+
+    redu_f = 1 + 0.2 * (reduced_time - 1)
+
+
+    QMDP_alpha = Q_value_iteration(zeros(Float64,n_s,n_a),T,R,0.01,gamma/redu_f)
+    QUMDP_alpha = QUMDP(zeros(Float64,n_s,n_a),T,R,0.01,gamma/redu_f)
+    FIB_alpha = FIB(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma/redu_f)
+
+    #println(QMDP_alpha)
+
+    QMDP_r_sum = 0
+    QUMDP_r_sum = 0
+    FIB_r_sum = 0
+
+    t_trial = 2000
+    t_step = 200
+
+    for i = 1 : t_trial
+
+        QMDP_r_sum += one_tiger_grid_trial_2(T,R,O,t_step,QMDP_alpha,gamma)
+        QUMDP_r_sum += one_tiger_grid_trial_2(T,R,O,t_step,QUMDP_alpha,gamma)
+        FIB_r_sum += one_tiger_grid_trial_2(T,R,O,t_step,FIB_alpha,gamma)
+
+    end
+
+    red[reduced_time] = redu_f
+    QMDP_r[reduced_time] = QMDP_r_sum/t_trial
+    UMDP_r[reduced_time] = QUMDP_r_sum/t_trial
+    FIB_r[reduced_time] = FIB_r_sum/t_trial
+
 end
 
-println(QMDP_r_sum/t_trial)
-println(QUMDP_r_sum/t_trial)
-println(FIB_r_sum/t_trial)
-println(MY_3_r_sum/t_trial)
-println(MY_5_r_sum/t_trial)
-println(MY_6_r_sum/t_trial)
-println(MY_7_r_sum/t_trial)
+plot(red,QMDP_r,label="QMDP")
+plot(red,UMDP_r,label="UMDP")
+plot(red,FIB_r,label="FIB")
+xlabel("reduced factor")
+ylabel("Discounted Reward")
+title("Tiger grid with gamma 0.95 and concentrated initial belief")
+legend(loc="upper right",fancybox="true")
+#annotate("SARSOP = 2.309",
+#	xy=[1;0],
+#	xycoords="axes fraction",
+#	xytext=[-10,10],
+#	textcoords="offset points",
+#	fontsize=12.0,
+#	ha="right",
+#	va="bottom")

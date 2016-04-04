@@ -429,8 +429,6 @@ end
 ############ Run Simulation #################
 #############################################
 
-f = open("run_collect","w")
-
 
 gamma = 0.9
 #redu_f = 1.5
@@ -496,16 +494,14 @@ end
 
 end
 
-close(f)
-
 plot(red,QMDP_r,label="QMDP")
 plot(red,UMDP_r,label="UMDP")
 plot(red,FIB_r,label="FIB")
 xlabel("reduced factor")
 ylabel("Discounted Reward")
-title("Maze20 with gamma 0.95 and concentrated initial belief")
+title("Maze20 with gamma 0.90 and concentrated initial belief")
 legend(loc="upper right",fancybox="true")
-annotate("SARSOP = 116.84",
+annotate("SARSOP = 50.94",
 	xy=[1;0],
 	xycoords="axes fraction",
 	xytext=[-10,10],

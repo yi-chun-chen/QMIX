@@ -494,6 +494,28 @@ end
 ######### Sample from model ##########
 ######################################
 
+##### Sample from initial belief #####
+
+function sample_from_belief(b)
+
+    n_s = length(b)
+    b_cum = zeros(Float64,n_s)
+    b_cum[1] = b[1]
+
+    for i = 2 : n_s
+        b_cum[i] = b_cum[i-1] + b[i]
+    end
+
+    x = rand()
+
+    for i = 1 : n_s
+        if b_cum[i] >= x
+            return i
+        end
+    end
+end
+
+
 ##### Observation Model #####
 
 function observe_sampling(O,s,a)

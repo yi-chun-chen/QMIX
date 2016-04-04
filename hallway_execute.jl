@@ -1015,16 +1015,6 @@ end
 
 #############################
 
-gamma = 0.95
-
-@time Q_MDP = Q_value_iteration(zeros(Float64,60,5),T,R,0.01,gamma/2)
-@time Q_UMDP = QUMDP(zeros(Float64,60,5),T,R,0.01,gamma/2)
-@time Q_FIB = FIB(zeros(Float64,60,5),T,R,O,0.01,gamma/2)
-@time Q_M3 = purely_iteration_v3(zeros(Float64,60,5),T,R,O,0.01,gamma)
-@time Q_M5 = purely_iteration_v5(zeros(Float64,60,5),T,R,O,0.01,gamma)
-@time Q_M6 = purely_iteration_v6(zeros(Float64,60,5),T,R,O,0.01,gamma)
-@time Q_M7 = purely_iteration_v7(zeros(Float64,60,5),T,R,O,0.01,gamma)
-
 function one_hallway60_trial(T,R,O,t_step,alpha,gamma)
 
     # initial belief
@@ -1109,28 +1099,38 @@ function one_hallway60_trial_2(T,R,O,t_step,alpha,gamma)
 
 end
 
-QMDP_r_sum = 0
-QUMDP_r_sum = 0
-FIB_r_sum = 0
-MY_3_r_sum = 0
-MY_5_r_sum = 0
-MY_6_r_sum = 0
-MY_7_r_sum = 0
+#gamma = 0.95
+
+#@time Q_MDP = Q_value_iteration(zeros(Float64,60,5),T,R,0.01,gamma/2)
+#@time Q_UMDP = QUMDP(zeros(Float64,60,5),T,R,0.01,gamma/2)
+#@time Q_FIB = FIB(zeros(Float64,60,5),T,R,O,0.01,gamma/2)
+#@time Q_M3 = purely_iteration_v3(zeros(Float64,60,5),T,R,O,0.01,gamma)
+#@time Q_M5 = purely_iteration_v5(zeros(Float64,60,5),T,R,O,0.01,gamma)
+#@time Q_M6 = purely_iteration_v6(zeros(Float64,60,5),T,R,O,0.01,gamma)
+#@time Q_M7 = purely_iteration_v7(zeros(Float64,60,5),T,R,O,0.01,gamma)
+
+#QMDP_r_sum = 0
+#QUMDP_r_sum = 0
+#FIB_r_sum = 0
+#MY_3_r_sum = 0
+#MY_5_r_sum = 0
+#MY_6_r_sum = 0
+#MY_7_r_sum = 0
 
 
-t_trial = 1000
-t_step = 300
-for i = 1 : t_trial
-    if (i%100 == 0); println("trial = ",i); end
-    QMDP_r_sum += one_hallway60_trial(T,R,O,t_step,Q_MDP,gamma)
-    QUMDP_r_sum += one_hallway60_trial(T,R,O,t_step,Q_UMDP,gamma)
-    FIB_r_sum += one_hallway60_trial(T,R,O,t_step,Q_FIB,gamma)
-    MY_3_r_sum += one_hallway60_trial(T,R,O,t_step,Q_M3,gamma)
-    MY_5_r_sum += one_hallway60_trial(T,R,O,t_step,Q_M5,gamma)
-    MY_6_r_sum += one_hallway60_trial(T,R,O,t_step,Q_M6,gamma)
-    MY_7_r_sum += one_hallway60_trial(T,R,O,t_step,Q_M7,gamma)
+#t_trial = 1000
+#t_step = 300
+#for i = 1 : t_trial
+#    if (i%100 == 0); println("trial = ",i); end
+#    QMDP_r_sum += one_hallway60_trial(T,R,O,t_step,Q_MDP,gamma)
+#    QUMDP_r_sum += one_hallway60_trial(T,R,O,t_step,Q_UMDP,gamma)
+#    FIB_r_sum += one_hallway60_trial(T,R,O,t_step,Q_FIB,gamma)
+#    MY_3_r_sum += one_hallway60_trial(T,R,O,t_step,Q_M3,gamma)
+#    MY_5_r_sum += one_hallway60_trial(T,R,O,t_step,Q_M5,gamma)
+#    MY_6_r_sum += one_hallway60_trial(T,R,O,t_step,Q_M6,gamma)
+#    MY_7_r_sum += one_hallway60_trial(T,R,O,t_step,Q_M7,gamma)
 
-end
+#end
 
 #for i = 1 : t_trial
 #    if (i%100 == 0); println("trial = ",i); end
@@ -1145,11 +1145,76 @@ end
 #end
 
 
-println(QMDP_r_sum/t_trial)
-println(QUMDP_r_sum/t_trial)
-println(FIB_r_sum/t_trial)
-println(MY_3_r_sum/t_trial)
-println(MY_5_r_sum/t_trial)
-println(MY_7_r_sum/t_trial)
-println(MY_6_r_sum/t_trial)
+#println(QMDP_r_sum/t_trial)
+#println(QUMDP_r_sum/t_trial)
+#println(FIB_r_sum/t_trial)
+#println(MY_3_r_sum/t_trial)
+#println(MY_5_r_sum/t_trial)
+#println(MY_7_r_sum/t_trial)
+#println(MY_6_r_sum/t_trial)
+
+n_s = 60
+n_a = 5
+n_o = 21
+
+gamma = 0.9
+grid = 100
+
+red = zeros(Float64,grid+1)
+QMDP_r = zeros(Float64,grid+1)
+UMDP_r = zeros(Float64,grid+1)
+FIB_r = zeros(Float64,grid+1)
+
+
+for reduced_time = 1 : grid+1
+
+    println(reduced_time)
+
+    redu_f = 1 + 0.1 * (reduced_time - 1)
+
+
+    QMDP_alpha = Q_value_iteration(zeros(Float64,n_s,n_a),T,R,0.01,gamma/redu_f)
+    QUMDP_alpha = QUMDP(zeros(Float64,n_s,n_a),T,R,0.01,gamma/redu_f)
+    FIB_alpha = FIB(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma/redu_f)
+
+    #println(QMDP_alpha)
+
+    QMDP_r_sum = 0
+    QUMDP_r_sum = 0
+    FIB_r_sum = 0
+
+    t_trial = 2000
+    t_step = 300
+
+    for i = 1 : t_trial
+
+        QMDP_r_sum += one_hallway60_trial(T,R,O,t_step,QMDP_alpha,gamma)
+        QUMDP_r_sum += one_hallway60_trial(T,R,O,t_step,QUMDP_alpha,gamma)
+        FIB_r_sum += one_hallway60_trial(T,R,O,t_step,FIB_alpha,gamma)
+
+    end
+
+    red[reduced_time] = redu_f
+    QMDP_r[reduced_time] = QMDP_r_sum/t_trial
+    UMDP_r[reduced_time] = QUMDP_r_sum/t_trial
+    FIB_r[reduced_time] = FIB_r_sum/t_trial
+
+end
+
+plot(red,QMDP_r,label="QMDP")
+plot(red,UMDP_r,label="UMDP")
+plot(red,FIB_r,label="FIB")
+xlabel("reduced factor")
+ylabel("Discounted Reward")
+title("Hallway with gamma 0.9 and concentrated initial belief")
+legend(loc="upper right",fancybox="true")
+annotate("SARSOP = 0.370",
+	xy=[1;0],
+	xycoords="axes fraction",
+	xytext=[-10,10],
+	textcoords="offset points",
+	fontsize=12.0,
+	ha="right",
+	va="bottom")
+
 

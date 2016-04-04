@@ -68,23 +68,23 @@ R[2,2,2] = -3
 R[7,2,7] = -3
 R[4,3,1] = 10
 
-Q_MDP = Q_value_iteration(zeros(Float64,8,3),T,R,0.01,0.95)
-Q_UMDP = QUMDP(zeros(Float64,8,3),T,R,0.01,0.95)
-Q_FIB = FIB(zeros(Float64,8,3),T,R,O,0.01,0.95)
-Q_M3 = purely_iteration_v3(zeros(Float64,8,3),T,R,O,0.01,0.95)
-Q_M5 = purely_iteration_v5(zeros(Float64,8,3),T,R,O,0.01,0.95)
-Q_M6 = purely_iteration_v6(zeros(Float64,8,3),T,R,O,0.01,0.95)
-Q_M7 = purely_iteration_v7(zeros(Float64,8,3),T,R,O,0.01,0.95)
+#Q_MDP = Q_value_iteration(zeros(Float64,8,3),T,R,0.01,0.95)
+#Q_UMDP = QUMDP(zeros(Float64,8,3),T,R,0.01,0.95)
+#Q_FIB = FIB(zeros(Float64,8,3),T,R,O,0.01,0.95)
+#Q_M3 = purely_iteration_v3(zeros(Float64,8,3),T,R,O,0.01,0.95)
+#Q_M5 = purely_iteration_v5(zeros(Float64,8,3),T,R,O,0.01,0.95)
+#Q_M6 = purely_iteration_v6(zeros(Float64,8,3),T,R,O,0.01,0.95)
+#Q_M7 = purely_iteration_v7(zeros(Float64,8,3),T,R,O,0.01,0.95)
 
-function one_shuttle_trial(T,R,O,t_step,alpha)
-    delta = 0.1; gamma = 0.95;
+function one_shuttle_trial(T,R,O,t_step,alpha,gamma)
+    delta = 0.1
 
     # initial belief
     #b = zeros(Float64,8)
     b = ones(Float64,8) * (1/8)
 
     # Initialize state
-    x = round(Int64,div(rand()*(8-1),1)) + 1
+    x = round(Int64,div(rand()*(8),1)) + 1
 
     # intialize total reward
     total_r = 0
@@ -96,7 +96,7 @@ function one_shuttle_trial(T,R,O,t_step,alpha)
 
         # Get reward and the next state
         (xp,r) = tran_reward_sampling(T,R,x,action_to_do)
-        total_r += r * (gamma^(t-1))
+        total_r += r * (gamma^(t))
 
         # Get observation
         o = observe_sampling(O,xp,action_to_do)
@@ -118,31 +118,92 @@ function one_shuttle_trial(T,R,O,t_step,alpha)
 
 end
 
-QMDP_r_sum = 0
-QUMDP_r_sum = 0
-FIB_r_sum = 0
-MY_3_r_sum = 0
-MY_5_r_sum = 0
-MY_6_r_sum = 0
-MY_7_r_sum = 0
-t_trial = 2000
-t_step = 150
+#QMDP_r_sum = 0
+#QUMDP_r_sum = 0
+#FIB_r_sum = 0
+#MY_3_r_sum = 0
+#MY_5_r_sum = 0
+#MY_6_r_sum = 0
+#MY_7_r_sum = 0
+#t_trial = 2000
+#t_step = 150
 
-for i = 1 : t_trial
-    if (i%100 == 0); println("trial = ",i); end
-    QMDP_r_sum += one_shuttle_trial(T,R,O,t_step,Q_MDP)
-    QUMDP_r_sum += one_shuttle_trial(T,R,O,t_step,Q_UMDP)
-    FIB_r_sum += one_shuttle_trial(T,R,O,t_step,Q_FIB)
-    MY_3_r_sum += one_shuttle_trial(T,R,O,t_step,Q_M3)
-    MY_5_r_sum += one_shuttle_trial(T,R,O,t_step,Q_M5)
-    MY_6_r_sum += one_shuttle_trial(T,R,O,t_step,Q_M6)
-    MY_7_r_sum += one_shuttle_trial(T,R,O,t_step,Q_M7)
+#for i = 1 : t_trial
+#    if (i%100 == 0); println("trial = ",i); end
+#    QMDP_r_sum += one_shuttle_trial(T,R,O,t_step,Q_MDP)
+#    QUMDP_r_sum += one_shuttle_trial(T,R,O,t_step,Q_UMDP)
+#    FIB_r_sum += one_shuttle_trial(T,R,O,t_step,Q_FIB)
+#    MY_3_r_sum += one_shuttle_trial(T,R,O,t_step,Q_M3)
+#    MY_5_r_sum += one_shuttle_trial(T,R,O,t_step,Q_M5)
+#    MY_6_r_sum += one_shuttle_trial(T,R,O,t_step,Q_M6)
+#    MY_7_r_sum += one_shuttle_trial(T,R,O,t_step,Q_M7)
+#end
+
+#println(QMDP_r_sum/t_trial)
+#println(QUMDP_r_sum/t_trial)
+#println(FIB_r_sum/t_trial)
+#println(MY_3_r_sum/t_trial)
+#println(MY_5_r_sum/t_trial)
+#println(MY_7_r_sum/t_trial)
+#println(MY_6_r_sum/t_trial)
+
+
+gamma = 0.95
+grid = 50
+
+red = zeros(Float64,grid+1)
+QMDP_r = zeros(Float64,grid+1)
+UMDP_r = zeros(Float64,grid+1)
+FIB_r = zeros(Float64,grid+1)
+
+
+for reduced_time = 1 : grid+1
+
+    println(reduced_time)
+
+    redu_f = 1 + 0.1 * (reduced_time - 1)
+
+
+    QMDP_alpha = Q_value_iteration(zeros(Float64,n_s,n_a),T,R,0.01,gamma/redu_f)
+    QUMDP_alpha = QUMDP(zeros(Float64,n_s,n_a),T,R,0.01,gamma/redu_f)
+    FIB_alpha = FIB(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma/redu_f)
+
+    #println(QMDP_alpha)
+
+    QMDP_r_sum = 0
+    QUMDP_r_sum = 0
+    FIB_r_sum = 0
+
+    t_trial = 2000
+    t_step = 200
+
+    for i = 1 : t_trial
+
+        QMDP_r_sum += one_shuttle_trial(T,R,O,t_step,QMDP_alpha,gamma)
+        QUMDP_r_sum += one_shuttle_trial(T,R,O,t_step,QUMDP_alpha,gamma)
+        FIB_r_sum += one_shuttle_trial(T,R,O,t_step,FIB_alpha,gamma)
+
+    end
+
+    red[reduced_time] = redu_f
+    QMDP_r[reduced_time] = QMDP_r_sum/t_trial
+    UMDP_r[reduced_time] = QUMDP_r_sum/t_trial
+    FIB_r[reduced_time] = FIB_r_sum/t_trial
+
 end
 
-println(QMDP_r_sum/t_trial)
-println(QUMDP_r_sum/t_trial)
-println(FIB_r_sum/t_trial)
-println(MY_3_r_sum/t_trial)
-println(MY_5_r_sum/t_trial)
-println(MY_7_r_sum/t_trial)
-println(MY_6_r_sum/t_trial)
+plot(red,QMDP_r,label="QMDP")
+plot(red,UMDP_r,label="UMDP")
+plot(red,FIB_r,label="FIB")
+xlabel("reduced factor")
+ylabel("Discounted Reward")
+title("Shuttle with gamma 0.95 and uniform initial belief")
+legend(loc="upper right",fancybox="true")
+annotate("SARSOP = 32.89",
+	xy=[1;0],
+	xycoords="axes fraction",
+	xytext=[-10,10],
+	textcoords="offset points",
+	fontsize=12.0,
+	ha="right",
+	va="bottom")
