@@ -1,4 +1,4 @@
-include("project_1.jl")
+include("method_existing.jl")
 
 function sample_in_belief_space(n_s)
 

@@ -1,5 +1,5 @@
-include("project_1.jl")
-include("project_2.jl")
+include("method_existing.jl")
+include("method_QMIX.jl")
 
 T = zeros(Float64,60,5,60)
 
@@ -1006,16 +1006,27 @@ end
 R= zeros(Float64,60,5,60)
 for s = 1 : 60
     for a = 1 : 5
-        R[s,a,57] = 1
-        R[s,a,58] = 1
-        R[s,a,59] = 1
-        R[s,a,60] = 1
+        R[s,a,57] = 1.0
+        R[s,a,58] = 1.0
+        R[s,a,59] = 1.0
+        R[s,a,60] = 1.0
     end
 end
 
 #############################
 
-function one_hallway60_trial(T,R,O,t_step,alpha,gamma)
+function one_hallway60_trial(
+    T      :: Array{Float64,3}, # transition model (s,a,s')
+    R      :: Array{Float64,3}, # reward model (s,a,s')
+    O      :: Array{Float64,3}, # observation model (s,a,o)
+    t_step :: Int64,            # simluation length
+    alpha  :: Matrix{Float64},  # alpha vectors help to decide action
+    gamma  :: Float64,          # discount factor
+    )
+
+    n_s = size(T,1)
+    n_a = size(T,2)
+    n_o = size(O,3)
 
     # initial belief
     b = zeros(Float64,60)
@@ -1054,11 +1065,22 @@ function one_hallway60_trial(T,R,O,t_step,alpha,gamma)
 
     end
 
-    return (total_r)# / t_step)
+    return (total_r)
 
 end
 
-function one_hallway60_trial_2(T,R,O,t_step,alpha,gamma)
+function one_hallway60_trial_2(
+    T      :: Array{Float64,3}, # transition model (s,a,s')
+    R      :: Array{Float64,3}, # reward model (s,a,s')
+    O      :: Array{Float64,3}, # observation model (s,a,o)
+    t_step :: Int64,            # simluation length
+    alpha  :: Matrix{Float64},  # alpha vectors help to decide action
+    gamma  :: Float64,          # discount factor
+    )
+
+    n_s = size(T,1)
+    n_a = size(T,2)
+    n_o = size(O,3)
 
     # initial belief
     b = zeros(Float64,60)
@@ -1095,7 +1117,7 @@ function one_hallway60_trial_2(T,R,O,t_step,alpha,gamma)
 
     end
 
-    return (total_r)# / t_step)
+    return (total_r)
 
 end
 

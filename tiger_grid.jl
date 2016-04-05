@@ -620,8 +620,16 @@ end
 
 ################################
 
-function one_tiger_grid_trial(T,R,O,t_step,alpha,gamma)
-    (n_s,n_a,n_o) = (size(T)[1],size(T)[2],size(O)[3])
+function one_tiger_grid_trial(
+    T::Array{Float64,3},
+    R::Array{Float64,3},
+    O::Array{Float64,3},
+    t_step::Int,
+    alpha::Matrix{Float64},
+    gamma::Float64
+    )
+
+    (n_s,n_a,n_o) = (size(T,1),size(T,2),size(O,3))
 
     # initial belief
     b = zeros(Float64,n_s)
@@ -636,16 +644,16 @@ function one_tiger_grid_trial(T,R,O,t_step,alpha,gamma)
     end
 
     # intialize total reward
-    total_r = 0
+    total_r = 0.0
 
-    for t = 1 : t_step
+    for t in 1 : t_step
 
         # Choose the action
         action_to_do = action_to_take(b,alpha)
 
         # Get reward and the next state
         (xp,r) = tran_reward_sampling(T,R,x,action_to_do)
-        total_r += r *  ((gamma)^t)
+        total_r += r *  ((gamma)^(t-1))
 
         # Get observation
         o = observe_sampling(O,xp,action_to_do)
@@ -664,7 +672,6 @@ function one_tiger_grid_trial(T,R,O,t_step,alpha,gamma)
     end
 
     return (total_r)
-
 end
 
 function one_tiger_grid_trial_2(T,R,O,t_step,alpha,gamma)
@@ -750,7 +757,7 @@ end
 #println(MY_7_r_sum/t_trial)
 
 gamma = 0.95
-grid = 5
+grid = 0
 
 red = zeros(Float64,grid+1)
 QMDP_r = zeros(Float64,grid+1)
@@ -793,13 +800,13 @@ for reduced_time = 1 : grid+1
 
 end
 
-plot(red,QMDP_r,label="QMDP")
-plot(red,UMDP_r,label="UMDP")
-plot(red,FIB_r,label="FIB")
-xlabel("reduced factor")
-ylabel("Discounted Reward")
-title("Tiger grid with gamma 0.95 and concentrated initial belief")
-legend(loc="upper right",fancybox="true")
+#plot(red,QMDP_r,label="QMDP")
+#plot(red,UMDP_r,label="UMDP")
+#plot(red,FIB_r,label="FIB")
+#xlabel("reduced factor")
+#ylabel("Discounted Reward")
+#title("Tiger grid with gamma 0.95 and concentrated initial belief")
+#legend(loc="upper right",fancybox="true")
 #annotate("SARSOP = 2.309",
 #	xy=[1;0],
 #	xycoords="axes fraction",

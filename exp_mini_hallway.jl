@@ -1,5 +1,9 @@
-include("project_1.jl")
-include("project_2.jl")
+include("method_existing.jl")
+include("method_QMIX.jl")
+
+#############################
+###### The model data #######
+#############################
 
 n_s = 13; n_a = 3; n_o = 9;
 
@@ -49,32 +53,44 @@ for a = 1 : n_a
 end
 
 for a = 1 : n_a
-    O[1,a,1] = 1
-    O[2,a,2] = 1
-    O[3,a,3] = 1
-    O[4,a,4] = 1
-    O[5,a,5] = 1
-    O[6,a,6] = 1
-    O[7,a,7] = 1
-    O[8,a,8] = 1
-    O[9,a,7] = 1
-    O[10,a,8] = 1
-    O[11,a,5] = 1
-    O[12,a,6] = 1
-    O[13,a,9] = 1
+    O[1,a,1] = 1.0
+    O[2,a,2] = 1.0
+    O[3,a,3] = 1.0
+    O[4,a,4] = 1.0
+    O[5,a,5] = 1.0
+    O[6,a,6] = 1.0
+    O[7,a,7] = 1.0
+    O[8,a,8] = 1.0
+    O[9,a,7] = 1.0
+    O[10,a,8] = 1.0
+    O[11,a,5] = 1.0
+    O[12,a,6] = 1.0
+    O[13,a,9] = 1.0
 end
 
 for s = 1 : n_s
     for a = 1 : n_a
-        R[s,a,13] = 1
+        R[s,a,13] = 1.0
     end
 end
 
-#################################
+###############################
+### Function for simulation ###
+###############################
 
 
-function one_mini_hallway_trial(T,R,O,t_step,alpha,gamma)
-    (n_s,n_a,n_o) = (size(T)[1],size(T)[2],size(O)[3])
+function one_mini_hallway_trial(
+    T      :: Array{Float64,3}, # Transition model (s,a,s')
+    R      :: Array{Float64,3}, # Reward model (s,a,s')
+    O      :: Array{Float64,3}, # Observation model (s,a,o)
+    t_step :: Int64,            # horizon for simulation / simulation length
+    alpha  :: Matrix{Float64},  # alpha vector for deciding action
+    gamma  :: Float64,          # disount factor
+    )
+
+    n_s = size(T,1)
+    n_a = size(T,2)
+    n_o = size(O,3)
 
     # initial belief
     b = zeros(Float64,n_s)
@@ -84,9 +100,9 @@ function one_mini_hallway_trial(T,R,O,t_step,alpha,gamma)
     x = round(Int64,div(rand()*(n_s-1),1)) + 1
 
     # intialize total reward
-    total_r = 0
+    total_r = 0.0
 
-    for t = 1 : t_step
+    for t in 1 : t_step
 
         # Choose the action
         action_to_do = action_to_take(b,alpha)
@@ -157,60 +173,51 @@ end
 
 
 
-gamma = 0.9
-grid = 50
+gamma_simulation = 0.95
+grid = 100
 
-red = zeros(Float64,grid+1)
-QMDP_r = zeros(Float64,grid+1)
-UMDP_r = zeros(Float64,grid+1)
-FIB_r = zeros(Float64,grid+1)
+gamma_p = collect(linspace(0.95, 0.5, grid))
+QMDP_r = zeros(Float64,grid)
+UMDP_r = zeros(Float64,grid)
+FIB_r = zeros(Float64,grid)
 
 
-for reduced_time = 1 : grid+1
+for (reduced_time, gamma) in enumerate(gamma_p)
 
     println(reduced_time)
 
-    redu_f = 1 + 0.1 * (reduced_time - 1)
+    #redu_f = 1 + 0.1 * (reduced_time - 1)
 
+    QMDP_alpha = Q_value_iteration(zeros(Float64,n_s,n_a),T,R,0.01,gamma)
+    QUMDP_alpha = QUMDP(zeros(Float64,n_s,n_a),T,R,0.01,gamma)
+    FIB_alpha = FIB(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
 
-    QMDP_alpha = Q_value_iteration(zeros(Float64,n_s,n_a),T,R,0.01,gamma/redu_f)
-    QUMDP_alpha = QUMDP(zeros(Float64,n_s,n_a),T,R,0.01,gamma/redu_f)
-    FIB_alpha = FIB(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma/redu_f)
-
-    QMDP_r_sum = 0
-    QUMDP_r_sum = 0
-    FIB_r_sum = 0
+    QMDP_r_sum = 0.0
+    QUMDP_r_sum = 0.0
+    FIB_r_sum = 0.0
 
     t_trial = 2000
     t_step = 200
 
     for i = 1 : t_trial
 
-        QMDP_r_sum += one_mini_hallway_trial(T,R,O,t_step,QMDP_alpha,gamma)
-        QUMDP_r_sum += one_mini_hallway_trial(T,R,O,t_step,QUMDP_alpha,gamma)
-        FIB_r_sum += one_mini_hallway_trial(T,R,O,t_step,FIB_alpha,gamma)
+        QMDP_r_sum += one_mini_hallway_trial(T,R,O,t_step,QMDP_alpha,gamma_simulation)
+        QUMDP_r_sum += one_mini_hallway_trial(T,R,O,t_step,QUMDP_alpha,gamma_simulation)
+        FIB_r_sum += one_mini_hallway_trial(T,R,O,t_step,FIB_alpha,gamma_simulation)
 
     end
 
-    red[reduced_time] = redu_f
     QMDP_r[reduced_time] = QMDP_r_sum/t_trial
     UMDP_r[reduced_time] = QUMDP_r_sum/t_trial
     FIB_r[reduced_time] = FIB_r_sum/t_trial
 
 end
 
-plot(red,QMDP_r,label="QMDP")
-plot(red,UMDP_r,label="UMDP")
-plot(red,FIB_r,label="FIB")
-xlabel("reduced factor")
-ylabel("Discounted Reward")
+plot(gamma_p,QMDP_r,label="QMDP")
+plot(gamma_p,UMDP_r,label="UMDP")
+plot(gamma_p,FIB_r,label="FIB")
+xlabel("discount factor")
+ylabel("Reward")
 title("Mini-Hallway with gamma 0.9 and uniform initial belief")
 legend(loc="upper right",fancybox="true")
-annotate("SARSOP = 1.217",
-	xy=[1;0],
-	xycoords="axes fraction",
-	xytext=[-10,10],
-	textcoords="offset points",
-	fontsize=12.0,
-	ha="right",
-	va="bottom")
+#annotate("SARSOP = 1.217",xy=[1;0],xycoords="axes fraction",xytext=[-10,10],textcoords="offset points",fontsize=12.0,ha="right",va="bottom")

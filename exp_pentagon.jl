@@ -1,5 +1,5 @@
-include("project_1.jl")
-include("project_2.jl")
+include("method_existing.jl")
+include("method_QMIX.jl")
 
 n_s = 212; n_a = 4; n_o = 28;
 

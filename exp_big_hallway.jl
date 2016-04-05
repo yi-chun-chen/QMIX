@@ -1,5 +1,5 @@
-include("project_1.jl")
-include("project_2.jl")
+include("method_existing.jl")
+include("method_QMIX.jl")
 
 n_s = 92; n_a = 5; n_o = 17;
 
@@ -1591,7 +1591,18 @@ end
 
 ###############################################
 
-function one_hhallway_trial(T,R,O,t_step,alpha,gamma)
+function one_big_hallway_trial(
+    T      :: Array{Float64,3}, # transition model (s,a,s')
+    R      :: Array{Float64,3}, # reward model (s,a,s')
+    O      :: Array{Float64,3}, # observation model (s,a,o)
+    t_step :: Int64,            # simluation length
+    alpha  :: Matrix{Float64},  # alpha vectors help to decide action
+    gamma  :: Float64,          # discount factor
+    )
+
+    n_s = size(T,1)
+    n_a = size(T,2)
+    n_o = size(O,3)
 
     # initial belief
     b = initial_belief
@@ -1601,7 +1612,7 @@ function one_hhallway_trial(T,R,O,t_step,alpha,gamma)
     x = sample_from_belief(b)
 
     # intialize total reward
-    total_r = 0
+    total_r = 0.0
 
     for t = 1 : t_step
 
@@ -1628,7 +1639,7 @@ function one_hhallway_trial(T,R,O,t_step,alpha,gamma)
 
     end
 
-    return (total_r)# / t_step)
+    return (total_r)
 
 end
 
@@ -1675,9 +1686,9 @@ for reduced_time = 1 : grid+1
 
     for i = 1 : t_trial
         if (i%100 == 0); println("trial = ",i); end
-        QMDP_r_sum += one_hhallway_trial(T,R,O,t_step,QMDP_alpha,gamma)
-        QUMDP_r_sum += one_hhallway_trial(T,R,O,t_step,QUMDP_alpha,gamma)
-        FIB_r_sum += one_hhallway_trial(T,R,O,t_step,FIB_alpha,gamma)
+        QMDP_r_sum += one_big_hallway_trial(T,R,O,t_step,QMDP_alpha,gamma)
+        QUMDP_r_sum += one_big_hallway_trial(T,R,O,t_step,QUMDP_alpha,gamma)
+        FIB_r_sum += one_big_hallway_trial(T,R,O,t_step,FIB_alpha,gamma)
 
     end
 
