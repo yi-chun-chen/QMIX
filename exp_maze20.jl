@@ -343,6 +343,7 @@ function one_maze20_trial(
     # initial belief (given by the file)
     b = zeros(Float64,n_s)
     b[1] = 0.3; b[5] = 0.3; b[20] = 0.4;
+    b_p = deepcopy(b)
 
     # Initialize state
     x = 0
@@ -357,33 +358,33 @@ function one_maze20_trial(
 
     # intialize total reward
     total_r = 0.0
-
-    for t = 1 : t_step
+    for t in 1 : t_step
 
         # Choose the action
         action_to_do = action_to_take(b,alpha)
 
         # Get reward and the next state
         (xp,r) = tran_reward_sampling(T,R,x,action_to_do)
-        total_r += r *  ((gamma)^t)
+        xp = tran_sampling(T, x, action_to_do)
+        r = R[x,action_to_do,xp]
+        total_r += r *  ((gamma)^(t-1))
 
         # Get observation
         o = observe_sampling(O,xp,action_to_do)
 
         # update the belief
-        bp = belief_update(b,action_to_do,o,T,O)
+        belief_update!(b_p, b,action_to_do,o,T,O)
 
         # printing
         #println("Time Step = ",t)
         #println("S,A,O,R,SP",(x,action_to_do,o,r,xp))
 
         # update
-        b = bp
+        copy!(b, b_p)
         x = xp
-
     end
 
-    return (total_r)
+    return total_r
 
 end
 
@@ -402,39 +403,40 @@ function one_maze20_trial_2(
 
     # initial belief
     b = ones(Float64,n_s) * (1.0/n_s)
+    b_p = deepcopy(b)
 
     # Initialize state (uniformly over all states)
     x = round(Int64,div(rand()*20,1)) + 1
 
     # intialize total reward
     total_r = 0.0
-
-    for t = 1 : t_step
+    for t in 1 : t_step
 
         # Choose the action
         action_to_do = action_to_take(b,alpha)
 
         # Get reward and the next state
         (xp,r) = tran_reward_sampling(T,R,x,action_to_do)
-        total_r += r *  ((gamma)^t)
+        xp = tran_sampling(T, x, action_to_do)
+        r = R[x,action_to_do,xp]
+        total_r += r *  ((gamma)^(t))
 
         # Get observation
         o = observe_sampling(O,xp,action_to_do)
 
         # update the belief
-        bp = belief_update(b,action_to_do,o,T,O)
+        belief_update!(b_p, b,action_to_do,o,T,O)
 
         # printing
         #println("Time Step = ",t)
         #println("S,A,O,R,SP",(x,action_to_do,o,r,xp))
 
         # update
-        b = bp
+        copy!(b, b_p)
         x = xp
-
     end
 
-    return (total_r)
+    return total_r
 
 end
 
@@ -442,10 +444,10 @@ end
 ############ Run Simulation #################
 #############################################
 
-gamma_simulation = 0.9
-grid = 100
+gamma_simulation = 0.95
+grid = 50
 
-gamma_p = collect(linspace(gamma_simulation, 0.5, grid))
+gamma_p = collect(linspace(0.95, 0.7, grid))
 QMDP_r = zeros(Float64,grid)
 UMDP_r = zeros(Float64,grid)
 FIB_r = zeros(Float64,grid)
@@ -465,8 +467,8 @@ for (reduced_time, gamma) in enumerate(gamma_p)
     QUMDP_r_sum = 0.0
     FIB_r_sum = 0.0
 
-    t_trial = 2000
-    t_step = 60
+    t_trial = 4000
+    t_step = 200
 
     for i = 1 : t_trial
 

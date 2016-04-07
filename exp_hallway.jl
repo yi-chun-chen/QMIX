@@ -1090,34 +1090,34 @@ function one_hallway60_trial_2(
     x = 1
 
     # intialize total reward
-    total_r = 0
-
-    for t = 1 : t_step
+    total_r = 0.0
+    for t in 1 : t_step
 
         # Choose the action
         action_to_do = action_to_take(b,alpha)
 
         # Get reward and the next state
         (xp,r) = tran_reward_sampling(T,R,x,action_to_do)
-        total_r += r * ((gamma)^t)
+        xp = tran_sampling(T, x, action_to_do)
+        r = R[x,action_to_do,xp]
+        total_r += r *  ((gamma)^(t))
 
         # Get observation
         o = observe_sampling(O,xp,action_to_do)
 
         # update the belief
-        bp = belief_update(b,action_to_do,o,T,O)
+        belief_update!(b_p, b,action_to_do,o,T,O)
 
         # printing
         #println("Time Step = ",t)
         #println("S,A,O,R,SP",(x,action_to_do,o,r,xp))
 
         # update
-        b = bp
+        copy!(b, b_p)
         x = xp
-
     end
 
-    return (total_r)
+    return total_r
 
 end
 
@@ -1179,7 +1179,7 @@ n_s = 60
 n_a = 5
 n_o = 21
 
-gamma = 0.9
+gamma = 1
 grid = 100
 
 red = zeros(Float64,grid+1)

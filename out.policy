@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Policy version="0.1" type="value" model="mini-hall2.POMDP" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="policyx.xsd">
+<AlphaVector vectorLength="13" numObsValue="1" numVectors="3">
+<Vector action="0" obsValue="0">2.886    3.04112  3.37629  3.04112  2.886    3.74766  2.886    3.20441  3.55721  3.74766  4.15915  3.20441  3.32865</Vector>
+<Vector action="1" obsValue="0">3.04112  3.20441  3.04112  2.886    3.55721  3.37629  3.20441  3.37629  3.74766  3.94813  3.74766  3.55721  3.32865 </Vector>
+<Vector action="2" obsValue="0">3.04112  2.886    3.04112  3.20441  3.20441  3.37629  3.55721  3.37629  3.74766  3.55721  3.74766  3.94813  3.32865 </Vector>
+</AlphaVector> </Policy>

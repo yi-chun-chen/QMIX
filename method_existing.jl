@@ -2,23 +2,28 @@
 
 using PyPlot
 
-function belief_update(b::Vector{Float64},a::Int64,o::Int64,T::Array{Float64,3},O::Array{Float64,3})
+function belief_update!(
+    b_p::Vector{Float64},
+    b::Vector{Float64},
+    a::Int64,
+    o::Int64,
+    T::Array{Float64,3}, # Transition model T(s,a,sp)
+    O::Array{Float64,3}  # Observation model O(s,a,o)
+    )
+
     n_s = length(b)
-    b_p = Array(Float64,n_s)
     for s_p in 1 : n_s
         sum_s = 0.0
         for i in 1 : n_s
-            #print((T[i,a,s_p],b[i]))
             sum_s += T[i,a,s_p] * b[i]
         end
         b_p[s_p] = O[s_p,a,o] * sum_s
-        #println(b_p[s_p])
     end
 
 
-    if sum(b_p) == 0.0
-        fill!(b_p, 1.0)
-    end
+    #if sum(b_p) == 0.0
+    #    fill!(b_p, 1.0)
+    #end
 
     b_p ./= sum(b_p)
 
@@ -27,10 +32,10 @@ end
 
 function Q_value_iteration(
     Q_0::Matrix{Float64}, # Initial Q matrix
-    T::Array{Float64,3}, # Transition model (s,a,s')
-    R::Array{Float64,3}, # Reward model (s,a,s')
-    delta::Float64, # value iteration Q-value Inf-norm tolerance
-    gamma::Float64, # discount factor
+    T::Array{Float64,3},  # Transition model (s,a,s')
+    R::Array{Float64,3},  # Reward model (s,a,s')
+    delta::Float64,       # value iteration Q-value Inf-norm tolerance
+    gamma::Float64,       # discount factor
     )
 
     ##################
@@ -133,7 +138,13 @@ function FIB(
     return alpha
 end
 
-function QUMDP(Q_0,T,R,delta,gamma)
+function QUMDP(
+    Q_0::Matrix{Float64}, # Initial Q matrix
+    T::Array{Float64,3},  # Transition model (s,a,s')
+    R::Array{Float64,3},  # Reward model (s,a,s')
+    delta::Float64,       # value iteration Q-value Inf-norm tolerance
+    gamma::Float64,       # discount factor
+    )
 
     ##########################
     # Alpha vectors for UMDP #
@@ -183,6 +194,7 @@ function QUMDP(Q_0,T,R,delta,gamma)
     return Q
 end
 
+
 ######################################
 ######### Sample from model ##########
 ######################################
@@ -219,21 +231,18 @@ function observe_sampling(O,s,a)
     return sample_from_vector(distr)
 end
 
-#######################################
-##### Transition and Reward Model #####
-#######################################
+############################
+##### Transition Model #####
+############################
 
-function tran_reward_sampling(T,R,s,a)
+function tran_sampling(T,s,a)
 
-    # Given current state s and action a, sample next state sp and obtain immediate reward r
-
-
-    n_s = (size(T)[1])
+    # Given current state s and action a, sample next state sp
+    n_s = size(T,1)
     distr = vec(T[s,a,:])
     sp = sample_from_vector(distr)
-    r = R[s,a,sp]
 
-    return (sp, r)
+    return sp
 
 end
 
@@ -246,21 +255,17 @@ function action_to_take(b::Vector{Float64},Q::Matrix{Float64})
     best_action = 0
     best_action_value = -Inf
 
-    for a = 1 : n_a
+    for a in 1 : n_a
 
         current_action_value = 0.0
 
-        for s = 1 : n_s
-
+        for s in 1 : n_s
             current_action_value += b[s] * Q[s,a]
-
         end
 
         if current_action_value > best_action_value
-
             best_action = a
             best_action_value = current_action_value
-
         end
 
     end
@@ -299,45 +304,4 @@ R[2,2,2] = 0; R[2,1,2] = -5; R[1,2,2] = -10; R[1,1,2] = -15
 R[2,2,1] = 0; R[2,1,1] = -5; R[1,2,1] = -10; R[1,1,1] = -15
 
 b_0 = [0.5,0.5]
-
-
-
-#################################################
-################### Test 2 ######################
-###############  Tiger Problem ##################
-#################################################
-
-# S1 = Tiger at left
-# S2 = Tiger at right
-# A1 = Open left door
-# A2 = Open right door
-# A3 = Listen
-# O1 = Tiger at left
-# O2 = Tiger at right
-
-T_T = Array(Float64,2,3,2)
-T_T[1,1,1] = 0.5; T_T[1,1,2] = 0.5;
-T_T[1,2,1] = 0.5; T_T[1,2,2] = 0.5;
-T_T[1,3,1] = 1.0; T_T[1,3,2] = 0.0;
-T_T[2,1,1] = 0.5; T_T[2,1,2] = 0.5;
-T_T[2,2,1] = 0.5; T_T[2,2,2] = 0.5;
-T_T[2,3,1] = 0.0; T_T[2,3,2] = 1.0;
-
-R_T = Array(Float64,2,3,2)
-cl = -1 # Cost for listening
-R_T[1,1,1] = -100; R_T[1,1,2] = -100;
-R_T[1,2,1] = 10; R_T[1,2,2] = 10;
-R_T[1,3,1] = cl; R_T[1,3,2] = cl;
-R_T[2,1,1] = 10; R_T[2,1,2] = 10;
-R_T[2,2,1] = -100; R_T[2,2,2] = -100;
-R_T[2,3,1] = cl; R_T[2,3,2] = cl;
-
-O_T = Array(Float64,2,3,2)
-best_observe = 0.85
-O_T[1,1,1] = 0.5; O_T[1,1,2] = 0.5;
-O_T[1,2,1] = 0.5; O_T[1,2,2] = 0.5;
-O_T[1,3,1] = best_observe; O_T[1,3,2] = 1- best_observe;
-O_T[2,1,1] = 0.5; O_T[2,1,2] = 0.5;
-O_T[2,2,1] = 0.5; O_T[2,2,2] = 0.5;
-O_T[2,3,1] = 1-best_observe; O_T[2,3,2] = best_observe;
 
