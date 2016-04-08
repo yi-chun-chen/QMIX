@@ -1,7 +1,5 @@
 using POMDPs
 
-p_listen_c = 0.7
-cost_listen = -20
 
 type TigerPOMDP <: POMDP
     r_listen::Float64 # reward for listening (default -1)
@@ -12,7 +10,7 @@ type TigerPOMDP <: POMDP
 end
 # default constructor
 function TigerPOMDP()
-    return TigerPOMDP(cost_listen, -100.0, 10.0, p_listen_c, 0.95)
+    return TigerPOMDP(-1.0, -100.0, 10.0, 0.85, 0.95)
 end
 
 pomdp = TigerPOMDP()
@@ -193,53 +191,41 @@ POMDPs.initial_belief(::TigerPOMDP) = DiscreteBelief(2);
 ############## SARSOP ####################
 ##########################################
 
+using QMDP
 
-using SARSOP # load the module
-# initialize our tiger POMDP
-pomdp = TigerPOMDP()
-
-# what follows are functions provided by SARSOP
-policy = POMDPPolicy("tiger.policy") # initialize the policy, the argument is the name you want for your policy file
-# create the .pomdpx file, this is the format which the SARSOP backend reads in
-pomdpfile = POMDPFile(pomdp, "tiger.pomdpx") # must end in .pomdpx
 # initialize the solver
-solver = SARSOPSolver()
-# run the solve function
-solve(solver, pomdpfile, policy)
+# key-word args are the maximum number of iterations the solver will run for, and the Bellman tolerance
+solver = QMDPSolver(max_iterations=1, tolerance=1e-3)
 
-alphas(policy)
+# initialize the QMDP policy
+qmdp_policy = create_policy(solver, pomdp)
 
-b = initial_belief(pomdp)
-
-ai = action(policy, b) # index of action, you need to convert this to the true action, support for automatic conversion is coming soon
-# the index corresponds to the action in our action array
-action_map = iterator(actions(pomdp)) # create a mapping array
-a = action_map[ai] # get the actions
+# run the solver
+solve(solver, pomdp, qmdp_policy, verbose=true)
+qmdp_policy.alphas = [[-100 400 300];[300 -10 100]]
 
 s = create_state(pomdp)
 o = create_observation(pomdp)
 
 b = initial_belief(pomdp)
 
-ppp = 0.83
-b = POMDPToolbox.DiscreteBelief([ppp,1-ppp],[0.5,0.5],2,true)
-
 updater = DiscreteUpdater(pomdp) # this comes from POMDPToolbox
 
-rng = MersenneTwister(9) # initialize a random number generator
+#rng = MersenneTwister(9) # initialize a random number generator
 
-rtot = 0.0
 # lets run the simulation for ten time steps
-for i = 1:10
+r_tot = 0.0
+for j = 1 : 1000
+    rtot = 0.0
+for i = 1:1000
     # get the action from our SARSOP policy
-    ai = action(policy, b)
-    a = action_map[ai]
+    a = action(qmdp_policy, b) # the QMDP action function returns the POMDP action not its index like the SARSOP action function
     # compute the reward
     r = reward(pomdp, s, a)
     rtot += r
 
-    println("Time step $i")
-    println("Have belief: $(b.b), taking action: $(a), got reward: $(r)")
+    #println("Time step $i")
+    #println("Have belief: $(b.b), taking action: $(a), got reward: $(r)")
 
     # transition the system state
     trans_dist = transition(pomdp, s, a)
@@ -252,7 +238,9 @@ for i = 1:10
     # update the belief
     b = update(updater, b, a, o)
 
-    println("Saw observation: $(o), new belief: $(b.b)\n")
+    #println("Saw observation: $(o), new belief: $(b.b)\n")
 
 end
-println("Total reward: $rtot")
+r_tot += rtot
+end
+println(r_tot/1000)

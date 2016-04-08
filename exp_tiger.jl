@@ -48,8 +48,8 @@ function one_tiger_trial(
 
     # initial belief
     b = zeros(Float64,n_s)
-    b[1] = 0.6
-    b[2] = 0.4
+    b[1] = 0.5
+    b[2] = 0.5
     b_p = deepcopy(b)
 
     # Initialize state
@@ -61,13 +61,13 @@ function one_tiger_trial(
 
         # Choose the action
         action_to_do = action_to_take(b,alpha)
-        action_to_do = 2 #debug
+        #println("action_to_do")
 
         # Get reward and the next state
         (xp,r) = tran_reward_sampling(T,R,x,action_to_do)
         xp = tran_sampling(T, x, action_to_do)
         r = R[x,action_to_do,xp]
-        total_r += r *  ((gamma)^(t))
+        total_r += r #*  ((gamma)^(t))
 
         # Get observation
         o = observe_sampling(O,xp,action_to_do)
@@ -88,14 +88,14 @@ function one_tiger_trial(
 
 end
 
-gamma_simulation = 0.95
+gamma_simulation = 1.0
 grid = 2
 
 gamma_p = collect(linspace(gamma_simulation, 0.5, grid))
 QMDP_r = zeros(Float64,grid)
 UMDP_r = zeros(Float64,grid)
 FIB_r = zeros(Float64,grid)
-
+#FIB_alpha = FIB(zeros(Float64,n_s,n_a),T,R,O,0.01,0.95)
 
 for (reduced_time, gamma) in enumerate(gamma_p)
 
@@ -103,22 +103,23 @@ for (reduced_time, gamma) in enumerate(gamma_p)
 
     #redu_f = 1 + 0.1 * (reduced_time - 1)
 
-    QMDP_alpha = Q_value_iteration(zeros(Float64,n_s,n_a),T,R,0.01,gamma)
-    QUMDP_alpha = QUMDP(zeros(Float64,n_s,n_a),T,R,0.01,gamma)
-    FIB_alpha = FIB(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
+    #QMDP_alpha = Q_value_iteration(zeros(Float64,n_s,n_a),T,R,0.01,gamma)
+    #QUMDP_alpha = QUMDP(zeros(Float64,n_s,n_a),T,R,0.01,gamma)
+    #FIB_alpha = FIB(zeros(Float64,n_s,n_a),T,R,O,0.01,gamma)
+    FIB_alpha = [[300.0  -100.0  400.0];[100.0 300.0 -10.0]]
 
     QMDP_r_sum = 0.0
     QUMDP_r_sum = 0.0
     FIB_r_sum = 0.0
 
-    t_trial = 2000
-    t_step = 200
+    t_trial = 100
+    t_step = 1000
 
     for i = 1 : t_trial
 
-        QMDP_r_sum += one_tiger_trial(T,R,O,t_step,QMDP_alpha,gamma_simulation)
-        QUMDP_r_sum += one_tiger_trial(T,R,O,t_step,QUMDP_alpha,gamma_simulation)
-        FIB_r_sum += one_tiger_trial(T,R,O,t_step,FIB_alpha,gamma_simulation)
+        #QMDP_r_sum += one_tiger_trial(T,R,O,t_step,QMDP_alpha,gamma_simulation)
+        #QUMDP_r_sum += one_tiger_trial(T,R,O,t_step,QUMDP_alpha,gamma_simulation)
+        FIB_r_sum += one_tiger_trial(T,R,O,t_step,FIB_alpha,1.0)
 
     end
 
@@ -127,7 +128,7 @@ for (reduced_time, gamma) in enumerate(gamma_p)
     FIB_r[reduced_time] = FIB_r_sum/t_trial
 
 end
-
+println(FIB_r[1])
 
 #plot(gamma_p,QMDP_r,label="QMDP")
 #plot(gamma_p,UMDP_r,label="UMDP")
